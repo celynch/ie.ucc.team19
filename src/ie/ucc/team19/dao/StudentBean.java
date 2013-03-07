@@ -2,7 +2,7 @@ package ie.ucc.team19.dao;
 
 import java.sql.Date;
 
-public class RegisterBean {
+public class StudentBean {
     private String first_name;
     private String last_name;
     private String email;
@@ -12,13 +12,13 @@ public class RegisterBean {
     private String address_line3;
     private String country;
     private String telephone; 
-    private String date_of_birth;
+    private Date date_of_birth;
     private char gender;
     private boolean authenticated;
     private String auth_string;
     private Date date_ac_created;
 
-    public RegisterBean() {
+    public StudentBean() {
 
     }
 
@@ -76,10 +76,10 @@ public class RegisterBean {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    public String getDate_of_birth() {
+    public Date getDate_of_birth() {
         return date_of_birth;
     }
-    public void setDate_of_birth(String date_of_birth) {
+    public void setDate_of_birth(Date date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
     public char getGender() {

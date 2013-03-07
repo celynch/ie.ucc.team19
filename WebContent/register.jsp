@@ -1,11 +1,9 @@
-<jsp:directive.page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" />
-<jsp:directive.page import= "ie.ucc.team19.service.*" />
-<jsp:include page="header.jsp">
-    <jsp:param name="pageTitle" value="Account Registration | UCC Summer Courses" />
+<jsp:directive.page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" />
+<jsp:include page="WEB-INF/views/header.jsp" >
+    <jsp:param name="pageTitle" value="${pageTitle}" />
 </jsp:include>
     <div id="main">
-        <form method="post" action="registered.jsp">
+        <form method="post" action="http://localhost:8080/team19/pages/RegisterComplete.jsp">
             <fieldset id="personalinformation">
                 <legend>Personal information</legend>
                 <dl>
@@ -74,13 +72,13 @@
                 <p>Please enter a password for your student account. Passwords should be between 6 and 20 characters and contain at least 1 letter and 1 number.</p>
                 <dl>
 		            <dt><label for="password">Password: *</label></dt>
-		            <dd><input required="required" type="password" id="password" name="password" /><dd>
+		            <dd><input required="required" type="password" id="password" name="password_hash" /><dd>
 		            <dt><label for="password2">Re-enter Password: *</label></dt>
-		            <dd><input required="required" type="password" id="password2" name="password2" /></dd>
+		            <dd><input required="required" type="password" id="password2" name="password_hash" /></dd>
 	            </dl>
             </fieldset>
             <input type="submit" name="Proceed" value="Cancel"/> <input type="submit" name="Proceed" value="Proceed"/>
         </form>
         <div style="clear:both;"></div>
     </div>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="WEB-INF/views/footer.jsp"></jsp:include>

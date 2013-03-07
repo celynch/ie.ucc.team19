@@ -1,17 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package ie.ucc.team19.dao;
 
 /**
  *
- * @author Shiny
+ * @author
  */
 //import java.text.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.io.*;
 
 public class DBConnectionManager {
@@ -21,7 +19,6 @@ public class DBConnectionManager {
     // Managing java 'constants'
     //http://docs.oracle.com/javase/tutorial/essential/environment/properties.html
 
-    //PROS AND CONS FOR OPENING CONNECTIONS ON AN AS NEEDEED BASIS?
     public void OpenDatabaseConnection(String DBServerNamein,String DSNin,String usernamein,String passwordin) {
         String DBName = DSNin;
         String DBServerName = DBServerNamein;
@@ -72,8 +69,8 @@ public class DBConnectionManager {
             }
         } // End Insert
    
-    public ArrayList<String[]> Select(String SQLquery) {
-        ArrayList<String[]> resultTable = new ArrayList<String[]>();
+    public ArrayList<Map<String, String[]>> Select(String SQLquery) {
+        ArrayList<Map<String, String[]>> resultTable = new ArrayList<Map<String, String[]>>();
 
         try {// Make connection to database
             statementObject = connectionObject.createStatement();
@@ -81,20 +78,26 @@ public class DBConnectionManager {
 
             ResultSetMetaData rsMetaData = statementResult.getMetaData();
             int numberOfColumns = rsMetaData.getColumnCount();
-            statementResult.beforeFirst();
+            String[] columnLabels = new String[numberOfColumns];
+            for(int i = 1; i <= numberOfColumns; i++) {
+                columnLabels[i-1] = rsMetaData.getColumnLabel(i);
+            }
 
+            statementResult.beforeFirst();
             while (statementResult.next()) { // While there are rows to process
-                String[] rowResult = new String[numberOfColumns];
-                for(int i = 0; i < numberOfColumns; i++) {
-                    rowResult[i] = statementResult.getString(i+1);
+                Map<String, String[]> rowResult = new HashMap<String, String[]>();
+                for(String columnLabel : columnLabels) {
+                    String sqlValue = statementResult.getString(columnLabel);
+                    String[] values = {sqlValue};
+                    rowResult.put(columnLabel, values);
                 }
                 resultTable.add(rowResult);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println("Select problems with SQL " + SQLquery);
-            System.err.println("Select problem is " + e.getMessage());
-            writeLogSQL(SQLquery + " caused error " + e.getMessage());
+            System.err.println("Select problem is " + e.getMessage() + " " + e.getErrorCode());
+            writeLogSQL(SQLquery + " caused error " + e.getClass().toString());
         }
 
         return resultTable;
@@ -104,7 +107,6 @@ public class DBConnectionManager {
         PrintStream output;
         try {
             output = new PrintStream(new FileOutputStream("sql-logfile.txt", true));
-            System.out.println(message);
             output.println(new java.util.Date() + " " + message);
             output.close();
         } catch (IOException ieo) {

@@ -1,16 +1,16 @@
 package ie.ucc.team19.service;
 
 import ie.ucc.team19.dao.DBConnectionManager;
-import ie.ucc.team19.dao.RegisterBean;
+import ie.ucc.team19.dao.StudentBean;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.UUID;
 
 public class InsertUser {
-    public void insertStudent(RegisterBean student) {
-        String dateNow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        //String dateOfBirth = new SimpleDateFormat("yyyy-MM-dd").format(student.getDate_of_birth());
+    public static void insertStudent(StudentBean student) {
+        String dateNow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
+        String dateOfBirth = new SimpleDateFormat("yyyy-MM-dd").format((java.sql.Date)student.getDate_of_birth());
         
         String query;
         query = "INSERT INTO Students VALUES" +
