@@ -38,7 +38,7 @@ public class BeanFetcher {
         venues = (VenueBean[]) sqlBeanPopulate(venues, resultTable);
         return venues;
     }
-    
+
     private ArrayList<Map<String, String[]>> fetchTable(String query) {
         DBConnectionManager connector = new DBConnectionManager();
         connector.OpenDatabaseConnection("localhost", "team19", "root","eizeikem");
@@ -46,7 +46,7 @@ public class BeanFetcher {
         connector.CloseDatabaseConnection();
         return resultTable;
     }
-    
+
     private Object[] sqlBeanPopulate(Object[] beans, ArrayList<Map<String, String[]>> resultTable) {
 
         int beanNum = 0;

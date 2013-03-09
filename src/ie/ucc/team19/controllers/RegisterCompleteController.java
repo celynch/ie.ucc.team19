@@ -25,8 +25,8 @@ public class RegisterCompleteController extends AbstractController{
             System.out.println("Error populating StudentBean");
             e.printStackTrace();
         }
-        
-        InsertUser.insertStudent(user);
+
+        InsertUser.createStudent(user);
         this.setReturnPage("/registerComplete.jsp");
         this.getRequest().setAttribute("pageTitle", "Registration Completed | UCC Summer Courses");
     }

@@ -9,7 +9,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.io.*;
 
 public class DBConnectionManager {
@@ -93,6 +92,11 @@ public class DBConnectionManager {
                 }
                 resultTable.add(rowResult);
             }
+            
+            /*for(Map<String, String[]> row : resultTable) {
+                System.out.println("printing email: " + row.get("email"));
+                System.out.println("printing dob: " + row.get("date_of_birth")[0]);
+            }*/
 
         } catch (SQLException e) {
             System.err.println("Select problems with SQL " + SQLquery);

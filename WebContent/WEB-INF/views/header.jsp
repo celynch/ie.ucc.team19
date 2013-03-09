@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>${param['pageTitle']}</title>
-        <link rel="stylesheet" type="text/css" href="http://localhost:8080/team19/dbtestcss.css" />
+        <link rel="stylesheet" type="text/css" href="/team19/css/dbtestcss.css" />
     </head>
     <body>
     <div id="wrapper" >
@@ -31,7 +31,8 @@
                                     <dt><label for="password_hash">Password: </label></dt>
                                     <dd><input required="required" type="password" id="password_hash" name="password_hash" /></dd>
                                 </dl>
-                                <input type="submit" name="Login" value="Login"/>
+                                <input type="submit" name="login" value="login"/>
+                                <a href="/pages/register.jsp">Register</a>
                             </fieldset>
                         </form>
 		            </c:otherwise>

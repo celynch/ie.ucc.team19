@@ -1,6 +1,7 @@
 package ie.ucc.team19.dao;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class StudentBean {
     private String first_name;
@@ -16,7 +17,8 @@ public class StudentBean {
     private char gender;
     private boolean authenticated;
     private String auth_string;
-    private Date date_ac_created;
+    private Timestamp date_ac_created;
+    private String cookie_token;
 
     public StudentBean() {
 
@@ -100,10 +102,16 @@ public class StudentBean {
     public void setAuth_string(String auth_string) {
         this.auth_string = auth_string;
     }
-    public Date getDate_ac_created() {
+    public Timestamp getDate_ac_created() {
         return date_ac_created;
     }
-    public void setDate_ac_created(Date date_ac_created) {
+    public void setDate_ac_created(Timestamp date_ac_created) {
         this.date_ac_created = date_ac_created;
+    }
+    public String getCookie_token() {
+        return cookie_token;
+    }
+    public void setCookie_token(String cookie_token) {
+        this.cookie_token = cookie_token;
     }
 }

@@ -2,15 +2,12 @@ package ie.ucc.team19.service;
 
 import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.StudentBean;
-
 import java.text.SimpleDateFormat;
-import java.sql.Date;
 import java.util.UUID;
 
 public class InsertUser {
-    public static void insertStudent(StudentBean student) {
+    public static void createStudent(StudentBean student) {
         String dateNow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
-        String dateOfBirth = new SimpleDateFormat("yyyy-MM-dd").format((java.sql.Date)student.getDate_of_birth());
         
         String query;
         query = "INSERT INTO Students VALUES" +
@@ -28,7 +25,8 @@ public class InsertUser {
                 + "'" + student.getGender() + "', "
                 + "false" + ", "
                 + "'" + UUID.randomUUID().toString() + "', "
-                + "'" + dateNow + "')";
+                + "'" + dateNow + "', " 
+                + "'" + UUID.randomUUID().toString() + "')";
 
         DBConnectionManager connector = new DBConnectionManager();
         connector.OpenDatabaseConnection("localhost", "team19", "root","eizeikem");
