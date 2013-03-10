@@ -4,13 +4,9 @@ import ie.ucc.team19.controllers.Controller;
 import ie.ucc.team19.controllers.ControllerFactory;
 import ie.ucc.team19.dao.StudentBean;
 import ie.ucc.team19.service.LoginUser;
-import ie.ucc.team19.service.UpdateUser;
-
 import java.io.IOException;
-import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,35 +22,16 @@ public class FrontController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        StudentBean student;
+        StudentBean student = new StudentBean();
         response.setContentType("text/html;charset=UTF-8");
-        if(request.getSession().getAttribute("user") == null) {
+        if( (request.getSession().getAttribute("user") == null)
+            || ( ((StudentBean) request.getSession().getAttribute("user")).getFirst_name() == null) )  {
             if(request.getParameter("login") != null && request.getParameter("login").equals("login")) {
-                student = LoginUser.loginStudent(request.getParameter("email"), request.getParameter("password_hash"));
-                if(student.isAuthenticated()) {
-                    request.getSession().setAttribute("user", student);
-                }
+                System.out.println("Form login");
+                new LoginUser().loginViaForm(request, response, student);
             } else {
-                Cookie[] cookies = request.getCookies();
-                if(cookies != null) {
-                    String email = "";
-                    String cookie_token = "";
-                    for(Cookie cookie : cookies) {
-                        if(cookie.getName().equals("email")) {
-                            email = cookie.getValue();
-                        } else if (cookie.getName().equals("cookie_token") ) {
-                            cookie_token = cookie.getValue();
-                        }
-                    }
-                    student = LoginUser.cookieValidate(email, cookie_token);
-                    if(student.isAuthenticated()) {
-                        request.getSession().setAttribute("user", student);
-                        String cookieTokenUpdate = UUID.randomUUID().toString();
-                        response.addCookie(new Cookie(student.getEmail(), cookieTokenUpdate));
-                        student.setCookie_token(cookieTokenUpdate);
-                        UpdateUser.updateCookieToken(email, cookieTokenUpdate);
-                    }
-                }
+                System.out.println("Cookie login");
+                new LoginUser().loginViaCookie(request, response, student);
             }
         }
 
@@ -62,7 +39,7 @@ public class FrontController extends HttpServlet {
             String controller = getURLPattern(request);
             //Instantiate controller class
             Controller control = ControllerFactory.getControllerByFullClassName(controller);
-            control.init(request);
+            control.init(request, response);
             control.execute();
             RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(control.getReturnPage());
             requestDispatcher.forward(request, response);
@@ -71,6 +48,7 @@ public class FrontController extends HttpServlet {
             e.printStackTrace();
         }
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -82,7 +60,7 @@ public class FrontController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     private String getURLPattern(HttpServletRequest request) {
         //get the request's url
         String url = request.getRequestURL().substring(request.getRequestURL().lastIndexOf("/") + 1, request.getRequestURL().length());
