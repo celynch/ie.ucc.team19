@@ -16,10 +16,6 @@ public class UpdateUser {
      */
     public static void updateCookieToken(String email, String cookie_token) {
         String query = "UPDATE Students SET cookie_token = '" + cookie_token + "' WHERE email = '" + email + "'";
-        
-        DBConnectionManager connector = new DBConnectionManager();
-        connector.OpenDatabaseConnection("localhost", "team19", "root","eizeikem");
-        connector.Insert(query);
-        connector.CloseDatabaseConnection();
+        new DBConnectionManager().Insert(query);
     }
 }

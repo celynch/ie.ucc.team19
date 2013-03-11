@@ -10,27 +10,23 @@ public class InsertUser {
         String dateNow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
         
         String query;
-        query = "INSERT INTO Students VALUES" +
-                "(NULL, "
-                + "'" + student.getFirst_name() +"', "
-                + "'" + student.getLast_name() + "', "
-                + "'" + student.getEmail() + "', "
-                + "'" + student.getPassword_hash() + "', "
-                + "'" + student.getAddress_line1() + "', "
-                + "'" + student.getAddress_line2() + "', "
-                + "'" + student.getAddress_line3() + "', "
-                + "'" + student.getCountry() + "', "
-                + "'" + student.getTelephone() + "', "
-                + "'" + student.getDate_of_birth() + "', "
-                + "'" + student.getGender() + "', "
-                + "false" + ", "
-                + "'" + UUID.randomUUID().toString() + "', "
-                + "'" + dateNow + "', " 
-                + "'" + UUID.randomUUID().toString() + "')";
+        query = "INSERT INTO Students VALUES" + "(NULL, ";
+        query += "'" + student.getFirst_name() +"', ";
+        query += "'" + student.getLast_name() + "', ";
+        query += "'" + student.getEmail() + "', ";
+        query += "'" + student.getPassword_hash() + "', ";
+        query += "'" + student.getAddress_line1() + "', ";
+        query += "'" + student.getAddress_line2() + "', ";
+        query += "'" + student.getAddress_line3() + "', ";
+        query += "'" + student.getCountry() + "', ";
+        query += "'" + student.getTelephone() + "', ";
+        query += "'" + student.getDate_of_birth() + "', ";
+        query += "'" + student.getGender() + "', ";
+        query += "false" + ", ";
+        query += "'" + UUID.randomUUID().toString() + "', ";
+        query += "'" + dateNow + "', "; 
+        query += "'" + UUID.randomUUID().toString() + "')";
 
-        DBConnectionManager connector = new DBConnectionManager();
-        connector.OpenDatabaseConnection("localhost", "team19", "root","eizeikem");
-        connector.Insert(query);
-        connector.CloseDatabaseConnection();
+        new DBConnectionManager().Insert(query);
     }
 }

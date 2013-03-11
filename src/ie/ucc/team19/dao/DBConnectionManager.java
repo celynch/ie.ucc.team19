@@ -13,17 +13,16 @@ import java.io.*;
 
 public class DBConnectionManager {
 
+    // TODO initialise from xml
+    private static final String DBServerName = "localhost";
+    private static final String DBName = "team19";
+    private static final String username = "root";
+    private static final String password = "eizeikem";
     private Statement statementObject;
     private Connection connectionObject;
-    // Managing java 'constants'
-    //http://docs.oracle.com/javase/tutorial/essential/environment/properties.html
 
-    public void OpenDatabaseConnection(String DBServerNamein,String DSNin,String usernamein,String passwordin) {
-        String DBName = DSNin;
-        String DBServerName = DBServerNamein;
-        String URL = "jdbc:mysql://"+DBServerName+"/" + DBName;
-        String username = usernamein;
-        String password = passwordin;
+    private void OpenDatabaseConnection() {
+        String URL = "jdbc:mysql://" + DBServerName + "/" + DBName;
 
         try { // Initialiase drivers
             Class.forName("com.mysql.jdbc.Driver");
@@ -39,12 +38,12 @@ public class DBConnectionManager {
             writeLogSQL(URL + " caused error " + exceptionObject.getMessage());
         }
 
-    } // DatabaseConnectorNew constructor
+    }
 
-    public void CloseDatabaseConnection() {
+    private void CloseDatabaseConnection() {
         try {
             // Establish connection to database
-            connectionObject.close(); //19/9/11
+            connectionObject.close();
         } catch (SQLException exceptionObject) {
             System.out.println("Problem with closing up ");
             writeLogSQL("closing caused error " + exceptionObject.getMessage());
@@ -54,6 +53,7 @@ public class DBConnectionManager {
     } //CloseDatabaseConnection
 
     public void Insert(String SQLinsert) {
+        OpenDatabaseConnection();
         // Setup database connection details
         try {
             // Setup statement object
@@ -65,13 +65,16 @@ public class DBConnectionManager {
         } catch (SQLException exceptionObject) {
             System.out.println(SQLinsert+" - Problem is : " + exceptionObject.getMessage());
             writeLogSQL(SQLinsert + " caused error " + exceptionObject.getMessage());
-            }
-        } // End Insert
+        } finally {
+            CloseDatabaseConnection();
+        }
+    }
    
     public ArrayList<Map<String, String[]>> Select(String SQLquery) {
         ArrayList<Map<String, String[]>> resultTable = new ArrayList<Map<String, String[]>>();
 
         try {// Make connection to database
+            OpenDatabaseConnection();
             statementObject = connectionObject.createStatement();
             ResultSet statementResult = statementObject.executeQuery(SQLquery);
 
@@ -92,12 +95,6 @@ public class DBConnectionManager {
                 }
                 resultTable.add(rowResult);
             }
-            
-            /*for(Map<String, String[]> row : resultTable) {
-                System.out.println("printing email: " + row.get("email"));
-                System.out.println("printing dob: " + row.get("date_of_birth")[0]);
-            }*/
-
         } catch (SQLException e) {
             System.err.println("Select problems with SQL " + SQLquery);
             System.err.println("Select problem is " + e.getMessage() + " " + e.getErrorCode());

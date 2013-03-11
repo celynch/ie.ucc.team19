@@ -14,12 +14,10 @@ import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.StudentBean;
 
 public class LoginUser {
-    public static StudentBean loginStudent(String email, String password_hash) {
+    private static StudentBean loginStudent(String email, String password_hash) {
         StudentBean student = new StudentBean();
         String query = "SELECT * FROM Students WHERE email = '" + email + "'";
-        DBConnectionManager connector = new DBConnectionManager();
-        connector.OpenDatabaseConnection("localhost", "team19", "root","eizeikem");
-        ArrayList<Map<String, String[]>> studentDetails = connector.Select(query);
+        ArrayList<Map<String, String[]>> studentDetails = new DBConnectionManager().Select(query);
         if(studentDetails.size() != 0) {    // email found
             if( studentDetails.get(0).get("password_hash")[0].equals(password_hash)) { // password matches
                 try {
@@ -30,16 +28,13 @@ public class LoginUser {
                 }
             }
         }
-        connector.CloseDatabaseConnection();
         return student;
     }
 
     public static StudentBean cookieValidate(String email, String cookie_token) {
         StudentBean student = new StudentBean();
         String query = "SELECT * FROM Students WHERE email = '" + email + "'";
-        DBConnectionManager connector = new DBConnectionManager();
-        connector.OpenDatabaseConnection("localhost", "team19", "root","eizeikem");
-        ArrayList<Map<String, String[]>> studentDetails = connector.Select(query);
+        ArrayList<Map<String, String[]>> studentDetails = new DBConnectionManager().Select(query);
         if(studentDetails.size() != 0) {    // email found
             if( studentDetails.get(0).get("cookie_token")[0].equals(cookie_token)) { // cookie_token matches
                 try {
@@ -53,7 +48,6 @@ public class LoginUser {
                 }
             }
         }
-        connector.CloseDatabaseConnection();
         return student;
     }
     
@@ -64,7 +58,7 @@ public class LoginUser {
             setCookies(response, student, Boolean.parseBoolean(request.getParameter("rememberMe")), false);
         }
     }
-    
+
     public void loginViaCookie(HttpServletRequest request, HttpServletResponse response, StudentBean student) {
         Cookie[] cookies = request.getCookies();
         if(cookies != null) {
@@ -85,21 +79,18 @@ public class LoginUser {
             }
         }
     }
-    
+
     public void setCookies(HttpServletResponse response, StudentBean student, boolean rememberMe, boolean expire) {
         int SECONDS_PER_YEAR = 60*60*24*365;
         Cookie emailCookie = new Cookie("email", student.getEmail());
         Cookie cookieToken = new Cookie("cookie_token", student.getCookie_token());
         emailCookie.setDomain("localhost");
         cookieToken.setDomain("localhost");
-        System.out.println("setting cookies");
         if(rememberMe) {
-            System.out.println("memba me");
             emailCookie.setMaxAge(SECONDS_PER_YEAR);
             cookieToken.setMaxAge(SECONDS_PER_YEAR);
         }
         if(expire) {
-            System.out.println("forget me");
             emailCookie.setMaxAge(0);
             cookieToken.setMaxAge(0);
         }

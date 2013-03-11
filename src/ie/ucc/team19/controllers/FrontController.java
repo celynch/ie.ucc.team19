@@ -26,11 +26,9 @@ public class FrontController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         if( (request.getSession().getAttribute("user") == null)
             || ( ((StudentBean) request.getSession().getAttribute("user")).getFirst_name() == null) )  {
-            if(request.getParameter("login") != null && request.getParameter("login").equals("login")) {
-                System.out.println("Form login");
+            if(request.getParameter("login") != null) {
                 new LoginUser().loginViaForm(request, response, student);
             } else {
-                System.out.println("Cookie login");
                 new LoginUser().loginViaCookie(request, response, student);
             }
         }

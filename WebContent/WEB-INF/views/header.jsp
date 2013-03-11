@@ -1,7 +1,4 @@
-<jsp:directive.page import= "ie.ucc.team19.dao.*" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<jsp:useBean id="user" class="ie.ucc.team19.dao.StudentBean" scope="session"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,16 +23,16 @@
                             <fieldset id="personalinformation">
                                 <legend>Login</legend>
                                 <dl>
-                                    <dt><label for="email">E-mail: </label></dt>
-                                    <dd><input required="required" type="text" id="email" name="email" /></dd>
-                                    <dt><label for="password_hash">Password: </label></dt>
-                                    <dd><input required="required" type="password" id="password_hash" name="password_hash" /></dd>
+                                    <dd><input required="required" type="text" id="email" name="email" placeholder="email" size="12"/></dd>
+                                    <dd><input required="required" type="password" id="password_hash" name="password_hash"  placeholder="password" size="12"/></dd>
+                                    <dt><label for="rememberMe">Remember&nbsp;me</label></dt>
+                                    <dd><input type="checkbox" id="rememberMe" name="rememberMe" value="true"/></dd>
                                 </dl>
-                                <input type="submit" name="login" value="login"/>
                                 <a href="/pages/register.jsp">Register</a>
+                                <input type="submit" name="login" value="Login"/>
                             </fieldset>
                         </form>
 		            </c:otherwise>
 				</c:choose>
 
-        </div>
+        </div><!-- close header -->

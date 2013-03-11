@@ -13,7 +13,6 @@ public class RegisterCompleteController extends AbstractController{
     public void execute() {
         StudentBean user = new StudentBean();
         HttpServletRequest request = this.getRequest();
-        request.getSession().setAttribute("user", user);
         Map<String, String[]> userFormValues = request.getParameterMap();
         String date_of_birth_fields = request.getParameter("dobY") + "-" + request.getParameter("dobM") + "-" + request.getParameter("dobD");
         Date date_of_birth = Date.valueOf(date_of_birth_fields);

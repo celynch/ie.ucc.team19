@@ -140,7 +140,16 @@ as well as aspects of the folklore of other countries, particularly in
 relation to some supernatural beliefs, which can be compared to other 
 cultural contexts. The focus is on belief, custom and narrative traditions 
 in the Irish context.</p>', 
-'2013-01-01', '2013-05-01', '/timetables/') 
+'2013-01-01', '2013-05-01', '/timetables/'),
+    ('Introduction to Irish Folklore', 190.00, 25, 'sci-fi', 
+'<h3>Course Content</h3>
+<ol>
+<li>Star Wars</li>
+<li>Star Trek</li>
+</ol>
+
+<p>These are the voyages of....</p>', 
+'2013-01-01', '2013-05-01', '/timetables/')
 ;
 
 DROP TABLE IF EXISTS Teaches; 
