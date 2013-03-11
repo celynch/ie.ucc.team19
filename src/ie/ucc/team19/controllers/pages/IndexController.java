@@ -1,10 +1,8 @@
-package ie.ucc.team19.controllers;
+package ie.ucc.team19.controllers.pages;
 
+import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.*;
 import ie.ucc.team19.service.FetchBean;
-
-//import ie.ucc.team19.daos.FooDao;
-//import java.util.List;
 
 /**
  *

@@ -1,4 +1,6 @@
-package ie.ucc.team19.controllers;
+package ie.ucc.team19.controllers.pages;
+
+import ie.ucc.team19.controllers.AbstractController;
 
 /**
  * 

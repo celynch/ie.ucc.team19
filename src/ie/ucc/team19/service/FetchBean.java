@@ -20,6 +20,16 @@ public class FetchBean {
         return courses;
     }
     
+    public CourseBean[] getCourseByCategory(String course_id) {
+        course_id = course_id.replace("'", "''");
+        String query = "SELECT * FROM Courses WHERE course_category = \'"
+                + course_id + "\'";
+        ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
+        CourseBean[] courses = new CourseBean[resultTable.size()];
+        courses = (CourseBean[]) sqlBeanPopulate(courses, resultTable);
+        return courses;
+    }
+    
     public LecturerBean[] getCourseLecturers(String course_id) {
         course_id = course_id.replace("'", "''");
         String query = "SELECT * FROM Lecturers WHERE lecturer_id IN (SELECT lecturer_id FROM Teaches WHERE course_id >= \'"
@@ -70,7 +80,6 @@ public class FetchBean {
     public CategoryBean getCourseCategories() {
         CategoryBean categories = new CategoryBean();
         String query = "SELECT DISTINCT course_category FROM Courses";
-        System.out.println(query);
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         String[] categoryList = new String[resultTable.size()];
         int catNumber = 0;
@@ -79,9 +88,6 @@ public class FetchBean {
             catNumber++;
         }
         categories.setCategoryTitles(categoryList);
-        for(String foo : categoryList) {
-            System.out.println(foo);
-        }
         return categories;
     }
 }

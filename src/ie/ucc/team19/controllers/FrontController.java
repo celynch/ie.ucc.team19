@@ -61,8 +61,8 @@ public class FrontController extends HttpServlet {
 
     private String getURLPattern(HttpServletRequest request) {
         //get the request's url
-        String url = request.getRequestURL().substring(request.getRequestURL().lastIndexOf("/") + 1, request.getRequestURL().length());
-        System.out.println(url);
+        String requestURL = request.getRequestURL().toString();
+        String url = requestURL.substring(requestURL.lastIndexOf("/") + 1, requestURL.length());
         //get Controllers name from request
         String controller = url.substring(0, url.indexOf(".") != -1 ? url.indexOf(".") : url.length());
         controller = controller.length() == 0 ? "Index" : controller;

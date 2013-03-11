@@ -141,7 +141,7 @@ relation to some supernatural beliefs, which can be compared to other
 cultural contexts. The focus is on belief, custom and narrative traditions 
 in the Irish context.</p>', 
 '2013-01-01', '2013-05-01', '/timetables/'),
-    ('Introduction to Irish Folklore', 190.00, 25, 'sci-fi', 
+    ('Sci-Fi Lore', 190.00, 25, 'sci-fi', 
 '<h3>Course Content</h3>
 <ol>
 <li>Star Wars</li>
@@ -149,6 +149,15 @@ in the Irish context.</p>',
 </ol>
 
 <p>These are the voyages of....</p>', 
+'2013-01-01', '2013-05-01', '/timetables/'),
+    ('The Romans', 190.00, 25, 'History', 
+'<h3>Course Content</h3>
+<ol>
+<li>Aquaduct</li>
+<li>Sanitation</li>
+</ol>
+
+<p>What have the Romans ever down for us?</p>', 
 '2013-01-01', '2013-05-01', '/timetables/')
 ;
 

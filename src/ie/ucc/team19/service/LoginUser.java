@@ -65,7 +65,6 @@ public class LoginUser {
             String email = "";
             String cookie_token = "";
             for(Cookie cookie : cookies) {
-                System.out.println(cookie.getName() + ": " + cookie.getValue());
                 if(cookie.getName().equals("email")) {
                     email = cookie.getValue();
                 } else if (cookie.getName().equals("cookie_token") ) {

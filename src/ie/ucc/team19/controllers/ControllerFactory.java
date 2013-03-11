@@ -18,8 +18,7 @@ public class ControllerFactory {
 
     public static final Controller getControllerByFullClassName(String className) {
         try {
-            String name = "ie.ucc.team19.controllers." + className + "Controller";
-            System.out.println(name);
+            String name = "ie.ucc.team19.controllers.pages." + className + "Controller";
             Class<?> actionClass = Class.forName(name);
             return getControllerByClass(actionClass);
         } catch (ClassNotFoundException e) {

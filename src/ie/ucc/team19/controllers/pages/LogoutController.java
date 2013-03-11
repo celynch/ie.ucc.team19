@@ -1,7 +1,8 @@
-package ie.ucc.team19.controllers;
+package ie.ucc.team19.controllers.pages;
 
 import javax.servlet.http.HttpServletResponse;
 
+import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.StudentBean;
 import ie.ucc.team19.service.LoginUser;
 
