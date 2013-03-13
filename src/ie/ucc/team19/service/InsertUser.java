@@ -2,13 +2,9 @@ package ie.ucc.team19.service;
 
 import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.StudentBean;
-import java.text.SimpleDateFormat;
-import java.util.UUID;
 
 public class InsertUser {
     public static void createStudent(StudentBean student) {
-        String dateNow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
-        
         String query;
         query = "INSERT INTO Students VALUES" + "(NULL, ";
         query += "'" + student.getFirst_name() +"', ";
@@ -22,10 +18,10 @@ public class InsertUser {
         query += "'" + student.getTelephone() + "', ";
         query += "'" + student.getDate_of_birth() + "', ";
         query += "'" + student.getGender() + "', ";
-        query += "false" + ", ";
-        query += "'" + UUID.randomUUID().toString() + "', ";
-        query += "'" + dateNow + "', "; 
-        query += "'" + UUID.randomUUID().toString() + "')";
+        query += student.isAuthenticated() + ", ";
+        query += "'" + student.getAuth_string() + "', ";
+        query += "'" + student.getDate_ac_created() + "', "; 
+        query += "'" + student.getCookie_token() + "')";
 
         new DBConnectionManager().Insert(query);
     }

@@ -22,12 +22,14 @@ public class FrontController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        StudentBean student = new StudentBean();
+        StudentBean student = (StudentBean) request.getSession().getAttribute("user");
         response.setContentType("text/html;charset=UTF-8");
-        if( (request.getSession().getAttribute("user") == null)
-            || ( ((StudentBean) request.getSession().getAttribute("user")).getFirst_name() == null) )  {
+        if( (student == null) || ( student.getFirst_name() == null) )  {
             if(request.getParameter("login") != null) {
                 new LoginUser().loginViaForm(request, response, student);
+            } else if(request.getParameter("auth_string") != null) {
+                System.out.println("verify");
+                new LoginUser().loginVerify(request, response, student);
             } else {
                 new LoginUser().loginViaCookie(request, response, student);
             }

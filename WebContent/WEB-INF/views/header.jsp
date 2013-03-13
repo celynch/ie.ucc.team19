@@ -28,7 +28,7 @@
                                     <dt><label for="rememberMe">Remember&nbsp;me</label></dt>
                                     <dd><input type="checkbox" id="rememberMe" name="rememberMe" value="true"/></dd>
                                 </dl>
-                                <a href="/pages/register.jsp">Register</a>
+                                <a href="/team19/pages/register.jsp">Register</a>
                                 <input type="submit" name="login" value="Login"/>
                             </fieldset>
                         </form>

@@ -96,4 +96,19 @@ public class LoginUser {
         response.addCookie(cookieToken);
         response.addCookie(emailCookie);
     }
+
+    public void loginVerify(HttpServletRequest request, HttpServletResponse response, StudentBean student) {
+        student = LoginUser.loginStudent(request.getParameter("email"), request.getParameter("password_hash"));
+        if(request.getParameter("auth_string").equals(student.getAuth_string())) {
+            System.out.println("good auth_string");
+            student.setAuthenticated(true);
+        } else {
+            System.out.println("bad auth_string");
+        }
+        if(student.isAuthenticated()) {
+            request.getSession().setAttribute("user", student);
+            setCookies(response, student, Boolean.parseBoolean(request.getParameter("rememberMe")), false);
+        }
+        
+    }
 }

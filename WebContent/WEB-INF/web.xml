@@ -14,10 +14,18 @@
         <servlet-name>FrontController</servlet-name>
         <servlet-class>ie.ucc.team19.controllers.FrontController</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>FrontController</servlet-name>
         <url-pattern>/pages/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SendEmail</servlet-name>
+        <servlet-class>ie.ucc.team19.service.SendEmail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SendEmail</servlet-name>
+        <url-pattern>/SendEmail</url-pattern>
     </servlet-mapping>
 
 </web-app>
