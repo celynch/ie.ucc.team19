@@ -2,119 +2,121 @@
 source ~/cs3305/team19.sql
 */
 
-DROP TABLE IF EXISTS Teaches;
-DROP TABLE IF EXISTS Enrollments;
-DROP TABLE IF EXISTS Course_locations;
-DROP TABLE IF EXISTS Courses;
-DROP TABLE IF EXISTS Venues;
-DROP TABLE IF EXISTS Students;
-DROP TABLE IF EXISTS Lecturers;
-DROP TABLE IF EXISTS Admins;
+DROP TABLE IF EXISTS teaches;
+DROP TABLE IF EXISTS enrollments;
+DROP TABLE IF EXISTS courseLocations;
+DROP TABLE IF EXISTS courses;
+DROP TABLE IF EXISTS venues;
+DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS lecturers;
+DROP TABLE IF EXISTS admins;
 
-DROP TABLE IF EXISTS Students;
+DROP TABLE IF EXISTS students;
 
-CREATE TABLE Students
+CREATE TABLE students
 (
-    student_id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(30) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
+    studentId INT NOT NULL AUTO_INCREMENT,
+    firstName VARCHAR(30) NOT NULL,
+    lastName VARCHAR(30) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
-    password_hash CHAR(32),
-    address_line1 VARCHAR(30),
-    address_line2 VARCHAR(30),
-    address_line3 VARCHAR(30),
+    passwordHash CHAR(32),
+    addressLine1 VARCHAR(30),
+    addressLine2 VARCHAR(30),
+    addressLine3 VARCHAR(30),
     country VARCHAR(30),
     telephone VARCHAR(20), 
-    date_of_birth DATE,
+    dateOfBirth DATE,
     gender CHAR(1),
     authenticated BOOLEAN,
-    auth_string CHAR(36),
-    date_ac_created DATETIME,
-    cookie_token CHAR(36),
-    PRIMARY KEY(student_id)
+    authString CHAR(36),
+    dateRegistered DATETIME,
+    cookieToken CHAR(36),
+    emailOptIn Boolean,
+    PRIMARY KEY(studentId)
 ) ENGINE=InnoDB;
 
-INSERT INTO Students 
+INSERT INTO students (studentID, firstName, lastName, email, passwordHash, addressLine1, addressLine2, addressLine3, country,  telephone, dateOfBirth, gender, authenticated, authString, dateRegistered, cookieToken, emailOPtIn)
 VALUES
-    (NULL, 'Cormac','Lynch','celynch@gmail.com','123','1 A Street','B-Town','C-City','Ireland','086-1234567','1981-01-01','M',true,'072d-31bbd0e-d3f582ae-340f0e39-f73e8','2013-02-24 16:30:00', '072d-31bbd0e-d3f582ae-340f0e39-f73e8')
+    (NULL, 'Cormac','Lynch','celynch@gmail.com','123','1 A Street','B-Town','C-City','Ireland','086-1234567','1981-01-01','M',true,'072d-31bbd0e-d3f582ae-340f0e39-f73e8','2013-02-24 16:30:00', '072d-31bbd0e-d3f582ae-340f0e39-f73e8', true)
 ;
 
-DROP TABLE IF EXISTS Lecturers; 
+DROP TABLE IF EXISTS lecturers; 
 
-CREATE TABLE Lecturers 
+CREATE TABLE lecturers 
 (
-    lecturer_id INT NOT NULL AUTO_INCREMENT, 
-    first_name VARCHAR(30) NOT NULL, 
-    last_name VARCHAR(30) NOT NULL, 
+    lecturerId INT NOT NULL AUTO_INCREMENT, 
+    firstName VARCHAR(30) NOT NULL, 
+    lastName VARCHAR(30) NOT NULL, 
     email VARCHAR(50), 
-    lecturer_title VARCHAR(20), 
+    lecturerTitle VARCHAR(20), 
     position VARCHAR(100), 
-    address_line1 VARCHAR(30), 
-    address_line2 VARCHAR(30), 
-    address_line3 VARCHAR(30), 
+    addressLine1 VARCHAR(30), 
+    addressLine2 VARCHAR(30), 
+    addressLine3 VARCHAR(30), 
     country VARCHAR(30), 
     telephone VARCHAR(20), 
-    PRIMARY KEY(lecturer_id) 
+    PRIMARY KEY(lecturerId) 
 ) ENGINE=InnoDB; 
 
-INSERT INTO Lecturers (first_name, last_name, email, lecturer_title, position, address_line1, address_line2, address_line3, country, telephone)
+INSERT INTO lecturers (firstName, lastName, email, lecturerTitle, position, addressLine1, addressLine2, addressLine3, country, telephone)
 VALUES 
     ('Luke', 'Manning', 'lmanning@gmail.com', '', 'Project Manager, Team 19', '2 A Street', 'B-Town', 'C-City', 'Ireland', '086-1234567'), 
     ('Eoghan', 'Healy', 'ehealy@gmail.com', 'Dr', 'Software Engineering Lecturer', '3 C Street', 'A-Town', 'B-City', 'Ireland', '420-5913');
 
-DROP TABLE IF EXISTS Admins; 
+DROP TABLE IF EXISTS admins; 
 
-CREATE TABLE Admins 
+CREATE TABLE admins 
 (
-    admin_name VARCHAR(30),
-    admin_password VARCHAR(30),
+    adminName VARCHAR(30),
+    adminPassword VARCHAR(30),
     email VARCHAR(30),
-    PRIMARY KEY(admin_name) 
+    PRIMARY KEY(adminName) 
 ) ENGINE=InnoDB; 
 
-INSERT INTO Admins (admin_name, admin_password, email)
+INSERT INTO admins (adminName, adminPassword, email)
 VALUES 
     ('mindaugas', 'rakauskas', 'mrakauskas@gmail.com') 
 ;
 
-DROP TABLE IF EXISTS Venues; 
+DROP TABLE IF EXISTS venues; 
 
-CREATE TABLE Venues 
+CREATE TABLE venues 
 (
-    venue_id INT NOT NULL AUTO_INCREMENT,
-    venue_room VARCHAR(30),
-    venue_building VARCHAR(30),
-    address_line1 VARCHAR(30), 
-    address_line2 VARCHAR(30), 
-    address_line3 VARCHAR(30),
+    venueId INT NOT NULL AUTO_INCREMENT,
+    venueRoom VARCHAR(30),
+    venueBuilding VARCHAR(30),
+    addressLine1 VARCHAR(30), 
+    addressLine2 VARCHAR(30), 
+    addressLine3 VARCHAR(30),
     capacity INT,
-    on_campus BOOLEAN,
-    PRIMARY KEY(venue_id) 
+    onCampus BOOLEAN,
+    PRIMARY KEY(venueId) 
 ) ENGINE=InnoDB;
 
-INSERT INTO Venues (venue_room, venue_building, address_line1, address_line2, address_line3, capacity, on_campus)
+INSERT INTO venues (venueRoom, venueBuilding, addressLine1, addressLine2, addressLine3, capacity, onCampus)
 VALUES 
     ('G01', 'Western Gateway Building', 'UCC', 'Western Road', 'Cork', 60, false),
     ('Aula Maxima', 'North Wing', 'UCC', 'Western Road', 'Cork', 100, true)
 ;
 
-DROP TABLE IF EXISTS Courses; 
+DROP TABLE IF EXISTS courses; 
 
-CREATE TABLE Courses 
+CREATE TABLE courses 
 (
-    course_id INT NOT NULL AUTO_INCREMENT,
-    course_title VARCHAR(100),
+    courseId INT NOT NULL AUTO_INCREMENT,
+    courseTitle VARCHAR(100),
     fee DOUBLE,
     spaces INT,
-    course_category VARCHAR(30),
+    courseCategory VARCHAR(30),
     content TEXT,
-    enroll_start_date DATE,
-    enroll_end_date DATE,
-    url_timetable VARCHAR(30),
-    PRIMARY KEY(course_id) 
+    enrollStartDate DATE,
+    enrollEndDate DATE,
+    courseStartDate DATE,
+    courseEndDate DATE,
+    PRIMARY KEY(courseId) 
 ) ENGINE=InnoDB;
 
-INSERT INTO Courses (course_title, fee, spaces, course_category, content, enroll_start_date, enroll_end_date, url_timetable)
+INSERT INTO courses (courseTitle, fee, spaces, courseCategory, content, enrollStartDate, enrollEndDate, courseStartDate, courseEndDate)
 VALUES 
     ('Introduction to Irish Folklore', 190.00, 25, 'culture', 
 '<h3>Course Content</h3>
@@ -140,7 +142,7 @@ as well as aspects of the folklore of other countries, particularly in
 relation to some supernatural beliefs, which can be compared to other 
 cultural contexts. The focus is on belief, custom and narrative traditions 
 in the Irish context.</p>', 
-'2013-01-01', '2013-05-01', '/timetables/'),
+'2013-01-01', '2013-05-01', '2013-06-01', '2013-06-05'),
     ('Sci-Fi Lore', 190.00, 25, 'sci-fi', 
 '<h3>Course Content</h3>
 <ol>
@@ -149,7 +151,7 @@ in the Irish context.</p>',
 </ol>
 
 <p>These are the voyages of....</p>', 
-'2013-01-01', '2013-05-01', '/timetables/'),
+'2013-01-01', '2013-05-01', '2013-06-01', '2013-06-05'),
     ('The Romans', 190.00, 25, 'History', 
 '<h3>Course Content</h3>
 <ol>
@@ -158,54 +160,56 @@ in the Irish context.</p>',
 </ol>
 
 <p>What have the Romans ever down for us?</p>', 
-'2013-01-01', '2013-05-01', '/timetables/')
+'2013-01-01', '2013-05-01', '2013-06-01', '2013-06-05'),
 ;
 
-DROP TABLE IF EXISTS Teaches; 
+DROP TABLE IF EXISTS teaches; 
 
-CREATE TABLE Teaches 
+CREATE TABLE teaches 
 (
-    course_id INT NOT NULL,
-    lecturer_id INT NOT NULL,
-    PRIMARY KEY (course_id, lecturer_id),
-    FOREIGN KEY(course_id) REFERENCES Courses(course_id),
-    FOREIGN KEY(lecturer_id) REFERENCES Lecturers(lecturer_id)
+    courseId INT NOT NULL,
+    lecturerId INT NOT NULL,
+    PRIMARY KEY (courseId, lecturerId),
+    FOREIGN KEY(courseId) REFERENCES courses(courseId),
+    FOREIGN KEY(lecturerId) REFERENCES lecturers(lecturerId)
 ) ENGINE=InnoDB;
 
-INSERT INTO Teaches  
+INSERT INTO teaches (courseId, lecturerId) 
 VALUES 
     (1,1),
     (1,2);
 
-DROP TABLE IF EXISTS Enrollments; 
+DROP TABLE IF EXISTS enrollments; 
 
-CREATE TABLE Enrollments 
+CREATE TABLE enrollments 
 (
-    course_id INT REFERENCES Courses(course_id),
-    student_id INT REFERENCES Students(student_id),
+    courseId INT,
+    studentId INT,
     pending BOOLEAN,
-    deposit_paid BOOLEAN,
-    fee_paid BOOLEAN,
-    refund_issued BOOLEAN,
-    PRIMARY KEY (course_id, student_id)
+    paidDeposit BOOLEAN,
+    paidFee BOOLEAN,
+    issuedRefund BOOLEAN,
+    PRIMARY KEY (courseId, studentId),
+    FOREIGN KEY(courseId) REFERENCES courses(courseId),
+    FOREIGN KEY(studentId) REFERENCES students(studentId)
 ) ENGINE=InnoDB;
 
-INSERT INTO Enrollments (course_id, student_id, pending, deposit_paid, fee_paid, refund_issued) 
+INSERT INTO enrollments (courseId, studentId, pending, paidDeposit, paidFee, issuedRefund) 
 VALUES 
     (1, 1, false, true, false, false); 
 
-DROP TABLE IF EXISTS Course_locations; 
+DROP TABLE IF EXISTS courseLocations; 
 
-CREATE TABLE Course_locations 
+CREATE TABLE courseLocations 
 (
-    course_id INT NOT NULL,
-    venue_id INT NOT NULL,
-    PRIMARY KEY (course_id, venue_id),
-    FOREIGN KEY(course_id) REFERENCES Courses(course_id),
-    FOREIGN KEY(venue_id) REFERENCES Venues(venue_id)
+    courseId INT NOT NULL,
+    venueId INT NOT NULL,
+    PRIMARY KEY (courseId, venueId),
+    FOREIGN KEY(courseId) REFERENCES courses(courseId),
+    FOREIGN KEY(venueId) REFERENCES venues(venueId)
 ) ENGINE=InnoDB;
 
-INSERT INTO Course_locations  
+INSERT INTO courseLocations (courseId, venueId) 
 VALUES 
     (1,1),
     (1,2);

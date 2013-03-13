@@ -15,16 +15,16 @@
             <c:choose>
                 <c:when test="${fn:length(courses) > 0}">
                     <c:forEach var="course" items="${courses}">
-                        <h3>${course['course_title']}</h3>
+                        <h3>${course['courseTitle']}</h3>
                         <h3>Fee:</h3>
                         <p>&euro;<fmt:formatNumber value="${course['fee']}" minFractionDigits="2" maxFractionDigits="2"/></p>
                         <h3>Lecturer<c:choose><c:when test="${fn:length(lecturers) > 0}">s</c:when></c:choose>:</h3>
                         <c:forEach var="lecturer" items="${lecturers}">
-                            <p>${lecturer['lecturer_title']} ${lecturer['first_name']} ${lecturer['last_name']}, ${lecturer['position']}</p>
+                            <p>${lecturer['lecturerTitle']} ${lecturer['firstName']} ${lecturer['lastName']}, ${lecturer['position']}</p>
                         </c:forEach>
                         <h3>Venue<c:choose><c:when test="${fn:length(venues) > 0}">s</c:when></c:choose>:</h3>
                         <c:forEach var="venue" items="${venues}">
-                            <p>${venue['venue_room']}, ${venue['venue_building']}, ${venue['address_line1']}</p>
+                            <p>${venue['venue_room']}, ${venue['venueBuilding']}, ${venue['addressLine1']}</p>
                         </c:forEach>
                         ${course['content']}
                     </c:forEach>

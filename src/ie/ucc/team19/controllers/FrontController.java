@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * MVC Model 2 Front Controller implementation. Responsible for
+ * dispatching requests to appropriate controller classes. Also provides
+ * common 
+ * @author Cormac
+ */
 public class FrontController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -24,10 +30,10 @@ public class FrontController extends HttpServlet {
             throws ServletException, IOException {
         StudentBean student = (StudentBean) request.getSession().getAttribute("user");
         response.setContentType("text/html;charset=UTF-8");
-        if( (student == null) || ( student.getFirst_name() == null) )  {
+        if( (student == null) || ( student.getFirstName() == null) )  {
             if(request.getParameter("login") != null) {
                 new LoginUser().loginViaForm(request, response, student);
-            } else if(request.getParameter("auth_string") != null) {
+            } else if(request.getParameter("authString") != null && request.getParameter("loginVerify") != null) {
                 System.out.println("verify");
                 new LoginUser().loginVerify(request, response, student);
             } else {

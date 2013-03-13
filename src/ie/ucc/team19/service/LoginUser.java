@@ -16,10 +16,10 @@ import ie.ucc.team19.dao.StudentBean;
 public class LoginUser {
     private static StudentBean loginStudent(String email, String password_hash) {
         StudentBean student = new StudentBean();
-        String query = "SELECT * FROM Students WHERE email = '" + email + "'";
+        String query = "SELECT * FROM students WHERE email = '" + email + "'";
         ArrayList<Map<String, String[]>> studentDetails = new DBConnectionManager().Select(query);
         if(studentDetails.size() != 0) {    // email found
-            if( studentDetails.get(0).get("password_hash")[0].equals(password_hash)) { // password matches
+            if( studentDetails.get(0).get("passwordHash")[0].equals(password_hash)) { // password matches
                 try {
                     BeanUtilsBean.getInstance().populate(student, studentDetails.get(0));
                 } catch (IllegalAccessException | InvocationTargetException e) {
@@ -33,15 +33,15 @@ public class LoginUser {
 
     public static StudentBean cookieValidate(String email, String cookie_token) {
         StudentBean student = new StudentBean();
-        String query = "SELECT * FROM Students WHERE email = '" + email + "'";
+        String query = "SELECT * FROM students WHERE email = '" + email + "'";
         ArrayList<Map<String, String[]>> studentDetails = new DBConnectionManager().Select(query);
         if(studentDetails.size() != 0) {    // email found
-            if( studentDetails.get(0).get("cookie_token")[0].equals(cookie_token)) { // cookie_token matches
+            if( studentDetails.get(0).get("cookieToken")[0].equals(cookie_token)) { // cookieToken matches
                 try {
                     BeanUtilsBean.getInstance().populate(student, studentDetails.get(0));
                     cookie_token = UUID.randomUUID().toString();
-                    BeanUtilsBean.getInstance().setProperty(student, "cookie_token", cookie_token);
-                    UpdateUser.updateCookieToken(email, cookie_token);
+                    BeanUtilsBean.getInstance().setProperty(student, "cookieToken", cookie_token);
+                    new UpdateUser().updateCookieToken(email, cookie_token);
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     System.out.println("Error populating student bean");
                     e.printStackTrace();
@@ -52,7 +52,7 @@ public class LoginUser {
     }
     
     public void loginViaForm(HttpServletRequest request, HttpServletResponse response, StudentBean student) {
-        student = LoginUser.loginStudent(request.getParameter("email"), request.getParameter("password_hash"));
+        student = LoginUser.loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
         if(student.isAuthenticated()) {
             request.getSession().setAttribute("user", student);
             setCookies(response, student, Boolean.parseBoolean(request.getParameter("rememberMe")), false);
@@ -67,7 +67,7 @@ public class LoginUser {
             for(Cookie cookie : cookies) {
                 if(cookie.getName().equals("email")) {
                     email = cookie.getValue();
-                } else if (cookie.getName().equals("cookie_token") ) {
+                } else if (cookie.getName().equals("cookieToken") ) {
                     cookie_token = cookie.getValue();
                 }
             }
@@ -82,7 +82,7 @@ public class LoginUser {
     public void setCookies(HttpServletResponse response, StudentBean student, boolean rememberMe, boolean expire) {
         int SECONDS_PER_YEAR = 60*60*24*365;
         Cookie emailCookie = new Cookie("email", student.getEmail());
-        Cookie cookieToken = new Cookie("cookie_token", student.getCookie_token());
+        Cookie cookieToken = new Cookie("cookieToken", student.getCookieToken());
         emailCookie.setDomain("localhost");
         cookieToken.setDomain("localhost");
         if(rememberMe) {
@@ -98,12 +98,12 @@ public class LoginUser {
     }
 
     public void loginVerify(HttpServletRequest request, HttpServletResponse response, StudentBean student) {
-        student = LoginUser.loginStudent(request.getParameter("email"), request.getParameter("password_hash"));
-        if(request.getParameter("auth_string").equals(student.getAuth_string())) {
-            System.out.println("good auth_string");
+        student = LoginUser.loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
+        if(request.getParameter("authString").equals(student.getAuthString())) {
+            System.out.println("good authString");
             student.setAuthenticated(true);
         } else {
-            System.out.println("bad auth_string");
+            System.out.println("bad authString");
         }
         if(student.isAuthenticated()) {
             request.getSession().setAttribute("user", student);

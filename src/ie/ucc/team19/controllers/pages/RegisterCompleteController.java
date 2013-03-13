@@ -22,8 +22,8 @@ public class RegisterCompleteController extends AbstractController{
         String mailMessage = "Thanks for joining UCC Summer Courses.\n "
                 + "We listed your sign in details below, make sure you keep them safe. "
                 + "To verify your email address, please follow this link:\n"
-                + "<a href=\"http://localhost:8080/team19/pages/login?auth_string="
-                + user.getAuth_string() + "\">Complete Registration</a>\n"
+                + "<a href=\"http://localhost:8080/team19/pages/login?authString="
+                + user.getAuthString() + "\">Complete Registration</a>\n"
                 + "Your email address: " + user.getEmail()
                 + "\n<blockquote>\"Where Finbarr taught, let Munster learn\"</blockquote>\n- The UCC Summer Courses Team ";
         new SendEmail().sendEmail( user.getEmail(), subject, mailMessage);
@@ -42,11 +42,11 @@ public class RegisterCompleteController extends AbstractController{
         BeanUtilsBean beanManager = BeanUtilsBean.getInstance();
         try {
             beanManager.populate(user, userFormValues);
-            beanManager.setProperty(user, "date_of_birth", date_of_birth_fields);
+            beanManager.setProperty(user, "dateOfBirth", date_of_birth_fields);
             beanManager.setProperty(user, "authenticated", false);
-            beanManager.setProperty(user, "auth_string", UUID.randomUUID().toString());
-            beanManager.setProperty(user, "date_ac_created", dateNow);
-            beanManager.setProperty(user, "cookie_token", UUID.randomUUID().toString());
+            beanManager.setProperty(user, "authString", UUID.randomUUID().toString());
+            beanManager.setProperty(user, "dateRegistered", dateNow);
+            beanManager.setProperty(user, "cookieToken", UUID.randomUUID().toString());
         } catch (IllegalAccessException | InvocationTargetException e) {
             System.out.println("Error populating StudentBean");
             e.printStackTrace();

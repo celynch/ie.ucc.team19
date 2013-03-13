@@ -12,7 +12,7 @@ import org.apache.commons.beanutils.BeanUtilsBean;
 public class FetchBean {
     public CourseBean[] getCourseById(String course_id) {
         course_id = course_id.replace("'", "''");
-        String query = "SELECT * FROM Courses WHERE course_id = \'"
+        String query = "SELECT * FROM courses WHERE courseId = \'"
                 + course_id + "\'";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         CourseBean[] courses = new CourseBean[resultTable.size()];
@@ -20,30 +20,30 @@ public class FetchBean {
         return courses;
     }
     
-    public CourseBean[] getCourseByCategory(String course_id) {
-        course_id = course_id.replace("'", "''");
-        String query = "SELECT * FROM Courses WHERE course_category = \'"
-                + course_id + "\'";
+    public CourseBean[] getCourseByCategory(String courseId) {
+        courseId = courseId.replace("'", "''");
+        String query = "SELECT * FROM courses WHERE courseCategory = \'"
+                + courseId + "\'";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         CourseBean[] courses = new CourseBean[resultTable.size()];
         courses = (CourseBean[]) sqlBeanPopulate(courses, resultTable);
         return courses;
     }
     
-    public LecturerBean[] getCourseLecturers(String course_id) {
-        course_id = course_id.replace("'", "''");
-        String query = "SELECT * FROM Lecturers WHERE lecturer_id IN (SELECT lecturer_id FROM Teaches WHERE course_id >= \'"
-                + course_id + "\')";
+    public LecturerBean[] getCourseLecturers(String courseId) {
+        courseId = courseId.replace("'", "''");
+        String query = "SELECT * FROM lecturers WHERE lecturerId IN (SELECT lecturerId FROM teaches WHERE courseId >= \'"
+                + courseId + "\')";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         LecturerBean[] lecturers = new LecturerBean[resultTable.size()];
         lecturers = (LecturerBean[]) sqlBeanPopulate(lecturers, resultTable);
         return lecturers;
     }
 
-    public VenueBean[] getCourseVenues(String course_id) {
-        course_id = course_id.replace("'", "''");
-        String query = "SELECT * FROM Venues WHERE venue_id IN (SELECT venue_id FROM course_locations WHERE course_id = \'"
-                + course_id + "\')";
+    public VenueBean[] getCourseVenues(String courseId) {
+        courseId = courseId.replace("'", "''");
+        String query = "SELECT * FROM venues WHERE venueId IN (SELECT venueId FROM courseLocations WHERE courseId = \'"
+                + courseId + "\')";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         VenueBean[] venues = new VenueBean[resultTable.size()];
         venues = (VenueBean[]) sqlBeanPopulate(venues, resultTable);
@@ -77,14 +77,23 @@ public class FetchBean {
         return beans;
     }
 
+    public StudentBean getStudentByEmail(String email) {
+        String query = "SELECT * FROM students WHERE email = \'"
+                + email + "\'";
+        ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
+        StudentBean[] student = new StudentBean[1];
+        student = (StudentBean[]) sqlBeanPopulate(student, resultTable);
+        return student[0];
+    }
+    
     public CategoryBean getCourseCategories() {
         CategoryBean categories = new CategoryBean();
-        String query = "SELECT DISTINCT course_category FROM Courses";
+        String query = "SELECT DISTINCT coursecategory FROM courses";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         String[] categoryList = new String[resultTable.size()];
         int catNumber = 0;
         for(Map<String, String[]> row : resultTable) {
-            categoryList[catNumber] = row.get("course_category")[0];
+            categoryList[catNumber] = row.get("courseCategory")[0];
             catNumber++;
         }
         categories.setCategoryTitles(categoryList);

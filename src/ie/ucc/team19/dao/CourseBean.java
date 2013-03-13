@@ -3,27 +3,32 @@ package ie.ucc.team19.dao;
 import java.sql.Date;
 
 public class CourseBean {
-    private int course_id;
-    private String course_title;
+    private int courseId;
+    private String courseTitle;
     private double fee;
     private int spaces;
-    private String course_category;
+    private String courseCategory;
     private String content;
-    private Date enroll_start_date;
-    private Date enroll_end_date;
-    private String url_timetable;
+    private Date enrollStartDate;
+    private Date enrollEndDate;
+    private Date courseStartDate;
+    private Date courseEndDate;
 
-    public int getCourse_id() {
-        return course_id;
+    public CourseBean() {
+
     }
-    public void setCourse_id(int course_id) {
-        this.course_id = course_id;
+
+    public int getCourseId() {
+        return courseId;
     }
-    public String getCourse_title() {
-        return course_title;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
-    public void setCourse_title(String course_title) {
-        this.course_title = course_title;
+    public String getCourseTitle() {
+        return courseTitle;
+    }
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
     }
     public double getFee() {
         return fee;
@@ -37,11 +42,11 @@ public class CourseBean {
     public void setSpaces(int spaces) {
         this.spaces = spaces;
     }
-    public String getCourse_category() {
-        return course_category;
+    public String getCourseCategory() {
+        return courseCategory;
     }
-    public void setCourse_category(String course_category) {
-        this.course_category = course_category;
+    public void setCourse_category(String courseCategory) {
+        this.courseCategory = courseCategory;
     }
     public String getContent() {
         return content;
@@ -49,24 +54,28 @@ public class CourseBean {
     public void setContent(String content) {
         this.content = content;
     }
-    public Date getEnroll_start_date() {
-        return enroll_start_date;
+    public Date getEnrollStartDate() {
+        return enrollStartDate;
     }
-    public void setEnroll_start_date(Date enroll_start_date) {
-        this.enroll_start_date = enroll_start_date;
+    public void setEnroll_start_date(Date enrollStartDate) {
+        this.enrollStartDate = enrollStartDate;
     }
-    public Date getEnroll_end_date() {
-        return enroll_end_date;
+    public Date getEnrollEndDate() {
+        return enrollEndDate;
     }
-    public void setEnroll_end_date(Date enroll_end_date) {
-        this.enroll_end_date = enroll_end_date;
+    public void setEnroll_end_date(Date enrollEndDate) {
+        this.enrollEndDate = enrollEndDate;
     }
-    public String getUrl_timetable() {
-        return url_timetable;
+    public Date getCourseStartDate() {
+        return courseStartDate;
     }
-    public void setUrl_timetable(String url_timetable) {
-        this.url_timetable = url_timetable;
+    public void setCourseStartDate(Date courseStartDate) {
+        this.courseStartDate = courseStartDate;
     }
-
-    
+    public Date getCourseEndDate() {
+        return courseEndDate;
+    }
+    public void setCourseEndDate(Date courseEndDate) {
+        this.courseEndDate = courseEndDate;
+    }
 }

@@ -4,37 +4,38 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class StudentBean {
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String email;
-    private String password_hash;
-    private String address_line1;
-    private String address_line2;
-    private String address_line3;
+    private String passwordHash;
+    private String addressLine1;
+    private String addressLine2;
+    private String addressLine3;
     private String country;
     private String telephone; 
-    private Date date_of_birth;
+    private Date dateOfBirth;
     private char gender;
     private boolean authenticated;
-    private String auth_string;
-    private Timestamp date_ac_created;
-    private String cookie_token;
+    private String authString;
+    private Timestamp dateRegistered;
+    private String cookieToken;
+    private boolean emailOptIn;
 
     public StudentBean() {
 
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
     public String getEmail() {
         return email;
@@ -42,29 +43,29 @@ public class StudentBean {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getPassword_hash() {
-        return password_hash;
+    public String getPasswordHash() {
+        return passwordHash;
     }
-    public void setPassword_hash(String password_hash) {
-        this.password_hash = password_hash;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
-    public String getAddress_line1() {
-        return address_line1;
+    public String getAddressLine1() {
+        return addressLine1;
     }
-    public void setAddress_line1(String address_line1) {
-        this.address_line1 = address_line1;
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
     }
-    public String getAddress_line2() {
-        return address_line2;
+    public String getAddressLine2() {
+        return addressLine2;
     }
-    public void setAddress_line2(String address_line2) {
-        this.address_line2 = address_line2;
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
     }
-    public String getAddress_line3() {
-        return address_line3;
+    public String getAddressLine3() {
+        return addressLine3;
     }
-    public void setAddress_line3(String address_line3) {
-        this.address_line3 = address_line3;
+    public void setAddressLine3(String addressLine3) {
+        this.addressLine3 = addressLine3;
     }
     public String getCountry() {
         return country;
@@ -78,11 +79,11 @@ public class StudentBean {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
     public char getGender() {
         return gender;
@@ -96,22 +97,28 @@ public class StudentBean {
     public void setAuthenticated(boolean authenticated) {
         this.authenticated = authenticated;
     }
-    public String getAuth_string() {
-        return auth_string;
+    public String getAuthString() {
+        return authString;
     }
-    public void setAuth_string(String auth_string) {
-        this.auth_string = auth_string;
+    public void setAuthString(String authString) {
+        this.authString = authString;
     }
-    public Timestamp getDate_ac_created() {
-        return date_ac_created;
+    public Timestamp getDateRegistered() {
+        return dateRegistered;
     }
-    public void setDate_ac_created(Timestamp date_ac_created) {
-        this.date_ac_created = date_ac_created;
+    public void setDateRegistered(Timestamp dateRegistered) {
+        this.dateRegistered = dateRegistered;
     }
-    public String getCookie_token() {
-        return cookie_token;
+    public String getCookieToken() {
+        return cookieToken;
     }
-    public void setCookie_token(String cookie_token) {
-        this.cookie_token = cookie_token;
+    public void setCookieToken(String cookieToken) {
+        this.cookieToken = cookieToken;
+    }
+    public boolean getEmailOptIn() {
+        return emailOptIn;
+    }
+    public void setEmailOptIn(boolean emailOptIn) {
+        this.emailOptIn = emailOptIn;
     }
 }

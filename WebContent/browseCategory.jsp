@@ -16,7 +16,7 @@
                 <c:when test="${fn:length(categoryCourses) > 0}">
                     <ul>
 	                    <c:forEach var="course" items="${categoryCourses}">
-	                        <li><a href="viewCourse?course_id=${course['course_id']}">${course['course_title']}</a></li>
+	                        <li><a href="viewCourse?course_id=${course['courseId']}">${course['courseTitle']}</a></li>
 	                    </c:forEach>
                     </ul>
                 </c:when>

@@ -11,18 +11,14 @@
     <jsp:include page="WEB-INF/views/horiz_nav.jsp" />
     <jsp:include page="WEB-INF/views/verti_nav.jsp" />
         <div id="content">
-            <form method="post" action="https://localhost:8443/team19/pages/Index">
+            <form method="post" action="http://localhost:8080/team19/pages/resetPassword">
                 <fieldset id="personalinformation">
-                    <legend>Login to verify Account</legend>
+                    <legend>Reset password?</legend>
+                    <p>If you wish to reset your password, enter your email below and respond to the verification email sent.</p>
                     <dl>
                         <dd><input required="required" type="text" id="email" name="email" placeholder="email" size="12"/></dd>
-                        <dd><input required="required" type="password" id="passwordHash" name="passwordHash"  placeholder="password" size="12"/></dd>
-                        <dt><label for="rememberMe">Remember&nbsp;me</label></dt>
-                        <dd><input type="checkbox" id="rememberMe" name="rememberMe" value="true"/></dd>
                     </dl>
-                    <a href="/pages/register.jsp">Register</a>
-                    <input type="hidden" name="authString" value="${param['authString']}"/>
-                    <input type="submit" name="loginVerify" value="loginVerify"/>
+                    <input type="submit" name="loginVerify" value="Reset Password"/>
                 </fieldset>
             </form>
         </div>

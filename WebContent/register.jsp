@@ -7,10 +7,10 @@
             <fieldset id="personalinformation">
                 <legend>Personal information</legend>
                 <dl>
-	                <dt><label for="first_name">First Name: *</label></dt>
-	                <dd><input required="required" type="text" id="first_name" name="first_name" /></dd>
-	                <dt><label for="last_name">Last Name: *</label></dt>
-	                <dd><input required="required" type="text" id="last_name" name="last_name" /></dd>
+	                <dt><label for="firstName">First Name: *</label></dt>
+	                <dd><input required="required" type="text" id="firstName" name="firstName" /></dd>
+	                <dt><label for="lastName">Last Name: *</label></dt>
+	                <dd><input required="required" type="text" id="lastName" name="lastName" /></dd>
 	                <dt><label for="dobD">Date of Birth *</label></dt>
 		            <dd>
 		                <input required="required" type="text" name="dobD" maxlength="2" size="2" id="dobD"
@@ -44,15 +44,15 @@
                 <legend>Address</legend>
                 <dl>
 		            <dt><label for="address1">Address: *</label></dt>
-		            <dd><input required="required" type="text" id="address1" name="address_line1" /></dd>
-		            <dd><input required="required" type="text" id="address2" name="address_line2" /></dd>
-		            <dd><input required="required" type="text" id="address3" name="address_line3" /></dd>
+		            <dd><input required="required" type="text" id="address1" name="addressLine1" /></dd>
+		            <dd><input required="required" type="text" id="address2" name="addressLine2" /></dd>
+		            <dd><input required="required" type="text" id="address3" name="addressLine3" /></dd>
 		            <dt><label for="country">Country: *</label></dt>
 		            <dd><input required="required" type="text" id="country" name="country" /></dd>
 		            <dt><label for="gender">Gender *</label></dt>
 		            <dd id="gender">
-		                <label>Male:<input type="radio" name="gender" value="M"/></label>
-		                <label>Female:<input type="radio" name="gender" value="F"/></label>
+		                <label>Male:<input type="radio" name="gender" value="M" required="required"/></label>
+		                <label>Female:<input type="radio" name="gender" value="F" required="required"/></label>
 	                </dd>
 	            </dl>
             </fieldset>
@@ -62,9 +62,9 @@
                     <dt><label for="telephone">Telephone:</label></dt>
                     <dd><input type="text" id="telephone" name="telephone" /></dd>
 		            <dt><label for="email">Email: *</label></dt>
-		            <dd><input required="required" type="text" id="email" name="email" /></dd>
+		            <dd><input required="required" type="email" id="email" name="email" placeholder="email"/></dd>
 		            <dt><label for="email2">Verify Email: *</label></dt>
-                    <dd><input required="required" type="text" id="email2" name="email" /></dd>
+                    <dd><input required="required" type="password" id="email2" name="email2" placeholder="verify email" /></dd>
                 </dl>
             </fieldset>
             <fieldset id="Password information">
@@ -72,9 +72,9 @@
                 <p>Please enter a password for your student account. Passwords should be between 6 and 20 characters and contain at least 1 letter and 1 number.</p>
                 <dl>
 		            <dt><label for="password">Password: *</label></dt>
-		            <dd><input required="required" type="password" id="password" name="password_hash" /><dd>
+		            <dd><input required="required" type="password" id="password" name="passwordHash" /><dd>
 		            <dt><label for="password2">Re-enter Password: *</label></dt>
-		            <dd><input required="required" type="password" id="password2" name="password_hash" /></dd>
+		            <dd><input required="required" type="password" id="password2" name="passwordHash" /></dd>
 	            </dl>
             </fieldset>
             <input type="submit" name="Proceed" value="Cancel"/> <input type="submit" name="Proceed" value="Proceed"/>

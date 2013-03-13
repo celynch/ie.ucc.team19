@@ -12,7 +12,7 @@ public class ViewCourseController extends AbstractController {
 
     public void execute() {
         this.setReturnPage("/viewCourse.jsp");
-        String courseId = this.getRequest().getParameter("course_id");
+        String courseId = this.getRequest().getParameter("courseId");
         
         CourseBean[] courses = new FetchBean().getCourseById(courseId);
         this.getRequest().setAttribute("courses", courses);
@@ -21,7 +21,7 @@ public class ViewCourseController extends AbstractController {
         VenueBean[] venues = new FetchBean().getCourseVenues(courseId);
         this.getRequest().setAttribute("venues", venues);
         
-        String courseTitle = courses[0].getCourse_title();
+        String courseTitle = courses[0].getCourseTitle();
         this.getRequest().setAttribute("pageTitle", courseTitle + " | UCC Summer Courses");
     }
 }
