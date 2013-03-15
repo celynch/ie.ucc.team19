@@ -13,12 +13,11 @@ import ie.ucc.team19.service.LoginUser;
 public class LogoutController extends AbstractController{
 
     public void execute() {
-        HttpServletResponse response = this.getResponse();
-        StudentBean student = (StudentBean) this.getRequest().getSession().getAttribute("user");
+        HttpServletResponse response = getResponse();
+        StudentBean student = (StudentBean) getRequest().getSession().getAttribute("user");
         new LoginUser().setCookies(response, student, false, true);
-        this.getRequest().getSession().invalidate();
-        this.setReturnPage("/logout.jsp");
-        this.getRequest().setAttribute("pageTitle", "Logged Out | UCC Summer Courses");
+        getRequest().getSession().invalidate();
+        setReturnPage("/logout.jsp");
+        getRequest().setAttribute("pageTitle", "Logged Out | UCC Summer Courses");
     }
-
 }

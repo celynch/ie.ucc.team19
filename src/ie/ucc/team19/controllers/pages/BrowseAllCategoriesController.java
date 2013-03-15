@@ -6,9 +6,9 @@ import ie.ucc.team19.service.FetchBean;
 
 public class BrowseAllCategoriesController extends AbstractController{
     public void execute() {
-        this.setReturnPage("/browseAllCategories.jsp");
-        this.getRequest().setAttribute("pageTitle", "Browse Categories | UCC Summer Courses");
+        setReturnPage("/browseAllCategories.jsp");
+        getRequest().setAttribute("pageTitle", "Browse Categories | UCC Summer Courses");
         CategoryBean categories = new FetchBean().getCourseCategories();
-        this.getRequest().setAttribute("categories", categories);
+        getRequest().setAttribute("categories", categories);
     }
 }

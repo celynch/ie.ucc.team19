@@ -11,12 +11,17 @@
     <jsp:include page="WEB-INF/views/horiz_nav.jsp" />
     <jsp:include page="WEB-INF/views/verti_nav.jsp" />
         <div id="content">
-            <form method="post" action="http://localhost:8080/team19/pages/resetPassword">
-                <fieldset id="personalinformation">
+            <form method="post" action="http://localhost:8080/team19/pages/passwordResetDispatch">
+                <fieldset id="passwordReset">
                     <legend>Reset password?</legend>
+                    <c:choose>
+                        <c:when test="${emailError}">
+                            <p>"We are unable to find an account matching the email address you entered."</p>
+                        </c:when>
+                    </c:choose>
                     <p>If you wish to reset your password, enter your email below and respond to the verification email sent.</p>
                     <dl>
-                        <dd><input required="required" type="text" id="email" name="email" placeholder="email" size="12"/></dd>
+                        <dd><input required="required" type="email" id="email" name="email" placeholder="email" size="20"/></dd>
                     </dl>
                     <input type="submit" name="loginVerify" value="Reset Password"/>
                 </fieldset>

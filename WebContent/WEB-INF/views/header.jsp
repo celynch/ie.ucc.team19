@@ -29,7 +29,7 @@
                                     <dd><input type="checkbox" id="rememberMe" name="rememberMe" value="true"/></dd>
                                 </dl>
                                 <a href="/team19/pages/register.jsp">Register</a>
-                                <a href="/team19/pages/passwordReset.jsp">Forgot password?</a>
+                                <a href="/team19/pages/passwordResetRequest.jsp">Forgot password?</a>
                                 <input type="submit" name="login" value="Login"/>
                             </fieldset>
                         </form>

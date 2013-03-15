@@ -12,7 +12,7 @@ public class LoginController extends AbstractController{
      *
      */
     public void execute() {
-        this.setReturnPage("/login.jsp");
-        this.getRequest().setAttribute("pageTitle", "Welcome | UCC Summer Courses");
+        setReturnPage("/login.jsp");
+        getRequest().setAttribute("pageTitle", "Welcome | UCC Summer Courses");
     }
 }

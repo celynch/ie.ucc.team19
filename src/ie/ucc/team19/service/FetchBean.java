@@ -10,40 +10,54 @@ import org.apache.commons.beanutils.BeanUtilsBean;
 
 
 public class FetchBean {
-    public CourseBean[] getCourseById(String course_id) {
+    public CourseBean[] getCourseByCourseId(String course_id) {
         course_id = course_id.replace("'", "''");
-        String query = "SELECT * FROM courses WHERE courseId = \'"
-                + course_id + "\'";
+        String query = "SELECT * "
+                     + "FROM courses "
+                     + "WHERE courseId = \'"
+                     + course_id + "\'";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         CourseBean[] courses = new CourseBean[resultTable.size()];
         courses = (CourseBean[]) sqlBeanPopulate(courses, resultTable);
         return courses;
     }
     
-    public CourseBean[] getCourseByCategory(String courseId) {
-        courseId = courseId.replace("'", "''");
-        String query = "SELECT * FROM courses WHERE courseCategory = \'"
-                + courseId + "\'";
+    public CourseBean[] getCoursesByCourseCategory(String courseCategory) {
+        courseCategory = courseCategory.replace("'", "''");
+        String query = "SELECT * "
+                     + "FROM courses "
+                     + "WHERE courseCategory = \'"
+                     + courseCategory + "\'";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         CourseBean[] courses = new CourseBean[resultTable.size()];
         courses = (CourseBean[]) sqlBeanPopulate(courses, resultTable);
         return courses;
     }
     
-    public LecturerBean[] getCourseLecturers(String courseId) {
+    public LecturerBean[] getLecturersByCourseId(String courseId) {
         courseId = courseId.replace("'", "''");
-        String query = "SELECT * FROM lecturers WHERE lecturerId IN (SELECT lecturerId FROM teaches WHERE courseId >= \'"
-                + courseId + "\')";
+        String query = "SELECT * "
+                     + "FROM lecturers "
+                     + "WHERE lecturerId IN ("
+                         + "SELECT lecturerId "
+                         + "FROM teaches "
+                         + "WHERE courseId >= \'"
+                         + courseId + "\')";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         LecturerBean[] lecturers = new LecturerBean[resultTable.size()];
         lecturers = (LecturerBean[]) sqlBeanPopulate(lecturers, resultTable);
         return lecturers;
     }
 
-    public VenueBean[] getCourseVenues(String courseId) {
+    public VenueBean[] getVenuesByCourseId(String courseId) {
         courseId = courseId.replace("'", "''");
-        String query = "SELECT * FROM venues WHERE venueId IN (SELECT venueId FROM courseLocations WHERE courseId = \'"
-                + courseId + "\')";
+        String query = "SELECT * "
+                     + "FROM venues "
+                     + "WHERE venueId IN ("
+                         + "SELECT venueId "
+                         + "FROM courseLocations "
+                         + "WHERE courseId = \'"
+                         + courseId + "\')";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         VenueBean[] venues = new VenueBean[resultTable.size()];
         venues = (VenueBean[]) sqlBeanPopulate(venues, resultTable);
@@ -78,8 +92,10 @@ public class FetchBean {
     }
 
     public StudentBean getStudentByEmail(String email) {
-        String query = "SELECT * FROM students WHERE email = \'"
-                + email + "\'";
+        String query = "SELECT * "
+                     + "FROM students "
+                     + "WHERE email = \'"
+                     + email + "\'";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         StudentBean[] student = new StudentBean[1];
         student = (StudentBean[]) sqlBeanPopulate(student, resultTable);
@@ -88,7 +104,8 @@ public class FetchBean {
     
     public CategoryBean getCourseCategories() {
         CategoryBean categories = new CategoryBean();
-        String query = "SELECT DISTINCT coursecategory FROM courses";
+        String query = "SELECT DISTINCT coursecategory "
+                     + "FROM courses";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         String[] categoryList = new String[resultTable.size()];
         int catNumber = 0;

@@ -42,9 +42,10 @@ public class SendEmail {
             message.setRecipients (Message.RecipientType.TO, InternetAddress.parse(toAddress));
             message.setSubject (subject);
             message.setText (mailMessage);
- 
+
             Transport.send (message);
         } catch (MessagingException e) {
+            System.out.println("Error sending email");
             throw new RuntimeException (e);
         }
     }

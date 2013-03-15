@@ -52,7 +52,7 @@ html, body {
 	float: left;
 }
 
-form {
+#header form {
 	display: inline;
 	width: 30%;
 	margin: 0 3%;

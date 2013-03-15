@@ -1,5 +1,7 @@
 package ie.ucc.team19.controllers.pages;
 
+import java.util.Calendar;
+
 import ie.ucc.team19.controllers.AbstractController;
 
 /**
@@ -9,7 +11,8 @@ import ie.ucc.team19.controllers.AbstractController;
  */
 public class RegisterController extends AbstractController{
     public void execute() {
-        this.setReturnPage("/register.jsp");
-        this.getRequest().setAttribute("pageTitle", "Account Registration | UCC Summer Courses");
+        setReturnPage("/register.jsp");
+        getRequest().setAttribute("year", Calendar.getInstance().get(Calendar.YEAR));
+        getRequest().setAttribute("pageTitle", "Account Registration | UCC Summer Courses");
     }
 }

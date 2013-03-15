@@ -14,7 +14,7 @@ import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.StudentBean;
 
 public class LoginUser {
-    private static StudentBean loginStudent(String email, String password_hash) {
+    private StudentBean loginStudent(String email, String password_hash) {
         StudentBean student = new StudentBean();
         String query = "SELECT * FROM students WHERE email = '" + email + "'";
         ArrayList<Map<String, String[]>> studentDetails = new DBConnectionManager().Select(query);
@@ -52,7 +52,7 @@ public class LoginUser {
     }
     
     public void loginViaForm(HttpServletRequest request, HttpServletResponse response, StudentBean student) {
-        student = LoginUser.loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
+        student = loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
         if(student.isAuthenticated()) {
             request.getSession().setAttribute("user", student);
             setCookies(response, student, Boolean.parseBoolean(request.getParameter("rememberMe")), false);
@@ -98,7 +98,7 @@ public class LoginUser {
     }
 
     public void loginVerify(HttpServletRequest request, HttpServletResponse response, StudentBean student) {
-        student = LoginUser.loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
+        student = loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
         if(request.getParameter("authString").equals(student.getAuthString())) {
             System.out.println("good authString");
             student.setAuthenticated(true);

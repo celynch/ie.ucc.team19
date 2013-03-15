@@ -15,12 +15,20 @@ public class UpdateUser {
      * @param cookie_token
      */
     public void updateCookieToken(String email, String cookieToken) {
-        String query = "UPDATE Students SET cookieToken = '" + cookieToken + "' WHERE email = '" + email + "'";
+        String query = "UPDATE Students SET cookieToken = '"
+                + cookieToken + "' WHERE email = '" + email + "'";
         new DBConnectionManager().Insert(query);
     }
     
     public void updateAuthString(String email, String authString) {
-        String query = "UPDATE Students SET authString = '" + authString + "' WHERE email = '" + email + "'";
+        String query = "UPDATE Students SET authString = '"
+                + authString + "' WHERE email = '" + email + "'";
+        new DBConnectionManager().Insert(query);
+    }
+    
+    public void updatePasswordHash(String email, String passwordHash) {
+        String query = "UPDATE Students SET passwordHash = '"
+                + passwordHash + "' WHERE email = '" + email + "'";
         new DBConnectionManager().Insert(query);
     }
 }

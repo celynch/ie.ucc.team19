@@ -19,21 +19,23 @@ public class RegisterCompleteController extends AbstractController{
         this.setReturnPage("/registerComplete.jsp");
         this.getRequest().setAttribute("pageTitle", "Registration Completed | UCC Summer Courses");
         String subject = "UCC Summer Courses | Welcome";
-        String mailMessage = "Thanks for joining UCC Summer Courses.\n "
-                + "We listed your sign in details below, make sure you keep them safe. "
-                + "To verify your email address, please follow this link:\n"
-                + "<a href=\"http://localhost:8080/team19/pages/login?authString="
-                + user.getAuthString() + "\">Complete Registration</a>\n"
-                + "Your email address: " + user.getEmail()
-                + "\n<blockquote>\"Where Finbarr taught, let Munster learn\"</blockquote>\n- The UCC Summer Courses Team ";
+        String mailMessage = "<div><p>Thanks for joining UCC Summer Courses.</p>"
+                + "<p>We listed your sign in details below, make sure you keep them safe.</p>"
+                + "<p>To verify your email address, please follow this link:"
+                + "<a href=\"http://localhost:8080/team19/pages/login"
+                + "?authString=" + user.getAuthString()
+                + "&email=" + user.getEmail() +"\">Complete Registration</a></p>"
+                + "<p>Your email address: " + user.getEmail() + "</p>"
+                + "<blockquote>\"Where Finbarr taught, let Munster learn\"</blockquote>"
+                + "<p>- The UCC Summer Courses Team</p></div>";
         new SendEmail().sendEmail( user.getEmail(), subject, mailMessage);
     }
-    
+
     private StudentBean setupStudent() {
         StudentBean user = new StudentBean();
-        HttpServletRequest request = this.getRequest();
+        HttpServletRequest request = getRequest();
         Map<String, String[]> userFormValues = request.getParameterMap();
-        
+
         String date_of_birth_fields = request.getParameter("dobY")
                 + "-" + request.getParameter("dobM")
                 + "-" + request.getParameter("dobD");

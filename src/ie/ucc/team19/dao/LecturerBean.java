@@ -1,11 +1,11 @@
 package ie.ucc.team19.dao;
 
 public class LecturerBean {
-    private int lecturer_id;
+    private int lecturerId;
     private String firstName;
     private String lastName;
     private String email;
-    private String lecturertitle;
+    private String lecturerTitle;
     private String position;
     private String addressLine1;
     private String addressLine2;
@@ -17,11 +17,11 @@ public class LecturerBean {
         
     }
 
-    public int getLecturer_id() {
-        return lecturer_id;
+    public int getLecturerId() {
+        return lecturerId;
     }
-    public void setLecturer_id(int lecturer_id) {
-        this.lecturer_id = lecturer_id;
+    public void setLecturerId(int lecturerId) {
+        this.lecturerId = lecturerId;
     }
     public String getFirstName() {
         return firstName;
@@ -41,11 +41,11 @@ public class LecturerBean {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getLecturertitle() {
-        return lecturertitle;
+    public String getLecturerTitle() {
+        return lecturerTitle;
     }
-    public void setLecturertitle(String lecturertitle) {
-        this.lecturertitle = lecturertitle;
+    public void setLecturerTitle(String lecturerTitle) {
+        this.lecturerTitle = lecturerTitle;
     }
     public String getPosition() {
         return position;

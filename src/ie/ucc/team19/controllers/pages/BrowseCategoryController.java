@@ -6,10 +6,10 @@ import ie.ucc.team19.service.FetchBean;
 
 public class BrowseCategoryController extends AbstractController{
     public void execute() {
-        this.setReturnPage("/browseCategory.jsp");
+        setReturnPage("/browseCategory.jsp");
         String category = this.getRequest().getParameter("category");
-        this.getRequest().setAttribute("pageTitle", "Courses in " + category + " | UCC Summer Courses");
-        CourseBean[] categoryCourses = new FetchBean().getCourseByCategory(category);
-        this.getRequest().setAttribute("categoryCourses", categoryCourses);
+        getRequest().setAttribute("pageTitle", "Courses in " + category + " | UCC Summer Courses");
+        CourseBean[] categoryCourses = new FetchBean().getCoursesByCourseCategory(category);
+        getRequest().setAttribute("categoryCourses", categoryCourses);
     }
 }

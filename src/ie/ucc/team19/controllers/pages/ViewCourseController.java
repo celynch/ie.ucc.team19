@@ -11,17 +11,17 @@ import ie.ucc.team19.service.FetchBean;
 public class ViewCourseController extends AbstractController {
 
     public void execute() {
-        this.setReturnPage("/viewCourse.jsp");
-        String courseId = this.getRequest().getParameter("courseId");
+        setReturnPage("/viewCourse.jsp");
+        String courseId = getRequest().getParameter("courseId");
         
-        CourseBean[] courses = new FetchBean().getCourseById(courseId);
-        this.getRequest().setAttribute("courses", courses);
-        LecturerBean[] lecturers = new FetchBean().getCourseLecturers(courseId);
-        this.getRequest().setAttribute("lecturers", lecturers);
-        VenueBean[] venues = new FetchBean().getCourseVenues(courseId);
-        this.getRequest().setAttribute("venues", venues);
+        CourseBean[] courses = new FetchBean().getCourseByCourseId(courseId);
+        getRequest().setAttribute("courses", courses);
+        LecturerBean[] lecturers = new FetchBean().getLecturersByCourseId(courseId);
+        getRequest().setAttribute("lecturers", lecturers);
+        VenueBean[] venues = new FetchBean().getVenuesByCourseId(courseId);
+        getRequest().setAttribute("venues", venues);
         
         String courseTitle = courses[0].getCourseTitle();
-        this.getRequest().setAttribute("pageTitle", courseTitle + " | UCC Summer Courses");
+        getRequest().setAttribute("pageTitle", courseTitle + " | UCC Summer Courses");
     }
 }

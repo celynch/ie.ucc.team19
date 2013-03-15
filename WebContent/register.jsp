@@ -32,7 +32,7 @@
 							<option value="11">November</option>
 							<option value="12">December</option>
 	                    </select>
-	                    <input required="required" type="text" name="dobY" maxlength="4" size="4" id="dobY"
+	                    <input required="required" type="number" min="1900" max="${year - 18}" name="dobY" maxlength="4" size="4" id="dobY"
 			                value="YYYY"
 			                onfocus="if(this.value=='YYYY')this.value='';"
 			                onblur="if(this.value=='')this.value='YYYY';" />
@@ -60,7 +60,7 @@
                 <legend>Contact Information</legend>
                 <dl>
                     <dt><label for="telephone">Telephone:</label></dt>
-                    <dd><input type="text" id="telephone" name="telephone" /></dd>
+                    <dd><input type="tel" id="telephone" name="telephone" /></dd>
 		            <dt><label for="email">Email: *</label></dt>
 		            <dd><input required="required" type="email" id="email" name="email" placeholder="email"/></dd>
 		            <dt><label for="email2">Verify Email: *</label></dt>
@@ -74,7 +74,7 @@
 		            <dt><label for="password">Password: *</label></dt>
 		            <dd><input required="required" type="password" id="password" name="passwordHash" /><dd>
 		            <dt><label for="password2">Re-enter Password: *</label></dt>
-		            <dd><input required="required" type="password" id="password2" name="passwordHash" /></dd>
+		            <dd><input required="required" type="password" id="password2" name="passwordHash2" /></dd>
 	            </dl>
             </fieldset>
             <input type="submit" name="Proceed" value="Cancel"/> <input type="submit" name="Proceed" value="Proceed"/>

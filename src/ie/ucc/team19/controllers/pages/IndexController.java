@@ -11,13 +11,13 @@ import ie.ucc.team19.service.FetchBean;
 public class IndexController extends AbstractController {
 
     public void execute() {
-        this.setReturnPage("/index.jsp");
-        this.getRequest().setAttribute("pageTitle", "Welcome | UCC Summer Courses");
-        CourseBean[] courses = new FetchBean().getCourseById("1");
-        this.getRequest().setAttribute("courses", courses);
-        LecturerBean[] lecturers = new FetchBean().getCourseLecturers("1");
-        this.getRequest().setAttribute("lecturers", lecturers);
-        VenueBean[] venues = new FetchBean().getCourseVenues("1");
-        this.getRequest().setAttribute("venues", venues);
+        setReturnPage("/index.jsp");
+        getRequest().setAttribute("pageTitle", "Welcome | UCC Summer Courses");
+        CourseBean[] courses = new FetchBean().getCourseByCourseId("1");
+        getRequest().setAttribute("courses", courses);
+        LecturerBean[] lecturers = new FetchBean().getLecturersByCourseId("1");
+        getRequest().setAttribute("lecturers", lecturers);
+        VenueBean[] venues = new FetchBean().getVenuesByCourseId("1");
+        getRequest().setAttribute("venues", venues);
     }
 }

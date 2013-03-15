@@ -160,7 +160,7 @@ in the Irish context.</p>',
 </ol>
 
 <p>What have the Romans ever down for us?</p>', 
-'2013-01-01', '2013-05-01', '2013-06-01', '2013-06-05'),
+'2013-01-01', '2013-05-01', '2013-06-01', '2013-06-05')
 ;
 
 DROP TABLE IF EXISTS teaches; 
