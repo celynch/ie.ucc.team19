@@ -8,8 +8,8 @@
 </jsp:include>
 
     <div id="main" >
-    <jsp:include page="WEB-INF/views/horiz_nav.jsp" />
-    <jsp:include page="WEB-INF/views/verti_nav.jsp" />
+    <jsp:include page="WEB-INF/views/horizNav.jsp" />
+    <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
             <form method="post" action="http://localhost:8080/team19/pages/passwordResetDispatch">
                 <fieldset id="passwordReset">

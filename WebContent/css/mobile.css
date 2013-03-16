@@ -1,0 +1,22 @@
+body {
+    color: black;
+    font-family: Times New Roman, Times, serif;
+    font-size: 12px;
+}
+
+/*make all sections flow in single column*/
+#content, #vertiNav {
+  clear: left;
+  width: 100%;
+}
+
+#vertiNav {
+  clear: left;
+  width: 100%;
+  margin: 0;
+}
+
+#footer {
+  width: 100%;
+  text-align: left;
+}

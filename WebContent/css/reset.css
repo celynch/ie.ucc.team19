@@ -1,0 +1,93 @@
+html {
+    /*overflow: -moz-scrollbars-vertical !important;*/
+    overflow-y: scroll;
+    font-size: 100%; /*IS HACK: sets 1em equal to users default text size*/
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana,Helvetica,Arial,sans-serif;
+    font-size: 1em; /*sets 1em equal to users default text size - normally 16px*/
+    line-height: 1.125em;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+    font-family: "Trebuchet MS",Helvetica,Verdana,Arial,sans-serif;
+    color: #002B5F;
+}
+
+h1 {
+    height: 1%; 
+    font-size: 1.125em;
+    font-weight: normal;
+    margin: 0;
+}
+
+h2 {
+    font-size:1em;
+    margin: 0.5em 0 0 0;
+}
+
+h3 {
+    font-size:0.875em;
+    margin: 1em 0 0 0;
+}
+
+h4 {
+    font-size:0.7em;
+}
+
+p {
+    font-size: 0.7em;
+}
+
+/* Links */
+
+a, a:visited {
+    color: #003060;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #305070;
+    text-decoration: underline;
+}
+
+a img {
+    border: 0;
+}
+
+table th {
+    text-align: center;
+    background-color: #f0f8ff;
+    color: #505050;
+}
+
+tbody th {
+    text-align: right;
+    vertical-align: top;
+}
+
+table, table th, table td {
+    border-collapse: collapse;
+    padding: 0 10px;
+    margin-top: 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+fieldset {
+    margin-bottom: 2em;
+    padding: 0 0.8em 0.8em;
+    border: 1px solid #D5D5D5;
+}
+
+legend {
+    font-size: 1em;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}

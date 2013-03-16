@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div id="verti_nav">
+<div id="vertiNav">
     <nav>
         <ul>
             <li><a href="browseAllCategories.jsp">Browse Categories</a></li>

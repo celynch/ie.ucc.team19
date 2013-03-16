@@ -8,8 +8,8 @@
 </jsp:include>
 
     <div id="main" >
-    <jsp:include page="WEB-INF/views/horiz_nav.jsp" />
-    <jsp:include page="WEB-INF/views/verti_nav.jsp" />
+    <jsp:include page="WEB-INF/views/horizNav.jsp" />
+    <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
             <h2>Course Categories</h2>
             <p>Select from the list below to see the range of courses of that category.</p>

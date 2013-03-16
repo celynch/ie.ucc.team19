@@ -1,0 +1,112 @@
+/*Do not add other styles to these floats*/
+.left_float {
+    float:left;
+}
+.right_float {
+    float:right;
+}
+.left {
+    float: left;
+    margin: 0.5em 0.5em 0.5em 0;
+}
+
+.right {
+    float: right;
+    margin: 0.5em 0 0.5em 0.5em;
+}
+
+.clear {
+    clear: both;
+}
+/*End floats*/
+
+#wrapper {
+    height: auto !important;
+    min-height: 100%;
+    margin: 0 auto;
+    width: 75%;
+}
+
+#footer {
+    margin: 0 auto 5em;
+    width: 75%;
+}
+
+#mainContent {
+    margin: auto;
+    width: 960px;
+    clear: both;
+    min-height: 500px;
+}
+
+/*Header settings*/
+#header {
+    background: #A02020;
+    border-bottom: 1px solid #586878;
+    text-align:right;
+}
+
+#header .leftImage {
+    float:left;
+    line-height:normal;
+    position:relative;
+    z-index:1;
+}
+
+#header .rightImage {
+    float:right;
+    line-height:normal;
+    position:relative;
+    z-index:1;
+}
+
+.print {
+    display:none;
+}
+
+#header form {
+    float:right;
+}
+
+#horizNav {
+    float: left;
+    line-height: normal;
+    background: url(/inc/img/banner-nav-dot.jpg) 0 0 repeat-x;
+    /*background: url(/inc/img/nav/topnav-pipe.gif) no-repeat scroll left center;*/
+    border-bottom: 1px solid #141b28;
+    width: 100%;
+    text-align: center;
+    height: 2.5em;
+    text-transform: uppercase;
+}
+
+#horizNav li {
+    display:block;
+    float:left;
+    height:2.5em;
+}
+
+#horizNav li a {
+    color:#ffffff;
+    display:block;
+    overflow:hidden;
+    text-decoration:none !important;
+}
+
+#horizNav li a:hover {
+    background: url(/inc/img/top-nav-selected.jpg) repeat-x scroll 0 0;
+    color:#f0f0f0;
+}
+
+#horizNav a.selected {
+    background: url(/inc/img/top-nav-selected.jpg) repeat-x;
+}
+
+/*Footer settings*/
+#footer {
+    background: #A02020;
+    border-top: 1px solid #586878;
+    text-align:right;
+}
+
+/*End footer settings*/

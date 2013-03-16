@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div id="horiz_nav">
+<div id="horizNav">
     <nav>
 	    <ul>
 	        <li><a href="http://www.ucc.ie/en/study/">Study@UCC</a></li>

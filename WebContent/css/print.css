@@ -1,0 +1,66 @@
+* {
+    color: black !important;
+    font-family: serif !important;
+    font-size: 12pt;
+}
+
+p, dd, dd li, {
+    font-size: 12pt !important;
+}
+
+body, #wrapper {
+    width: 100%;
+    background: #ffffff;
+}
+
+#content, .rightcontent_widget {
+  clear: left;
+  float: none;
+  width: 100%;
+  margin: 0;
+}
+
+a {
+    color: #336699 !important;
+}
+
+a:after {
+    content: " ["attr(href)"] ";
+    font-family: monospace;
+    color: #333399;
+}
+
+/*Removal of unrequired formatting, e.g. top banners, navigation, etc*/
+#horizNav, #vertiNav {
+    display: none;
+}
+
+#header, #footer {
+    background: #ffffff !important;
+    border: none;
+}
+
+/*print un-friendly logos disappear*/
+.header_logo {
+    display: none;
+}
+
+/*makes print friendly logos appear*/
+.print_logo {
+    display: block !important;
+    font-size: 1.5em !important;
+}
+
+/*annotates image with alt description*/
+img:before {
+    content: "Image Description: " attr(alt);
+}
+
+#content img {
+  margin: 0;
+}
+
+#footer {
+    width: 100%;
+    text-align: left;
+}

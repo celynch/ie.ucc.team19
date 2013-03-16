@@ -1,0 +1,113 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#wrapper {
+    background-color: beige;
+    height: auto !important;
+    margin: 0 auto;
+    min-height: 100%;
+    width: 75%;
+}
+#content {
+    background: none repeat scroll 0 0 white;
+    padding: 1em;
+    width: 75%;
+}
+.clear {
+    clear: both;
+}
+#header, #footer {
+    background-color: activecaption;
+    border-radius: 10px 10px 10px 10px;
+}
+#header {
+    min-height: 6em;
+}
+#footer {
+    margin: 0 auto 5em;
+    width: 75%;
+}
+#header h1 {
+    display: inline;
+    float: left;
+    margin: 0 3%;
+    width: 50%;
+}
+#header form {
+    display: inline;
+    float: right;
+    font-size: 0.75em;
+    margin: 0 3%;
+    padding: 2px;
+    width: 30%;
+}
+table, tr, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+dl, dt, dd {
+    display: inline;
+    margin: 0;
+}
+#main, #header {
+    padding: 0 2em;
+}
+#main {
+    min-height: 100%;
+}
+td, th {
+    background-color: white;
+    padding: 5px;
+}
+#horiz_nav li, p, ul {
+    display: inline;
+}
+#horiz_nav ul {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CCCCCC;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 0;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
+#verti_nav ul {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CCCCCC;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 0;
+    float: right;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 25%;
+}
+#horiz_nav ul li {
+    display: inline-block;
+    width: 18%;
+}
+#horiz_nav ul li a, #verti_nav ul li a {
+    color: #000000;
+    display: inline;
+    font-family: ClarendonTextPro,Georgia,Arial,sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+#horiz_nav ul li:hover, #verti_nav ul li:hover {
+    background: none repeat scroll 0 0 gray;
+}

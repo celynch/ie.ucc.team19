@@ -2,6 +2,7 @@
 <jsp:include page="WEB-INF/views/header.jsp" >
     <jsp:param name="pageTitle" value="${pageTitle}" />
 </jsp:include>
+
     <div id="main">
         <form method="post" action="http://localhost:8080/team19/pages/RegisterComplete.jsp">
             <fieldset id="personalinformation">

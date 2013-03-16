@@ -1,0 +1,100 @@
+body {
+    background: #f3f3f3;
+}
+#wrapper {
+    background: white;
+}
+
+#horizNav {
+    border-left: 1px solid #396594;
+    border-right: 1px solid #396594;
+    color: #fff;
+}
+
+.intro {
+    font-style: italic;
+    font-family: Verdana,Helvetica,Arial,Sans-serif;
+    color: #333;
+    line-height: 1.5em;
+}
+
+#horizNav a {
+    color: #eeeeee;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+#vertiNav li.selected {
+    background: #b8d0f0;
+}
+
+.external:after {
+    content: " " url('/inc/img/external.png');
+}
+
+/*End top navigation settings*/
+#header {
+    color: #5d6e9c;
+}
+#header input {
+    color: #444444;
+}
+#header a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/*Footer styling*/
+#footer {
+    text-align: right;
+}
+#footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+/*End footer styling*/
+
+#rightcontent img.noborder {
+    border: 0;
+}
+
+#content p  {
+    line-height: 1.5em;
+}
+
+caption {
+    background-color: #2E4C6F;
+    color: white;
+}
+
+.register form {
+  border: 1px solid silver;
+  padding: 1em;
+}
+
+.hidden {
+  display: none;
+}
+
+/*Site map styles*/
+.sitemap {
+  font-size:0.759em;
+}
+/*End site map styles*/
+
+/* 
+  If the file is a .pdf file, display it as such
+  otherwise display it as something else. 
+*/
+
+a[href$='.pdf']:after {
+    content: " (PDF)";
+}
+
+a[href$='.doc']:after {
+    content: " (MS Word)";
+}
+
+a[href$='.xls']:after {
+    content: " (Excel)";
+}

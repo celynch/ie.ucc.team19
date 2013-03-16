@@ -12,7 +12,7 @@ public class StudentBean {
     private String addressLine2;
     private String addressLine3;
     private String country;
-    private String telephone; 
+    private String telephone;
     private Date dateOfBirth;
     private char gender;
     private boolean authenticated;

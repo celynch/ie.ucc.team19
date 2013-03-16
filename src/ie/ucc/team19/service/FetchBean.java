@@ -104,7 +104,7 @@ public class FetchBean {
     
     public CategoryBean getCourseCategories() {
         CategoryBean categories = new CategoryBean();
-        String query = "SELECT DISTINCT coursecategory "
+        String query = "SELECT DISTINCT courseCategory "
                      + "FROM courses";
         ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
         String[] categoryList = new String[resultTable.size()];

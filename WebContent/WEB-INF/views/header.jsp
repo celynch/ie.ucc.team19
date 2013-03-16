@@ -4,7 +4,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>${param['pageTitle']}</title>
-        <link rel="stylesheet" type="text/css" href="/team19/css/dbtestcss.css" />
+        <link rel="stylesheet" type="text/css" href="/team19/css/reset.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/team19/css/style.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/team19/css/structural.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/team19/css/fontsizes.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/team19/css/print.css" media="print" />
+        <link rel="stylesheet" type="text/css" href="/team19/css/mobile.css" media="mobile" />
+        <!-- <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />  -->
+        
     </head>
     <body>
     <div id="wrapper" >
