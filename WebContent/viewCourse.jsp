@@ -24,7 +24,7 @@
                         </c:forEach>
                         <h3>Venue<c:choose><c:when test="${fn:length(venues) > 0}">s</c:when></c:choose>:</h3>
                         <c:forEach var="venue" items="${venues}">
-                            <p>${venue['venue_room']}, ${venue['venueBuilding']}, ${venue['addressLine1']}</p>
+                            <p>${venue['venueRoom']}, ${venue['venueBuilding']}, ${venue['addressLine1']}</p>
                         </c:forEach>
                         ${course['content']}
                     </c:forEach>

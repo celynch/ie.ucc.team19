@@ -1,39 +1,13 @@
 body {
     background: #f3f3f3;
 }
+
 #wrapper {
-    background: white;
+	background: white;
 }
 
-#horizNav {
-    border-left: 1px solid #396594;
-    border-right: 1px solid #396594;
-    color: #fff;
-}
-
-.intro {
-    font-style: italic;
-    font-family: Verdana,Helvetica,Arial,Sans-serif;
-    color: #333;
-    line-height: 1.5em;
-}
-
-#horizNav a {
-    color: #eeeeee;
-    font-weight: normal;
-    text-decoration: none;
-}
-
-#vertiNav li.selected {
-    background: #b8d0f0;
-}
-
-.external:after {
-    content: " " url('/inc/img/external.png');
-}
-
-/*End top navigation settings*/
 #header {
+    background: #a02020;
     color: #5d6e9c;
 }
 #header input {
@@ -44,9 +18,61 @@ body {
     text-decoration: none;
 }
 
+#horizNav {
+    color: #224488;
+}
+
+#horizNav li a:hover {
+    background: url(/img/nav/hoizNav-selected.jpg) repeat-x scroll 0 0;
+    color:#f0f0f0;
+}
+
+#horizNav li a {
+    background: url(/img/nav/hoizNav-pipe.jpg) repeat-x scroll 0 0;
+    color:#ffffff;
+    text-decoration:none !important;
+}
+
+#horizNav a.selected {
+    background: url(/inc/img/top-nav-selected.jpg) repeat-x;
+}
+
+#horizNav a {
+    color: #eeeeee;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+#vertiNav {
+	border-radius: 1em;
+	text-transform: uppercase;
+    background: azure;
+}
+
+#vertiNav li.selected {
+    background: #b8d0f0;
+}
+
+.intro {
+    font-style: italic;
+    font-family: Verdana,Helvetica,Arial,Sans-serif;
+    color: #303030;
+    line-height: 1.5em;
+}
+
+.external:after {
+    content: " " url('/inc/img/external.png');
+}
+
+/*End top navigation settings*/
+
+
+
+
 /*Footer styling*/
 #footer {
     text-align: right;
+    background: #a02020;
 }
 #footer a {
     color: #ffffff;
@@ -54,7 +80,7 @@ body {
 }
 /*End footer styling*/
 
-#rightcontent img.noborder {
+#content img.noborder {
     border: 0;
 }
 
@@ -73,18 +99,17 @@ caption {
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 /*Site map styles*/
 .sitemap {
-  font-size:0.759em;
+    font-size:0.6em;
 }
-/*End site map styles*/
+
 
 /* 
-  If the file is a .pdf file, display it as such
-  otherwise display it as something else. 
+    display link file type for docs 
 */
 
 a[href$='.pdf']:after {

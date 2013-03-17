@@ -20,30 +20,49 @@
 }
 /*End floats*/
 
+.print {
+    display:none;
+}
+
 #wrapper {
-    height: auto !important;
+    height: auto !important; /* ie6 ignores !important, so this will be overridden below */
+    height: 100%;
     min-height: 100%;
-    margin: 0 auto;
+    margin: 0 auto -5%;
+    padding: 0;
     width: 75%;
+}
+
+#main {
+	diplay table;
+    height: 100%;
 }
 
 #footer {
-    margin: 0 auto 5em;
+	position: relative;
+    margin-top: -5%; /* negative value of footer height */
+	margin: 0 auto;
+    padding: 0;
     width: 75%;
+    border-top: 1px solid #586878;
+    text-align:right;
 }
 
-#mainContent {
-    margin: auto;
-    width: 960px;
-    clear: both;
-    min-height: 500px;
+.push, #footer {
+    height: 5%;
 }
 
 /*Header settings*/
 #header {
-    background: #A02020;
     border-bottom: 1px solid #586878;
-    text-align:right;
+    text-align:left;
+    overflow: auto;
+    width: 100%;
+}
+
+.header_logo {
+	width: 60%;
+	float: left;
 }
 
 #header .leftImage {
@@ -60,53 +79,66 @@
     z-index:1;
 }
 
-.print {
-    display:none;
+#loginLogout {
+    float:right;
+    width: 35%;
 }
 
-#header form {
-    float:right;
+#loginLogout dd, #loginLogout dt{
+	display: inline;
 }
 
 #horizNav {
-    float: left;
     line-height: normal;
-    background: url(/inc/img/banner-nav-dot.jpg) 0 0 repeat-x;
-    /*background: url(/inc/img/nav/topnav-pipe.gif) no-repeat scroll left center;*/
-    border-bottom: 1px solid #141b28;
+    background: #1e5799; /* browser w/o gradient */
+    background: linear-gradient(to bottom, #a02020 0%,#b03030 32%,#c04040 66%,#d06060 100%); /* W3C */
+    border-bottom: 1px solid #202040;
     width: 100%;
     text-align: center;
-    height: 2.5em;
     text-transform: uppercase;
 }
 
+#horizNav ul {
+	margin: 0 auto;
+}
+
 #horizNav li {
-    display:block;
-    float:left;
-    height:2.5em;
+    display: inline-block;
+    /*float: left;*/
 }
 
 #horizNav li a {
-    color:#ffffff;
     display:block;
     overflow:hidden;
-    text-decoration:none !important;
+    padding: 0.5em;
 }
 
-#horizNav li a:hover {
-    background: url(/inc/img/top-nav-selected.jpg) repeat-x scroll 0 0;
-    color:#f0f0f0;
+#vertiNav {
+	height: auto !important; /* ie6 ignores !important, so this will be overridden below */
+    height: 100%;
+    min-height: 100%;
+    margin: 1em;
+    float: left;
+    line-height: normal;
+    width: 20%;
+    text-align: center;
 }
 
-#horizNav a.selected {
-    background: url(/inc/img/top-nav-selected.jpg) repeat-x;
+#vertiNav li {
+    display:block;
 }
 
-/*Footer settings*/
-#footer {
-    background: #A02020;
-    border-top: 1px solid #586878;
-    text-align:right;
+#vertiNav li a {
+    display:block;
+    overflow:hidden;
+    padding: 0.5em;
 }
 
-/*End footer settings*/
+#vertiNav li a:hover {
+    background: PaleTurquoise;
+}
+
+#content {
+	margin: 1em 1em 1em 20%;
+	padding: 1em;
+}

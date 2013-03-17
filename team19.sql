@@ -1,5 +1,8 @@
 /*
-source ~/cs3305/team19.sql
+drop database team19;
+CREATE DATABASE team19 CHARACTER SET utf8 COLLATE utf8_general_ci;
+use team19
+source C:\Program Files\Tomcat\apache-tomcat-7.0.35\webapps\team19\team19.sql
 */
 
 DROP TABLE IF EXISTS teaches;
@@ -121,7 +124,7 @@ VALUES
     ('Introduction to Irish Folklore', 190.00, 25, 'culture', 
 '<h3>Course Content</h3>
 <ol>
-<li>Introduction – Defining "Folklore"</li>
+<li>Introduction - Defining "Folklore"</li>
 <li>The Otherworld and Fairy Folklore</li>
 <li>The Wake: Death and Dying in  
 Traditional Worldview</li>

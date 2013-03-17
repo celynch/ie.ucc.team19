@@ -19,41 +19,22 @@
                                 <legend>Account Details</legend>
                                 <dl>
 				                    <dt><label for="firstName">First Name:</label></dt>
-				                    <dt>${sessionScope['user'].firstName}</dt>
-				                    <dd><input type="text" id="firstName" name="firstName" /></dd>
+				                    <dd><input type="text" id="firstName" name="firstName" disabled="disabled" placeholder="${sessionScope['user'].firstName}"/></dd>
 				                    
 				                    <dt><label for="lastName">Last Name:</label></dt>
-				                    <dt>${sessionScope['user'].lastName}</dt>
-				                    <dd><input type="text" id="lastName" name="lastName" /></dd>
+				                    <dd><input type="text" id="lastName" name="lastName" disabled="disabled" placeholder="${sessionScope['user'].lastName}"/></dd>
 				                    
 				                    <dt><label for="address1">Address Line 1:</label></dt>
-				                    <dt>${sessionScope['user'].addressLine1}</dt>
-				                    <dd><input type="text" id="address1" name="addressLine1" /></dd>
+				                    <dd><input type="text" id="address1" name="addressLine1" disabled="disabled" placeholder="${sessionScope['user'].addressLine1}"/></dd>
 				                    
 				                    <dt><label for="address2">Address Line 2:</label></dt>
-				                    <dt>${sessionScope['user'].addressLine2}</dt>
-				                    <dd><input type="text" id="address2" name="addressLine2" /></dd>
+				                    <dd><input type="text" id="address2" name="addressLine2" disabled="disabled" placeholder="${sessionScope['user'].addressLine2}"/></dd>
 				                    
 				                    <dt><label for="address3">Address Line 3:</label></dt>
-				                    <dt>${sessionScope['user'].addressLine3}</dt>
-				                    <dd><input type="text" id="address3" name="addressLine3" /></dd>
+				                    <dd><input type="text" id="address3" name="addressLine3" disabled="disabled" placeholder="${sessionScope['user'].addressLine3}"/></dd>
 				                    
 				                    <dt><label for="country">Country:</label></dt>
-				                    <dt>${sessionScope['user'].country}</dt>
-				                    <dd><input type="text" id="country" name="country" /></dd>
-				                    
-				                    <dt><label for="gender">Gender</label></dt>
-				                    <dt>
-					                    <c:choose>
-					                        <c:when test="${sessionScope['user'].gender == 'M'.charAt(0)}">Male</c:when>
-					                        <c:otherwise>Female</c:otherwise>
-					                    </c:choose>
-
-				                    </dt>
-				                    <dd id="gender">
-				                        <label>M:<input type="radio" name="gender" value="M" /></label>
-				                        <label>F:<input type="radio" name="gender" value="F" /></label>
-				                    </dd>
+				                    <dd><input type="text" id="country" name="country" disabled="disabled" placeholder="${sessionScope['user'].country}"/></dd>
 				                </dl>
                             </fieldset>
                         </form>
