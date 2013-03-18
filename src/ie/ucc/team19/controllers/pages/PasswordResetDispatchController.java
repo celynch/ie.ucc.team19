@@ -17,7 +17,7 @@ public class PasswordResetDispatchController extends AbstractController{
             student.setAuthString(UUID.randomUUID().toString());
             new UpdateUser().updateAuthString(email, student.getAuthString());
             setReturnPage("/");
-            getRequest().setAttribute("pageTitle", "Welcome | UCC Summer Courses");
+            getRequest().setAttribute("pageTitle", "Welcome");
     
             String subject = "UCC Summer Courses | Password Reset";
             String mailMessage = "<div><p>" + student.getFirstName()

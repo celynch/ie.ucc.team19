@@ -14,12 +14,12 @@ import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.StudentBean;
 
 public class LoginUser {
-    private StudentBean loginStudent(String email, String password_hash) {
+    private StudentBean loginStudent(String email, String passwordHash) {
         StudentBean student = new StudentBean();
         String query = "SELECT * FROM students WHERE email = '" + email + "'";
         ArrayList<Map<String, String[]>> studentDetails = new DBConnectionManager().Select(query);
-        if(studentDetails.size() != 0) {    // email found
-            if( studentDetails.get(0).get("passwordHash")[0].equals(password_hash)) { // password matches
+        if(studentDetails.size() != 0) {// user exists
+            if( studentDetails.get(0).get("passwordHash")[0].equals(passwordHash)) { // password matches
                 try {
                     BeanUtilsBean.getInstance().populate(student, studentDetails.get(0));
                 } catch (IllegalAccessException | InvocationTargetException e) {
@@ -51,15 +51,19 @@ public class LoginUser {
         return student;
     }
     
-    public void loginViaForm(HttpServletRequest request, HttpServletResponse response, StudentBean student) {
-        student = loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
-        if(student.isAuthenticated()) {
+    public boolean loginViaForm(HttpServletRequest request, HttpServletResponse response) {
+        StudentBean student = loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
+        boolean result = false;
+        if(student.getEmail() != null && student.isAuthenticated()) {
+            result = true;
             request.getSession().setAttribute("user", student);
-            setCookies(response, student, Boolean.parseBoolean(request.getParameter("rememberMe")), false);
+            setCookies(response, student, request.getServerName(),
+                    Boolean.parseBoolean(request.getParameter("rememberMe")), false);
         }
+        return result;
     }
 
-    public void loginViaCookie(HttpServletRequest request, HttpServletResponse response, StudentBean student) {
+    public void loginViaCookie(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         if(cookies != null) {
             String email = "";
@@ -71,34 +75,31 @@ public class LoginUser {
                     cookie_token = cookie.getValue();
                 }
             }
-            student = LoginUser.cookieValidate(email, cookie_token);
-            if(student.isAuthenticated()) {
+            StudentBean student = LoginUser.cookieValidate(email, cookie_token);
+            if(student.getEmail() != null && student.isAuthenticated()) {
                 request.getSession().setAttribute("user", student);
-                setCookies(response, student, Boolean.parseBoolean(request.getParameter("rememberMe")), false);
+                setCookies(response, student, request.getServerName(),
+                        Boolean.parseBoolean(request.getParameter("rememberMe")), false);
             }
         }
     }
 
-    public void setCookies(HttpServletResponse response, StudentBean student, boolean rememberMe, boolean expire) {
+    public void setCookies(HttpServletResponse response, StudentBean student, String host, boolean rememberMe, boolean expire) {
         int SECONDS_PER_YEAR = 60*60*24*365;
         Cookie emailCookie = new Cookie("email", student.getEmail());
         Cookie cookieToken = new Cookie("cookieToken", student.getCookieToken());
-        emailCookie.setDomain("localhost");
-        cookieToken.setDomain("localhost");
+        emailCookie.setDomain(host);
+        cookieToken.setDomain(host);
         if(rememberMe) {
-            emailCookie.setMaxAge(SECONDS_PER_YEAR);
-            cookieToken.setMaxAge(SECONDS_PER_YEAR);
-        }
-        if(expire) {
-            emailCookie.setMaxAge(0);
-            cookieToken.setMaxAge(0);
+            emailCookie.setMaxAge(expire ? 0 : SECONDS_PER_YEAR);
+            cookieToken.setMaxAge(expire ? 0 : SECONDS_PER_YEAR);
         }
         response.addCookie(cookieToken);
         response.addCookie(emailCookie);
     }
 
-    public void loginVerify(HttpServletRequest request, HttpServletResponse response, StudentBean student) {
-        student = loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
+    public void loginVerify(HttpServletRequest request, HttpServletResponse response) {
+        StudentBean student = loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
         if(request.getParameter("authString").equals(student.getAuthString())) {
             System.out.println("good authString");
             student.setAuthenticated(true);
@@ -107,7 +108,8 @@ public class LoginUser {
         }
         if(student.isAuthenticated()) {
             request.getSession().setAttribute("user", student);
-            setCookies(response, student, Boolean.parseBoolean(request.getParameter("rememberMe")), false);
+            setCookies(response, student, request.getServerName(),
+                    Boolean.parseBoolean(request.getParameter("rememberMe")), false);
         }
         
     }

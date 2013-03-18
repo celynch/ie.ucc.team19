@@ -15,18 +15,26 @@
             <c:choose>
                 <c:when test="${fn:length(courses) > 0}">
                     <c:forEach var="course" items="${courses}">
-                        <h3>${course['courseTitle']}</h3>
+                        <h3>${course.courseTitle}</h3>
+                        <c:choose>
+                            <c:when test="${user!=null}">
+	                            <form method="post" action="/team19/pages/enrollTest">
+	                               <input type="hidden" name="enrollCourseId" value="${course.courseId}"/>
+	                               <input type="submit" value="Enroll"/>
+	                            </form>
+                            </c:when>
+                        </c:choose>
                         <h3>Fee:</h3>
-                        <p>&euro;<fmt:formatNumber value="${course['fee']}" minFractionDigits="2" maxFractionDigits="2"/></p>
+                        <p>&euro;<fmt:formatNumber value="${course.fee}" minFractionDigits="2" maxFractionDigits="2"/></p>
                         <h3>Lecturer<c:choose><c:when test="${fn:length(lecturers) > 0}">s</c:when></c:choose>:</h3>
                         <c:forEach var="lecturer" items="${lecturers}">
-                            <p>${lecturer['lecturerTitle']} ${lecturer['firstName']} ${lecturer['lastName']}, ${lecturer['position']}</p>
+                            <p>${lecturer.lecturerTitle} ${lecturer.firstName} ${lecturer.lastName}, ${lecturer.position}</p>
                         </c:forEach>
                         <h3>Venue<c:choose><c:when test="${fn:length(venues) > 0}">s</c:when></c:choose>:</h3>
                         <c:forEach var="venue" items="${venues}">
-                            <p>${venue['venueRoom']}, ${venue['venueBuilding']}, ${venue['addressLine1']}</p>
+                            <p>${venue.venueRoom}, ${venue.venueBuilding}, ${venue.addressLine1}</p>
                         </c:forEach>
-                        ${course['content']}
+                        ${course.content}
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
@@ -35,6 +43,5 @@
             </c:choose>
         </div>
     </div>
-    <div class="clear"></div>
 
 <jsp:include page="WEB-INF/views/footer.jsp"></jsp:include>

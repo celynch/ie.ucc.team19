@@ -13,6 +13,6 @@ public class PasswordResetRequestController extends AbstractController{
      */
     public void execute() {
         setReturnPage("/passwordResetRequest.jsp");
-        getRequest().setAttribute("pageTitle", "Password Reset | UCC Summer Courses");
+        getRequest().setAttribute("pageTitle", "Password Reset");
     }
 }

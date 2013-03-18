@@ -8,7 +8,7 @@ public class BrowseCategoryController extends AbstractController{
     public void execute() {
         setReturnPage("/browseCategory.jsp");
         String category = this.getRequest().getParameter("category");
-        getRequest().setAttribute("pageTitle", "Courses in " + category + " | UCC Summer Courses");
+        getRequest().setAttribute("pageTitle", "Courses in " + category);
         CourseBean[] categoryCourses = new FetchBean().getCoursesByCourseCategory(category);
         getRequest().setAttribute("categoryCourses", categoryCourses);
     }

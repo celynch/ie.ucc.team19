@@ -11,7 +11,7 @@
     <jsp:include page="WEB-INF/views/horizNav.jsp" />
     <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
-            <form method="post" action="https://localhost:8443/team19/pages/Index">
+            <form method="post" action="${returnURL}">
                 <fieldset id="personalinformation">
                     <legend>Login to verify Account</legend>
                     <dl>
@@ -27,6 +27,5 @@
             </form>
         </div>
     </div>
-    <div class="clear"></div>
 
 <jsp:include page="WEB-INF/views/footer.jsp"></jsp:include>

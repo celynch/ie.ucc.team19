@@ -13,7 +13,7 @@ public class SendAuthEmailController extends AbstractController {
 
     public void execute() {
         setReturnPage("/index.jsp");
-        getRequest().setAttribute("pageTitle", "TEST EMAIL SENT | UCC Summer Courses");
+        getRequest().setAttribute("pageTitle", "TEST EMAIL SENT");
         CourseBean[] courses = new FetchBean().getCourseByCourseId("1");
         getRequest().setAttribute("courses", courses);
         LecturerBean[] lecturers = new FetchBean().getLecturersByCourseId("1");

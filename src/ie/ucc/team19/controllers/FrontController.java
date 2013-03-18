@@ -31,13 +31,16 @@ public class FrontController extends HttpServlet {
         StudentBean student = (StudentBean) request.getSession().getAttribute("user");
         response.setContentType("text/html;charset=UTF-8");
         if( (student == null) || ( student.getFirstName() == null) )  {
-            if(request.getParameter("login") != null) {
-                new LoginUser().loginViaForm(request, response, student);
-            } else if(request.getParameter("authString") != null && request.getParameter("loginVerify") != null) {
-                System.out.println("verify");
-                new LoginUser().loginVerify(request, response, student);
-            } else {
-                new LoginUser().loginViaCookie(request, response, student);
+            if(request.getParameter("login") != null) {// standard login via banner
+                new LoginUser().loginViaForm(request, response);
+            } else if(request.getParameter("loginVerify") != null) {
+                if (request.getParameter("authString") != null) {
+                    new LoginUser().loginVerify(request, response);// verification login
+                } else {
+                    new LoginUser().loginViaForm(request, response);// challenge login
+                }
+            } else {        // cookie login
+                new LoginUser().loginViaCookie(request, response);
             }
         }
 

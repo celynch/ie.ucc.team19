@@ -5,7 +5,7 @@
 </jsp:include>
 
     <div id="main">
-        <p>You have now logged out. <a href="/team19/pages/Index">Return to front page</a></p>
+        <p>You have now logged out. <a href="http://localhost:8080/team19/pages/Index">Return to front page</a></p>
     </div>
 
 <jsp:include page="WEB-INF/views/footer.jsp"></jsp:include>

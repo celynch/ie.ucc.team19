@@ -25,8 +25,8 @@
 }
 
 #wrapper {
-    height: auto !important; /* ie6 ignores !important, so this will be overridden below */
-    height: 100%;
+    /*height: auto !important; /* ie6 ignores !important, so this will be overridden below */
+    /*height: 100%;*/
     min-height: 100%;
     margin: 0 auto -5%;
     padding: 0;
@@ -34,8 +34,9 @@
 }
 
 #main {
-	diplay table;
-    height: 100%;
+	diplay: table;
+    overflow:auto;
+    padding-bottom: 5%;
 }
 
 #footer {
@@ -46,10 +47,6 @@
     width: 75%;
     border-top: 1px solid #586878;
     text-align:right;
-}
-
-.push, #footer {
-    height: 5%;
 }
 
 /*Header settings*/

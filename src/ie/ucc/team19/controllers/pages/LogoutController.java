@@ -15,9 +15,9 @@ public class LogoutController extends AbstractController{
     public void execute() {
         HttpServletResponse response = getResponse();
         StudentBean student = (StudentBean) getRequest().getSession().getAttribute("user");
-        new LoginUser().setCookies(response, student, false, true);
+        new LoginUser().setCookies(response, student, getRequest().getServerName(), true, true);
         getRequest().getSession().invalidate();
         setReturnPage("/logout.jsp");
-        getRequest().setAttribute("pageTitle", "Logged Out | UCC Summer Courses");
+        getRequest().setAttribute("pageTitle", "Logged Out");
     }
 }

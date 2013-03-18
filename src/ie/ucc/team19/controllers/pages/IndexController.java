@@ -12,7 +12,7 @@ public class IndexController extends AbstractController {
 
     public void execute() {
         setReturnPage("/index.jsp");
-        getRequest().setAttribute("pageTitle", "Welcome | UCC Summer Courses");
+        getRequest().setAttribute("pageTitle", "Welcome");
         CourseBean[] courses = new FetchBean().getCourseByCourseId("1");
         getRequest().setAttribute("courses", courses);
         LecturerBean[] lecturers = new FetchBean().getLecturersByCourseId("1");

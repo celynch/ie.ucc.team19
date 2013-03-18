@@ -13,6 +13,6 @@ public class RegisterController extends AbstractController{
     public void execute() {
         setReturnPage("/register.jsp");
         getRequest().setAttribute("year", Calendar.getInstance().get(Calendar.YEAR));
-        getRequest().setAttribute("pageTitle", "Account Registration | UCC Summer Courses");
+        getRequest().setAttribute("pageTitle", "Account Registration");
     }
 }

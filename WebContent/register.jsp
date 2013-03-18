@@ -80,6 +80,5 @@
             </fieldset>
             <input type="submit" name="Proceed" value="Cancel"/> <input type="submit" name="Proceed" value="Proceed"/>
         </form>
-        <div style="clear:both;"></div>
     </div>
 <jsp:include page="WEB-INF/views/footer.jsp"></jsp:include>

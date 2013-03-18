@@ -28,6 +28,5 @@
             </form>
         </div>
     </div>
-    <div class="clear"></div>
 
 <jsp:include page="WEB-INF/views/footer.jsp"></jsp:include>

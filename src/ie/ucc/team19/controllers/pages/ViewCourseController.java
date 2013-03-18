@@ -22,6 +22,6 @@ public class ViewCourseController extends AbstractController {
         getRequest().setAttribute("venues", venues);
         
         String courseTitle = courses[0].getCourseTitle();
-        getRequest().setAttribute("pageTitle", courseTitle + " | UCC Summer Courses");
+        getRequest().setAttribute("pageTitle", courseTitle);
     }
 }

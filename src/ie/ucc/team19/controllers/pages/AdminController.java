@@ -19,7 +19,7 @@ public class AdminController extends AbstractController{
             String query = "UPDATE courses SET content = '" + spew + "' WHERE courseId = '1'";
             new DBConnectionManager().Insert(query);
         }
-        getRequest().setAttribute("pageTitle", "TinyMCE TEST | UCC Summer Courses");
+        getRequest().setAttribute("pageTitle", "TinyMCE TEST");
         getRequest().setAttribute("includeEditor", true);
         CourseBean[] course = new FetchBean().getCourseByCourseId("1");
         String content = course[0].getContent();

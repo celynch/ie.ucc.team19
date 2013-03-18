@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>${param['pageTitle']}</title>
+        <title>${pageTitle} | UCC&nbsp;Summer&nbsp;Courses</title>
         <link rel="stylesheet" type="text/css" href="/team19/css/reset.css" media="all" />
         <link rel="stylesheet" type="text/css" href="/team19/css/style.css" media="all" />
         <link rel="stylesheet" type="text/css" href="/team19/css/structural.css" media="all" />
@@ -19,7 +19,7 @@
     <div id="wrapper" >
        <div id="header">
             <div class="header_logo">
-                <h1>${pageTitle}</h1>
+                <h1>${pageTitle} | UCC&nbsp;Summer&nbsp;Courses</h1>
             </div>
             <div id="loginLogout">
 	            <c:choose>
