@@ -3,18 +3,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="WEB-INF/views/headertinymce.jsp" >
+<jsp:include page="WEB-INF/views/header.jsp" >
     <jsp:param name="pageTitle" value="${pageTitle}" />
 </jsp:include>
 
     <div id="main" >
     <jsp:include page="WEB-INF/views/horizNav.jsp" />
     <jsp:include page="WEB-INF/views/vertiNav.jsp" />
+        
         <div id="content">
-            <form>  
-		        <textarea name="content" cols="50" rows="15" > 
-		        This is some content that will be editable with TinyMCE.
-		        </textarea>
+            <div>
+	            ${param['content']}
+	        </div>
+            <form method="post" action="admin.jsp">  
+		        <textarea name="content" cols="50" rows="15" >${content}</textarea>
+		        <input type="submit" value="submit"/>
 	        </form>
             
         </div>

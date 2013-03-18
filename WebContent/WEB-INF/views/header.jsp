@@ -11,7 +11,9 @@
         <link rel="stylesheet" type="text/css" href="/team19/css/print.css" media="print" />
         <link rel="stylesheet" type="text/css" href="/team19/css/mobile.css" media="mobile" />
         <!-- <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />  -->
-        
+        <c:if test="${includeEditor!=null}">
+            <jsp:include page="loadTinyMce.jsp" />
+        </c:if>
     </head>
     <body>
     <div id="wrapper" >
@@ -47,5 +49,5 @@
 			        </c:otherwise>
 				</c:choose>
 			</div>
-            <div class=.clear"></div>
+            <div class="clear"></div>
         </div><!-- close header -->
