@@ -4,7 +4,7 @@
 </jsp:include>
 
     <div id="main">
-        <form method="post" action="http://localhost:8080/team19/pages/RegisterComplete.jsp">
+        <form method="post" action="https://localhost:8443/team19/pages/RegisterComplete.jsp">
             <fieldset id="personalinformation">
                 <legend>Personal information</legend>
                 <dl>
@@ -78,7 +78,8 @@
 		            <dd><input required="required" type="password" id="password2" name="passwordHash2" /></dd>
 	            </dl>
             </fieldset>
-            <input type="submit" name="Proceed" value="Cancel"/> <input type="submit" name="Proceed" value="Proceed"/>
+            <input type="submit" name="cancel" value="Cancel" formaction="/tema19/pages/"/>
+            <input type="submit" name="Proceed" value="Proceed"/>
         </form>
     </div>
 <jsp:include page="WEB-INF/views/footer.jsp"></jsp:include>

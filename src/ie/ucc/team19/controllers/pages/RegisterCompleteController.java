@@ -3,13 +3,10 @@ package ie.ucc.team19.controllers.pages;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.*;
 import ie.ucc.team19.service.*;
-
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.BeanUtilsBean;
 
 public class RegisterCompleteController extends AbstractController{
@@ -33,7 +30,6 @@ public class RegisterCompleteController extends AbstractController{
 
     private StudentBean setupStudent() {
         StudentBean user = new StudentBean();
-        HttpServletRequest request = getRequest();
         Map<String, String[]> userFormValues = request.getParameterMap();
 
         String date_of_birth_fields = request.getParameter("dobY")
