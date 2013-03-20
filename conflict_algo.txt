@@ -1,0 +1,20 @@
+get array of courses enrolled to
+    get earliest start date
+        get start of month -> date1
+    get latest end date
+        get end of month -> date2
+    store date range = date2 - date1
+        
+    DETECT
+    test EnrollCourse (EC) vs each sceduledCourse (SC) from array (sorted by start date)
+    foreach SC    
+        if (EC.start <= SC.end && EC.end >= SC.start) {
+            conflict!
+        }
+        (startdate - date1) as % of range -> OFFSET
+        (enddate - startdate) as % of range -> WIDTH
+    
+    DISPLAY    
+    parent container strip has proportionate size to page
+        indicator position:relative / margin left: OFFSET
+        indicator width: WIDTH
