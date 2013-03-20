@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class StudentBean {
+    private String studentId;
     private String firstName;
     private String lastName;
     private String email;
@@ -120,5 +121,11 @@ public class StudentBean {
     }
     public void setEmailOptIn(boolean emailOptIn) {
         this.emailOptIn = emailOptIn;
+    }
+    public String getStudentId() {
+        return studentId;
+    }
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 }

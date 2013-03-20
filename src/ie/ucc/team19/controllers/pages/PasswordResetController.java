@@ -1,18 +1,22 @@
 package ie.ucc.team19.controllers.pages;
 
 import ie.ucc.team19.controllers.AbstractController;
+import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.StudentBean;
-import ie.ucc.team19.service.FetchBean;
+import ie.ucc.team19.service.FetchBeanUtils;
 import ie.ucc.team19.service.LoginUser;
 import ie.ucc.team19.service.UpdateUser;
 
 public class PasswordResetController extends AbstractController {
     public void execute() {
+        DBConnectionManager connector = new DBConnectionManager();
+        FetchBeanUtils fetcher = new FetchBeanUtils(connector);
+        
         String email = getRequest().getParameter("email");
         String authString = getRequest().getParameter("authString");
         String passwordHash = getRequest().getParameter("passwordHash");
         String passwordHash2 = getRequest().getParameter("passwordHash2");
-        StudentBean student = new FetchBean().getStudentByEmail(email);
+        StudentBean student = fetcher.getStudentByEmail(email);
 
         if( !passwordHash.equals(passwordHash2)) { // re-entered passwords don't match
             String resubmit = "?authString=" + authString + "&email=" + email;

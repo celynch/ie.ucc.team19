@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <base href="http://localhost:8080" />
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>${pageTitle} | UCC&nbsp;Summer&nbsp;Courses</title>
         <link rel="stylesheet" type="text/css" href="/team19/css/reset.css" media="all" />

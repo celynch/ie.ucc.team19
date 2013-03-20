@@ -20,7 +20,7 @@
                         <dt><label for="rememberMe">Remember&nbsp;me</label></dt>
                         <dd><input type="checkbox" id="rememberMe" name="rememberMe" value="true"/></dd>
                     </dl>
-                    <a href="/pages/register.jsp">Register</a>
+                    <a href="/team19/pages/register.jsp">Register</a>
                     <input type="hidden" name="authString" value="${param['authString']}"/>
                     <input type="submit" name="loginVerify" value="loginVerify"/>
                 </fieldset>

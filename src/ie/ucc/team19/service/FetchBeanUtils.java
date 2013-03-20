@@ -1,15 +1,18 @@
 package ie.ucc.team19.service;
 
 import ie.ucc.team19.dao.*;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
-
 import org.apache.commons.beanutils.BeanUtilsBean;
 
 
-public class FetchBean {
+public class FetchBeanUtils {
+    private DBConnectionManager connector;
+    public FetchBeanUtils(DBConnectionManager connector) {
+        this.connector = connector;
+    }
+
     public CourseBean[] getCourseByCourseId(String course_id) {
         course_id = course_id.replace("'", "''");
         String query = "SELECT * "
@@ -21,7 +24,7 @@ public class FetchBean {
         courses = (CourseBean[]) sqlBeanPopulate(courses, resultTable);
         return courses;
     }
-    
+
     public CourseBean[] getCoursesByCourseCategory(String courseCategory) {
         courseCategory = courseCategory.replace("'", "''");
         String query = "SELECT * "
@@ -33,7 +36,7 @@ public class FetchBean {
         courses = (CourseBean[]) sqlBeanPopulate(courses, resultTable);
         return courses;
     }
-    
+
     public LecturerBean[] getLecturersByCourseId(String courseId) {
         courseId = courseId.replace("'", "''");
         String query = "SELECT * "
@@ -65,12 +68,11 @@ public class FetchBean {
     }
 
     private ArrayList<Map<String, String[]>> fetchTable(String query) {
-        ArrayList<Map<String, String[]>> resultTable = new DBConnectionManager().Select(query);
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query);
         return resultTable;
     }
 
-    private Object[] sqlBeanPopulate(Object[] beans, ArrayList<Map<String, String[]>> resultTable) {
-
+    Object[] sqlBeanPopulate(Object[] beans, ArrayList<Map<String, String[]>> resultTable) {
         int beanNum = 0;
         Class<?> ofArray = beans.getClass().getComponentType();
         for(Map<String, String[]> result : resultTable) {
@@ -101,7 +103,7 @@ public class FetchBean {
         student = (StudentBean[]) sqlBeanPopulate(student, resultTable);
         return student[0];
     }
-    
+
     public CategoryBean getCourseCategories() {
         CategoryBean categories = new CategoryBean();
         String query = "SELECT DISTINCT courseCategory "

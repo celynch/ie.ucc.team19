@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class AbstractController implements Controller {
 
-    private HttpServletResponse response;
-    private HttpServletRequest request;
+    protected HttpServletResponse response;
+    protected HttpServletRequest request;
     protected String returnPage;
 
     public void init(HttpServletRequest request, HttpServletResponse response) {

@@ -15,7 +15,7 @@
             <p>Select from the list below to see the range of courses of that category.</p>
                 <ul>
 	                <c:forEach var="category" items="${categories.categoryTitles}">
-	                    <li><a href="browseCategory.jsp?category=${category}">${category}</a></li>
+	                    <li><a href="/team19/pages/browseCategory.jsp?category=${category}">${category}</a></li>
 	                </c:forEach>
                 </ul>
         </div>

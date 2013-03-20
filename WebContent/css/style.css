@@ -88,6 +88,21 @@ body {
     line-height: 1.5em;
 }
 
+#allCoursesRange {
+    background-color: LightSteelBlue;
+    border-radius: 0.3em
+}
+
+#allCoursesRange .conflict {
+	background-color: IndianRed;
+	border-radius: 0.25em
+}
+
+#allCoursesRange .noConflict {
+    background-color: DarkSeaGreen;
+    border-radius: 0.25em
+}
+
 caption {
     background-color: #2E4C6F;
     color: white;

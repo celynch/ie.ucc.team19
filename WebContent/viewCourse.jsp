@@ -18,7 +18,7 @@
                         <h3>${course.courseTitle}</h3>
                         <c:choose>
                             <c:when test="${user!=null}">
-	                            <form method="post" action="/team19/pages/enrollTest">
+	                            <form method="post" action="/team19/pages/enrollConfirm">
 	                               <input type="hidden" name="enrollCourseId" value="${course.courseId}"/>
 	                               <input type="submit" value="Enroll"/>
 	                            </form>

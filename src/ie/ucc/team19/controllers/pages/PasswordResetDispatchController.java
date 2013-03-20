@@ -8,8 +8,11 @@ import java.util.UUID;
 
 public class PasswordResetDispatchController extends AbstractController{
     public void execute() {
+        DBConnectionManager connector = new DBConnectionManager();
+        FetchBeanUtils fetcher = new FetchBeanUtils(connector);
+        
         String email = getRequest().getParameter("email");
-        StudentBean student = new FetchBean().getStudentByEmail(email);
+        StudentBean student = fetcher.getStudentByEmail(email);
         if(student == null) {
             setReturnPage("/pages/passwordResetRequest");
             getRequest().setAttribute("emailError", true);

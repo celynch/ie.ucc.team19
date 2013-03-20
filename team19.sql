@@ -154,7 +154,7 @@ in the Irish context.</p>',
 </ol>
 
 <p>These are the voyages of....</p>', 
-'2013-01-01', '2013-05-01', '2013-06-01', '2013-06-05'),
+'2013-01-01', '2013-05-01', '2013-06-04', '2013-06-09'),
     ('The Romans', 190.00, 25, 'History', 
 '<h3>Course Content</h3>
 <ol>
@@ -163,7 +163,7 @@ in the Irish context.</p>',
 </ol>
 
 <p>What have the Romans ever down for us?</p>', 
-'2013-01-01', '2013-05-01', '2013-06-01', '2013-06-05')
+'2013-01-01', '2013-05-01', '2013-06-08', '2013-06-12')
 ;
 
 DROP TABLE IF EXISTS teaches; 
