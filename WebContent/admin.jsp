@@ -15,7 +15,7 @@
             <div>
 	            ${param['content']}
 	        </div>
-            <form method="post" action="admin.jsp">  
+            <form method="post" action="/team19/pages/admin.jsp">  
 		        <textarea name="content" cols="50" rows="15" >${content}</textarea>
 		        <input type="submit" value="submit"/>
 	        </form>

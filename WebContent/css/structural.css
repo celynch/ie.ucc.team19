@@ -137,12 +137,66 @@
 	padding: 1em;
 }
 
-#allCoursesRange {
-	width:50%;
-	height:1em;
+#scheduleContainer {
+	width: 100%;
+    border-collapse: separate;
+    border-spacing: 0.2em;
+}
+
+#scheduleContainer td {
+	border-radius: 0.25em;
+	background-color: LightSlateGray;
+	vertical-align: middle;
+	padding: 0.2em;
+}
+
+#scheduleContainer th {
+    border-radius: 0.4em;
+    background-color: LightBlue ;
+    vertical-align: middle;
+    padding: 0.2em;
+}
+
+.sched_CourseDetails {
+	min-width: 10%;
+}
+
+.sched_CourseDateBar {
+	width: 50%
+}
+
+.sched_AllCoursesRange{
+	height: 1em;
+	margin: auto 0;
 	padding: 0.25em;
 }
 
-#courseRange {
+.sched_CourseRange {
+	height: 100%;
+}
+
+.sched_CourseDetail h4, .schedCourseDetail p {
+	display: inline-block;
+	width: 30%;
+	margin: 0;
+}
+
+.sched_Status {
+    width: 10%;
+}
+
+.sched_Paid, .sched_Unpaid {
+	display: block;
+	width: 1em;
 	height: 1em;
+	margin: 0 auto;
+	border-radius: 0.5em;
+}
+
+.sched_Paid {
+    background-color: green;
+}
+
+.sched_Unpaid {
+    background-color: red;
 }

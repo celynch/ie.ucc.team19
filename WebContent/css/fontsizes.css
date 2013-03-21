@@ -1,11 +1,19 @@
 #header a {
-  font-size: 0.875em;
+    font-size: 0.875em;
 }
 
 #horizNav a {
-  font-size: 0.875em;
+    font-size: 0.875em;
 }
 
 #vertiNav a {
-  font-size: 1em;
+    font-size: 1em;
+}
+
+#scheduleContainer {
+	font-size: 0.8em;
+}
+
+.courseSchedule p {
+	font-size: 0.65em;
 }

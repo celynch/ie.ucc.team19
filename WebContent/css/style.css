@@ -88,19 +88,19 @@ body {
     line-height: 1.5em;
 }
 
-#allCoursesRange {
+.sched_AllCoursesRange {
     background-color: LightSteelBlue;
     border-radius: 0.3em
 }
 
-#allCoursesRange .conflict {
+.sched_AllCoursesRange .conflict {
 	background-color: IndianRed;
-	border-radius: 0.25em
+	border-radius: 0.25em;
 }
 
-#allCoursesRange .noConflict {
+.sched_AllCoursesRange .noConflict {
     background-color: DarkSeaGreen;
-    border-radius: 0.25em
+    border-radius: 0.25em;
 }
 
 caption {

@@ -11,7 +11,7 @@
     <jsp:include page="WEB-INF/views/horizNav.jsp" />
     <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
-            <h2>Course Enrollment</h2>
+            <h2>Confirm Enrollment</h2>
             <div id="enrollNotice">
                 <h3>Please Note: </h3>
 	            <p>Review your selection before proceeding with enrollment.</p>
@@ -19,18 +19,46 @@
             </div>
             <div id="schedule">
                 <h3>Your current schedule:</h3>
-                <div id="scheduleContainer">
+                <table id="scheduleContainer">
+                    <thead>
+                        <tr>
+                            <th class="sched_CourseDetails">Course Title</th>
+                            <th class="sched_CourseDetails">Start Date</th>
+                            <th class="sched_CourseDetails">End Date</th>
+                            <th>Dates</th>
+                            <th>Deposit</th>
+                            <th>Fee</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     <c:forEach var="i" begin="0" end="${fn:length(courses)-1}">
-                        <div>
-                            <p id="schedSideTitle">${courses[i].courseTitle}</p>
-                            <div id="allCoursesRange">
-                                <div id="courseRange" class="${conflicts[i]}"
-                                     style="position:relative;left:${offsets[i]}%;width:${widths[i]}%;">
-                                </div>
-                            </div>
-                        </div>
+                        <tr class="sched_CourseDetail">
+                            <td class="sched_CourseDetails sched_SideTitle">${courses[i].courseTitle}</td>
+                            <td class="sched_CourseDetails sched_StartDate"><fmt:formatDate type="date" value="${courses[i].courseStartDate}" pattern="MMM-dd" /></td>
+                            <td class="sched_CourseDetails sched_EndDate" ><fmt:formatDate type="date" value="${courses[i].courseEndDate}" pattern="MMM-dd"/></td>
+                            <td class="sched_CourseDateBar">
+	                            <div class="sched_AllCoursesRange">
+	                                <div class="sched_CourseRange ${conflicts[i]}"
+	                                    style="position:relative;left:${offsets[i]}%;width:${widths[i]}%;">
+	                                </div>
+	                            </div>
+                            </td>
+                            <td class="sched_Status">
+                                <c:choose>
+                                    <c:when test ="${enrollments[i].paidDeposit}"><span class="sched_Paid"> </span></c:when>
+                                    <c:otherwise><span class="sched_Unpaid"> </span></c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td class="schedStatus">
+                                <c:choose>
+                                    <c:when test ="${enrollments[i].paidFee}"><span class="sched_Paid"> </span></c:when>
+                                    <c:otherwise><span class="sched_Unpaid"> </span></c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
                     </c:forEach>
-                </div>
+                    </tbody>
+                </table>
             </div>
             <div id="cancelOrEnroll">
                 <c:choose>
@@ -38,17 +66,17 @@
                         <p>The course you trying to enroll in has a scheduling conflict with another course you are already enrolled in.</p>
                         <p>Either cancel this enrollment or view your account to un-enroll from the other course</p>
                         <form method="post">
-                            <input type="submit" value="Cancel" formaction="/team19/pages/viewCourse?courseId=${enrollCourse[0].courseId}" />
+                            <input type="submit" value="Cancel" formaction="/team19/pages/viewCourse?courseId=${enrollCourse.courseId}" />
                             <input type="submit" value="Account" formaction="/team19/pages/account" />
                         </form>
                     </c:when>
                     <c:otherwise>
-                        <p>The fee to enroll in this course is &euro;<fmt:formatNumber value="${enrollCourse[0].fee}" minFractionDigits="2" maxFractionDigits="2"/>.</p>
-                        <p>A minimum deposit of &euro;<fmt:formatNumber value="${enrollCourse[0].fee * 0.2}" minFractionDigits="2" maxFractionDigits="2"/> is required to reserve a place in the course.</p>
-                        <p>The total fee most be paid by ${enrollCourse[0].enrollEndDate}</p>
+                        <p>The fee to enroll in this course is &euro;<fmt:formatNumber value="${enrollCourse.fee}" minFractionDigits="2" maxFractionDigits="2"/>.</p>
+                        <p>A minimum deposit of &euro;<fmt:formatNumber value="${enrollCourse.fee * 0.2}" minFractionDigits="2" maxFractionDigits="2"/> is required to reserve a place in the course.</p>
+                        <p>The total fee most be paid by <fmt:formatDate type="date" value="${enrollCourse.enrollEndDate}" /></p>
                         <form method="post">
-                            <input type="submit" value="Cancel" formaction="/team19/pages/viewCourse?courseId=${enrollCourse[0].courseId}" />
-                            <input type="hidden" name="paypalVoodoo" value="${enrollCourse[0].fee}"/>
+                            <input type="submit" value="Cancel" formaction="/team19/pages/viewCourse?courseId=${enrollCourse.courseId}" />
+                            <input type="hidden" name="paypalVoodoo" value="${enrollCourse.fee}"/>
                             <input type="submit" name="deposit" value="Deposit" formaction="/team19/pages/account" />
                             <input type="submit" name="fee" value="Full Fee" formaction="/team19/pages/account" />
                         </form>

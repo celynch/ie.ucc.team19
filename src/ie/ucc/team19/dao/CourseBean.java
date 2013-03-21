@@ -45,7 +45,7 @@ public class CourseBean {
     public String getCourseCategory() {
         return courseCategory;
     }
-    public void setCourse_category(String courseCategory) {
+    public void setCourseCategory(String courseCategory) {
         this.courseCategory = courseCategory;
     }
     public String getContent() {
@@ -57,13 +57,13 @@ public class CourseBean {
     public Date getEnrollStartDate() {
         return enrollStartDate;
     }
-    public void setEnroll_start_date(Date enrollStartDate) {
+    public void setEnrollStartDate(Date enrollStartDate) {
         this.enrollStartDate = enrollStartDate;
     }
     public Date getEnrollEndDate() {
         return enrollEndDate;
     }
-    public void setEnroll_end_date(Date enrollEndDate) {
+    public void setEnrollEndDate(Date enrollEndDate) {
         this.enrollEndDate = enrollEndDate;
     }
     public Date getCourseStartDate() {

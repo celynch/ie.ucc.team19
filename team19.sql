@@ -40,7 +40,8 @@ CREATE TABLE students
 
 INSERT INTO students (studentID, firstName, lastName, email, passwordHash, addressLine1, addressLine2, addressLine3, country,  telephone, dateOfBirth, gender, authenticated, authString, dateRegistered, cookieToken, emailOPtIn)
 VALUES
-    (NULL, 'Cormac','Lynch','celynch@gmail.com','123','1 A Street','B-Town','C-City','Ireland','086-1234567','1981-01-01','M',true,'072d-31bbd0e-d3f582ae-340f0e39-f73e8','2013-02-24 16:30:00', '072d-31bbd0e-d3f582ae-340f0e39-f73e8', true)
+    (NULL, 'Cormac','Lynch','celynch@gmail.com','123','1 A Street','B-Town','C-City','Ireland','086-1234567','1981-01-01','M',true,'072d-31bbd0e-d3f582ae-340f0e39-f73e8','2013-02-24 16:30:00', '072d-31bbd0e-d3f582ae-340f0e39-f73e8', true),
+    (NULL, 'Aaron','Aaronson','101664280@umail.ucc.ie','123','1 A Street','B-Town','C-City','Ireland','086-1234567','1981-01-01','M',true,'072d-31bbd0e-d3f582ae-340f0e39-f73e8','2013-02-24 16:30:00', '072d-31bbd0e-d3f582ae-340f0e39-f73e8', true)
 ;
 
 DROP TABLE IF EXISTS lecturers; 
@@ -162,8 +163,17 @@ in the Irish context.</p>',
 <li>Sanitation</li>
 </ol>
 
-<p>What have the Romans ever down for us?</p>', 
-'2013-01-01', '2013-05-01', '2013-06-08', '2013-06-12')
+<p>What have the Romans ever done for us?</p>', 
+'2013-01-01', '2013-05-01', '2013-06-08', '2013-06-12'),
+    ('Programming', 2000.00, 3, 'Technology', 
+'<h3>Course Content</h3>
+<ol>
+<li>zeros</li>
+<li>ones</li>
+</ol>
+
+<p>This is how to program</p>', 
+'2013-01-01', '2013-05-01', '2013-07-01', '2013-07-01')
 ;
 
 DROP TABLE IF EXISTS teaches; 
