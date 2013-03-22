@@ -28,6 +28,8 @@ public class FrontController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println(request.getServerName());
+        request.setAttribute("serverName",request.getServerName());
         StudentBean student = (StudentBean) request.getSession().getAttribute("user");
         response.setContentType("text/html;charset=UTF-8");
         if( (student == null) || ( student.getFirstName() == null) )  {

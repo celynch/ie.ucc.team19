@@ -5,6 +5,7 @@
 
 <jsp:include page="WEB-INF/views/header.jsp" >
     <jsp:param name="pageTitle" value="${pageTitle}" />
+    <jsp:param name="serverName" value="${serverName}" />
 </jsp:include>
 
     <div id="main" >

@@ -5,6 +5,7 @@
 
 <jsp:include page="WEB-INF/views/header.jsp" >
     <jsp:param name="pageTitle" value="${pageTitle}" />
+    <jsp:param name="serverName" value="${serverName}" />
 </jsp:include>
 
     <div id="main" >
@@ -76,9 +77,25 @@
                         <p>The total fee most be paid by <fmt:formatDate type="date" value="${enrollCourse.enrollEndDate}" /></p>
                         <form method="post">
                             <input type="submit" value="Cancel" formaction="/team19/pages/viewCourse?courseId=${enrollCourse.courseId}" />
-                            <input type="hidden" name="paypalVoodoo" value="${enrollCourse.fee}"/>
-                            <input type="submit" name="deposit" value="Deposit" formaction="/team19/pages/account" />
-                            <input type="submit" name="fee" value="Full Fee" formaction="/team19/pages/account" />
+                        </form>
+                        <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+                            <input type="hidden" name="business" value="celynch@gmail.com.com">
+						    <input type="hidden" name="cmd" value="_xclick">
+						    <input type="hidden" name="item_name" value="Deposit ${enrollCourse.courseTitle}">
+						    <input type="hidden" name="amount" value="${enrollCourse.fee * 0.2}">
+						    <input type="hidden" name="currency_code" value="EUR">
+						    <input type="hidden" name="notify_url" value="http://578b.localtunnel.com/team19/ipn/">
+						    <input type="image" name="submit" border="0" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+						    <img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />
+                        </form>
+                        <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+                            <input type="hidden" name="business" value="celynch@gmail.com.com">
+                            <input type="hidden" name="cmd" value="_xclick">
+                            <input type="hidden" name="item_name" value="Fee ${enrollCourse.courseTitle}">
+                            <input type="hidden" name="amount" value="${enrollCourse.fee * 0.8}">
+                            <input type="hidden" name="currency_code" value="EUR">
+                            <input type="image" name="submit" border="0" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+                            <img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />
                         </form>
                     </c:otherwise>
                 </c:choose>

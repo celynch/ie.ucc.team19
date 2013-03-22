@@ -5,6 +5,7 @@
 
 <jsp:include page="WEB-INF/views/header.jsp" >
     <jsp:param name="pageTitle" value="${pageTitle}" />
+    <jsp:param name="serverName" value="${serverName}" />
 </jsp:include>
 
     <div id="main" >
@@ -18,11 +19,17 @@
                         <h3>${course.courseTitle}</h3>
                         <c:choose>
                             <c:when test="${user!=null}">
-	                            <form method="post" action="/team19/pages/enrollConfirm">
+	                            <form method="post" action="https://localhost:8443/team19/pages/enrollConfirm">
 	                               <input type="hidden" name="enrollCourseId" value="${course.courseId}"/>
 	                               <input type="submit" value="Enroll"/>
 	                            </form>
                             </c:when>
+                            <c:otherwise>
+                                <form method="post" action="/team19/pages/login">
+                                   <label for="loginChallenge">You must login before enrolling</label>
+                                   <input id="loginChallenge" type="submit" value="Login"/>
+                                </form>
+                            </c:otherwise>
                         </c:choose>
                         <h3>Fee:</h3>
                         <p>&euro;<fmt:formatNumber value="${course.fee}" minFractionDigits="2" maxFractionDigits="2"/></p>

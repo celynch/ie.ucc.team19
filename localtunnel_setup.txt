@@ -1,0 +1,29 @@
+1/ install cygwin, this is for running posix environment unix apps on windows:
+create C:\cygwin\ and download http://cygwin.com/setup.exe
+@ cmd prompt C:\cygwin run:
+setup.exe -q -P aspell-en,cron,ctags,exim,gcc-g++,inetutils,make,mingw-runtime,ncurses,openssh,patch,perl,python,ruby,rxvt,subversion,vim
+(  actually you might only need:
+      setup.exe -q -P gcc-g++,make,openssh,python,ruby
+  but I haven't figured out the min requirments, just get the lot )
+
+2/ Install localtunnel client, this service provides an reverse SSH tunnel from their public domain, see http://progrium.com/localtunnel/
+
+Install localtunnel by running (in the cygwin terminal): 
+    gem install localtunnel 
+Generate a public/private key by running:
+    ssh-keygen 
+When it prompts you for a file to save, enter nothing and press enter. 
+It will put the file into your home folder. ‘~/.ssh’ and the path to the file is 
+    ‘~/.ssh/id_rsa.pub’ by default.
+
+3/  Make note of where your public key is saved. Run localtunnel for the first time by running 
+    localtunnel -k {Path_To_Your_Public_Key} {PORT_NUMBER}
+eg: localtunnel -k ~/.ssh/id_rsa.pub 8080 
+
+This will upload your public key to localtunnel and respond with something like
+    "This localtunnel service is brought to you by Twilio.
+    Port 8080 is now publicly accessible from http://3ivy.localtunnel.com ..."
+
+From then on, you can just run localtunnel 8080 And get a temporary public URL for the local app.
+Unfortunately the domain prefix will be different each time ... blah blah problems ... blah blah fixable
+I still need to do a little more to get relative urls for css to use the right domain, later today...

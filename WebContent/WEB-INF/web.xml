@@ -27,5 +27,15 @@
         <servlet-name>SendEmail</servlet-name>
         <url-pattern>/SendEmail</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>IpnPaypalListener</servlet-name>
+        <servlet-class>ie.ucc.team19.paypal.IpnPaypalListenerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IpnPaypalListener</servlet-name>
+        <url-pattern>/ipn/*</url-pattern>
+    </servlet-mapping>
+    
 
 </web-app>

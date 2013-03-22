@@ -65,6 +65,7 @@ public class EnrollStudent {
         StudentBean student = (StudentBean) request.getSession().getAttribute("user");
         String studentId = student.getStudentId();
         String enrollCourseId = request.getParameter("enrollCourseId");
+        System.out.println("course selected: " + enrollCourseId);
 
         // get data from db
         enroller.enrollToCourse(enrollCourseId, studentId, true, false, false, false);

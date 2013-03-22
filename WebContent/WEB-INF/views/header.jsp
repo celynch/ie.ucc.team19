@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <base href="http://localhost:8080" />
+        <base href="http://${serverName}:8080" />
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>${pageTitle} | UCC&nbsp;Summer&nbsp;Courses</title>
         <link rel="stylesheet" type="text/css" href="/team19/css/reset.css" media="all" />
@@ -33,7 +33,7 @@
 			            </form>
 				    </c:when>
 			        <c:otherwise>
-			            <form method="post" action="https://localhost:8443/team19/pages/Index">
+			            <form method="post" action="https://${serverName}:8443/team19/pages/Index">
 			                <fieldset id="personalinformation">
 	                            <legend>Login</legend>
 	                            <dl>
