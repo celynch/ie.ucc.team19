@@ -12,6 +12,13 @@
     <jsp:include page="WEB-INF/views/horizNav.jsp" />
     <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
+            <p id="breadcrumbs">
+                <a href="http://${serverName}/team19/pages/">&gt; Summer Courses</a>
+                <a href="http://${serverName}/team19/pages/browseCategory?category=${courses[0].courseCategory}"
+                     >&gt; ${courses[0].courseCategory}</a>
+                <a href="http://${serverName}/team19/pages/viewCourse?courseId=${courses[0].courseId}"
+                     >&gt; ${courses[0].courseTitle}</a>
+            </p>
             <h2>Course Details</h2>
             <c:choose>
                 <c:when test="${fn:length(courses) > 0}">

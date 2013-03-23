@@ -200,3 +200,11 @@
 .sched_Unpaid {
     background-color: red;
 }
+
+#address {
+	float: left;
+}
+
+#mapContainer {
+	float: right;
+}

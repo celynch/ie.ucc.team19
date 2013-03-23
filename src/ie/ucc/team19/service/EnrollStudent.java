@@ -14,7 +14,17 @@ import ie.ucc.team19.dao.StudentBean;
 public class EnrollStudent {
     private DBConnectionManager connector;
     private static final long DAY_OFFSET = 1000 *60 * 60 * 24;
-    
+    private Date earliestStart;
+    private Date latestEnd;
+
+    private CourseBean[] courses;
+    private CourseBean[] enrollCourse;
+    private long[] offsets;
+    private long[] widths;
+    private String[] conflicts;
+    private boolean conflictDetected = false;
+    private boolean alreadyEnrolled = false;
+
     public EnrollStudent(DBConnectionManager connector) {
         this.connector = connector;
     }
@@ -56,9 +66,8 @@ public class EnrollStudent {
         return courses;
     }
     
-    public static boolean detectConflicts(HttpServletRequest request, DBConnectionManager connector) {
+    public void detectConflicts(HttpServletRequest request) {
         // setup DAOs
-        EnrollStudent enroller = new EnrollStudent(connector);
         FetchBeanUtils fetcher = new FetchBeanUtils(connector);
 
         // get params from request & session
@@ -68,14 +77,37 @@ public class EnrollStudent {
         System.out.println("course selected: " + enrollCourseId);
 
         // get data from db
-        enroller.enrollToCourse(enrollCourseId, studentId, true, false, false, false);
-        CourseBean[] courses = enroller.getCoursesByStudentId(studentId);
-        EnrollmentBean[] enrollments = enroller.getEnrollmentsByStudentId(studentId);
-        CourseBean[] enrollCourse = fetcher.getCourseByCourseId(enrollCourseId);
+        enrollCourse = fetcher.getCourseByCourseId(enrollCourseId);
+        courses = getCoursesByStudentId(studentId);
+        EnrollmentBean[] enrollments = getEnrollmentsByStudentId(studentId);
 
         // algo for detecting & displaying date conflicts
-        Date earliestStart = enrollCourse[0].getCourseStartDate();
-        Date latestEnd = enrollCourse[0].getCourseEndDate();
+        setStartEndDates();
+        long range = latestEnd.getTime() - earliestStart.getTime() + DAY_OFFSET;
+        offsets = new long[courses.length];
+        widths = new long[courses.length];
+        conflicts = new String[courses.length];
+
+        setStartEndDates();
+        scheduleLayout(range);
+        markConflicts();
+
+        request.setAttribute("enrollCourse", enrollCourse[0]);
+        request.setAttribute("courses", courses);
+        request.setAttribute("offsets", offsets);
+        request.setAttribute("widths", widths);
+        request.setAttribute("conflicts", conflicts);
+        request.setAttribute("enrollments", enrollments);
+        request.setAttribute("alreadyEnrolled", alreadyEnrolled);
+        request.setAttribute("conflictDetected", conflictDetected);
+        if(!conflictDetected && !alreadyEnrolled ) {
+            enrollToCourse(enrollCourseId, studentId, true, false, false, false);
+        }
+    }
+
+    private void setStartEndDates() {
+        earliestStart = enrollCourse[0].getCourseStartDate();
+        latestEnd = enrollCourse[0].getCourseEndDate();
         for(CourseBean course : courses) {
             Date courseStart = course.getCourseStartDate();
             Date courseEnd = course.getCourseEndDate();
@@ -86,34 +118,31 @@ public class EnrollStudent {
                 latestEnd = courseEnd;
             }
         }
-
-        long range = latestEnd.getTime() - earliestStart.getTime() + DAY_OFFSET;
-        long[] offsets = new long[courses.length];
-        long[] widths = new long[courses.length];
-        String[] conflicts = new String[courses.length];
-        boolean conflictDetected = false;
-
+    }
+    
+    private void scheduleLayout(long range) {
         for(int i = 0; i < courses.length; i++) {
             Date courseStart = courses[i].getCourseStartDate();
             Date courseEnd = courses[i].getCourseEndDate();
             offsets[i] = (courseStart.getTime() - earliestStart.getTime()) * 100L / range;
             widths[i] = (courseEnd.getTime() - courseStart.getTime() + DAY_OFFSET) * 100L / range;
-            //if (EC.start <= SC.end && EC.end >= SC.start)
-            if( (enrollCourse[0].getCourseId() != courses[i].getCourseId())
-                    && (enrollCourse[0].getCourseEndDate().compareTo(courseStart) >= 0)
-                    && (enrollCourse[0].getCourseStartDate().compareTo(courseEnd) <= 0) ) {
+        }
+    }
+    
+    private void markConflicts() {
+        for(int i = 0; i < courses.length; i++) {
+            Date courseStart = courses[i].getCourseStartDate();
+            Date courseEnd = courses[i].getCourseEndDate();
+            if( enrollCourse[0].getCourseEndDate().compareTo(courseStart) >= 0 &&
+                    enrollCourse[0].getCourseStartDate().compareTo(courseEnd) <= 0 ) {
                 conflicts[i] = "conflict";
                 conflictDetected = true;
+                if(enrollCourse[0].getCourseId() != courses[i].getCourseId()) {
+                    alreadyEnrolled = true;
+                }
             } else {
                 conflicts[i] = "noConflict";
             }
         }
-        request.setAttribute("enrollCourse", enrollCourse[0]);
-        request.setAttribute("courses", courses);
-        request.setAttribute("offsets", offsets);
-        request.setAttribute("widths", widths);
-        request.setAttribute("conflicts", conflicts);
-        request.setAttribute("enrollments", enrollments);
-        return conflictDetected;
     }
 }

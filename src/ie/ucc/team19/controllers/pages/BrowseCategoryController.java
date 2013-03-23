@@ -8,7 +8,7 @@ import ie.ucc.team19.service.FetchBeanUtils;
 public class BrowseCategoryController extends AbstractController{
     public void execute() {
         DBConnectionManager connector = new DBConnectionManager();
-        String category = this.getRequest().getParameter("category");
+        String category = request.getParameter("category");
         
         setReturnPage("/browseCategory.jsp");
         getRequest().setAttribute("pageTitle", "Courses in " + category);

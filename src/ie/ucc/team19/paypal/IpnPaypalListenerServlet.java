@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class IpnPaypalListenerServlet extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -32,10 +32,13 @@ public class IpnPaypalListenerServlet extends HttpServlet {
     	while (en.hasMoreElements()) {
     		paramName = (String) en.nextElement();
     		paramValue = request.getParameter(paramName);
+
+    		System.out.println(paramName);
+    		System.out.println(paramValue);
     		strBuffer.append("&").append(paramName).append("=")
     				.append(URLEncoder.encode(paramValue, "UTF-8"));
     	}
-     
+
     	// post back to PayPal system to validate
     	// NOTE: change http: to https: in the following URL to verify using SSL (for increased security).
     	// using HTTPS requires either Java 1.4 or greater, or Java Secure Socket Extension (JSSE)
@@ -50,14 +53,14 @@ public class IpnPaypalListenerServlet extends HttpServlet {
     	PrintWriter pw = new PrintWriter(uc.getOutputStream());
     	pw.println(strBuffer.toString());
     	pw.close();
-     
+
     	BufferedReader in = new BufferedReader(new InputStreamReader(
     			uc.getInputStream()));
     	String res = in.readLine();
     	in.close();
-     
+
     	// assign posted variables to local variables
-    	
+
     	//String itemName = request.getParameter("item_name");
     	//String itemNumber = request.getParameter("item_number");
     	String paymentStatus = request.getParameter("payment_status");
@@ -66,8 +69,7 @@ public class IpnPaypalListenerServlet extends HttpServlet {
     	//String txnId = request.getParameter("txn_id");
     	String receiverEmail = request.getParameter("receiver_email");
     	//String payerEmail = request.getParameter("payer_email");
-    	
-     
+
     	// check notification validation
     	if (res.equals("VERIFIED")) {
     	    System.out.println("IPN VALID");
@@ -99,5 +101,4 @@ public class IpnPaypalListenerServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
- 
 }

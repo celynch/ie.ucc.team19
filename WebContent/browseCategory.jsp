@@ -12,7 +12,10 @@
     <jsp:include page="WEB-INF/views/horizNav.jsp" />
     <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
-            <h2>Course Details</h2>
+            <p id="breadcrumbs">
+                <a href="http://${serverName}/team19/pages/">Summer Courses &gt;</a>
+                <a href="http://${serverName}/team19/pages/browseCategory?category=${param.category}">${param.category} &gt;</a>
+            </p>
             <c:choose>
                 <c:when test="${fn:length(categoryCourses) > 0}">
                     <ul>

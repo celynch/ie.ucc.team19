@@ -16,7 +16,10 @@ public class LoginController extends AbstractController{
         getRequest().setAttribute("pageTitle", "Login");
 
         String referer = request.getHeader("referer");
-        String returnPage = request.getServerName() + "/team19/pages/";
+        String returnPage = request.getAttribute("serverName") + "/team19/pages/";
+        returnPage = returnPage.replace("http:", "https:");
+        returnPage = returnPage.startsWith("https://") ? returnPage : "https://" + returnPage;
+        returnPage = returnPage.replace("8080", "8443");
         if(referer!=null) {
             int domainStart = referer.indexOf("//") + 2;
             referer = referer.substring(domainStart, referer.indexOf("/", domainStart));
@@ -26,6 +29,7 @@ public class LoginController extends AbstractController{
                 returnPage = returnPage.replace("8080", "8443");
             }
         }
+        System.out.println(returnPage);
         getRequest().setAttribute("returnURL", returnPage);
     }
 }

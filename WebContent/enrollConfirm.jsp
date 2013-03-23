@@ -17,6 +17,9 @@
                 <h3>Please Note: </h3>
 	            <p>Review your selection before proceeding with enrollment.</p>
 	            <p>A place on the course has been temporarily reserved for you. If payment of the deposit has not completed the within 30 minutes, the reservation is cancelled and you will have to reapply to enroll.</p>
+	            <p>Selected Course: <span>${enrollCourse.courseTitle}</span></p>
+	            <p>Deposit Required: <span>${enrollCourse.fee * 0.2}</span></p>
+	            <p>Rest of Fee: <span>${enrollCourse.fee * 0.8}</span></p>
             </div>
             <div id="schedule">
                 <h3>Your current schedule:</h3>
@@ -85,7 +88,7 @@
 						    <input type="hidden" name="amount" value="${enrollCourse.fee * 0.2}">
 						    <input type="hidden" name="currency_code" value="EUR">
 						    <input type="hidden" name="notify_url" value="http://578b.localtunnel.com/team19/ipn/">
-						    <input type="image" name="submit" border="0" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+						    <input type="image" name="submit" style="border:none;" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
 						    <img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />
                         </form>
                         <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
@@ -94,7 +97,7 @@
                             <input type="hidden" name="item_name" value="Fee ${enrollCourse.courseTitle}">
                             <input type="hidden" name="amount" value="${enrollCourse.fee * 0.8}">
                             <input type="hidden" name="currency_code" value="EUR">
-                            <input type="image" name="submit" border="0" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+                            <input type="image" name="submit" style="border:none;" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
                             <img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />
                         </form>
                     </c:otherwise>

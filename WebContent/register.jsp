@@ -5,8 +5,11 @@
 </jsp:include>
 
     <div id="main">
+        <jsp:include page="WEB-INF/views/horizNav.jsp" />
+        <jsp:include page="WEB-INF/views/vertiNav.jsp" />
+        <div id="content">
         <form method="post" action="https://localhost:8443/team19/pages/RegisterComplete.jsp">
-            <fieldset id="personalinformation">
+            <fieldset id="personalInformation">
                 <legend>Personal information</legend>
                 <dl>
 	                <dt><label for="firstName">First Name: *</label></dt>
@@ -15,7 +18,7 @@
 	                <dd><input required="required" type="text" id="lastName" name="lastName" /></dd>
 	                <dt><label for="dobD">Date of Birth *</label></dt>
 		            <dd>
-		                <input required="required" type="text" name="dobD" maxlength="2" size="2" id="dobD"
+		                <input required="required" type="number" min="1" max="31" name="dobD" maxlength="2" size="2" id="dobD"
 			                value="DD"
 			                onfocus="if(this.value=='DD')this.value='';"
 			                onblur="if(this.value=='')this.value='DD';" />
@@ -42,7 +45,7 @@
                 </dl>
             </fieldset>
 
-            <fieldset id="address">
+            <fieldset id="regAddress">
                 <legend>Address</legend>
                 <dl>
 		            <dt><label for="address1">Address: *</label></dt>
@@ -58,7 +61,7 @@
 	                </dd>
 	            </dl>
             </fieldset>
-            <fieldset id="contact information">
+            <fieldset id="contactInformation">
                 <legend>Contact Information</legend>
                 <dl>
                     <dt><label for="telephone">Telephone:</label></dt>
@@ -69,7 +72,7 @@
                     <dd><input required="required" type="password" id="email2" name="email2" placeholder="verify email" /></dd>
                 </dl>
             </fieldset>
-            <fieldset id="Password information">
+            <fieldset id="PasswordInformation">
                 <legend>Contact Information</legend>
                 <p>Please enter a password for your student account. Passwords should be between 6 and 20 characters and contain at least 1 letter and 1 number.</p>
                 <dl>
@@ -82,5 +85,6 @@
             <input type="submit" name="cancel" value="Cancel" formaction="/tema19/pages/"/>
             <input type="submit" name="Proceed" value="Proceed"/>
         </form>
+        </div>
     </div>
 <jsp:include page="WEB-INF/views/footer.jsp"></jsp:include>

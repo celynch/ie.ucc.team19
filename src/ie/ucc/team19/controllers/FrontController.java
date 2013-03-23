@@ -26,12 +26,30 @@ public class FrontController extends HttpServlet {
         super.init();
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println(request.getServerName());
-        request.setAttribute("serverName",request.getServerName());
+        String serverName= request.getServerName();
+        serverName = serverName.equals("localhost") ? serverName + ":8080" : serverName;
+        request.setAttribute("serverName",serverName);
         StudentBean student = (StudentBean) request.getSession().getAttribute("user");
-        response.setContentType("text/html;charset=UTF-8");
+        manageSession(student, request, response);
+
+        try {
+            String controller = getURLPattern(request);
+            //Instantiate controller class
+            Controller control = ControllerFactory.getControllerByFullClassName(controller);
+            control.init(request, response);
+            control.execute();
+            response.setContentType("text/html;charset=UTF-8");
+            RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(control.getReturnPage());
+            requestDispatcher.forward(request, response);
+        } catch (Exception e) {
+            System.out.println("Error determining request controller.");
+            e.printStackTrace();
+        }
+    }
+
+    private void manageSession(StudentBean student, HttpServletRequest request, HttpServletResponse response) {
         if( (student == null) || ( student.getFirstName() == null) )  {
             if(request.getParameter("login") != null) {// standard login via banner
                 new LoginUser().loginViaForm(request, response);
@@ -44,19 +62,6 @@ public class FrontController extends HttpServlet {
             } else {        // cookie login
                 new LoginUser().loginViaCookie(request, response);
             }
-        }
-
-        try {
-            String controller = getURLPattern(request);
-            //Instantiate controller class
-            Controller control = ControllerFactory.getControllerByFullClassName(controller);
-            control.init(request, response);
-            control.execute();
-            RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(control.getReturnPage());
-            requestDispatcher.forward(request, response);
-        } catch (Exception e) {
-            System.out.println("Error determining request controller.");
-            e.printStackTrace();
         }
     }
 

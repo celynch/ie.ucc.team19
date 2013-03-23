@@ -12,8 +12,8 @@ public class EnrollConfirmController extends AbstractController{
     public void execute() {
         if(request.getSession().getAttribute("user") != null) { // is logged in
             DBConnectionManager connector = new DBConnectionManager();
-            boolean conflictDetected = EnrollStudent.detectConflicts(request, connector);
-            request.setAttribute("conflictDetected", conflictDetected);
+            EnrollStudent enroller = new EnrollStudent(connector);
+            enroller.detectConflicts(request);
 
             setReturnPage("/enrollConfirm.jsp");
             request.setAttribute("pageTitle", "Course Enrollment");
