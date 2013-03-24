@@ -41,7 +41,8 @@ public class LoginUser {
                     BeanUtilsBean.getInstance().populate(student, studentDetails.get(0));
                     cookie_token = UUID.randomUUID().toString();
                     BeanUtilsBean.getInstance().setProperty(student, "cookieToken", cookie_token);
-                    new UpdateUser().updateCookieToken(email, cookie_token);
+                    UpdateUser updater = new UpdateUser(new DBConnectionManager());
+                    updater.updateCookieToken(email, cookie_token);
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     System.out.println("Error populating student bean");
                     e.printStackTrace();
@@ -50,7 +51,7 @@ public class LoginUser {
         }
         return student;
     }
-    
+
     public boolean loginViaForm(HttpServletRequest request, HttpServletResponse response) {
         StudentBean student = loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
         boolean result = false;

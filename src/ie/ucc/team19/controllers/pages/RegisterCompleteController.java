@@ -11,8 +11,9 @@ import org.apache.commons.beanutils.BeanUtilsBean;
 
 public class RegisterCompleteController extends AbstractController{
     public void execute() {
+        DBConnectionManager connector = new DBConnectionManager();
         StudentBean user = setupStudent();
-        InsertUser.createStudent(user);
+        new InsertUser(connector).createStudent(user);
         this.setReturnPage("/registerComplete.jsp");
         this.getRequest().setAttribute("pageTitle", "Registration Completed");
         String subject = "UCC Summer Courses | Welcome";
@@ -25,7 +26,7 @@ public class RegisterCompleteController extends AbstractController{
                 + "<p>Your email address: " + user.getEmail() + "</p>"
                 + "<blockquote>\"Where Finbarr taught, let Munster learn\"</blockquote>"
                 + "<p>- The UCC Summer Courses Team</p></div>";
-        new SendEmail().sendEmail( user.getEmail(), subject, mailMessage);
+        new SendEmail(connector).sendEmail( user.getEmail(), subject, mailMessage);
     }
 
     private StudentBean setupStudent() {

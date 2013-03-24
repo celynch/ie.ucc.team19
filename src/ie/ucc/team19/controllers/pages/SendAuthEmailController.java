@@ -25,6 +25,6 @@ public class SendAuthEmailController extends AbstractController {
         getRequest().setAttribute("lecturers", lecturers);
         getRequest().setAttribute("venues", venues);
 
-        new SendEmail().sendEmail( "101664280@gmail.com", "how now brown cow", "test email");
+        new SendEmail(connector).sendEmail( "101664280@gmail.com", "how now brown cow", "test email");
     }
 }

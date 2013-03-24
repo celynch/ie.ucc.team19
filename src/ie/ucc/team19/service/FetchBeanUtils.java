@@ -118,4 +118,15 @@ public class FetchBeanUtils {
         categories.setCategoryTitles(categoryList);
         return categories;
     }
+    
+    public CommentBean[] getUnreviewedComments() {
+        String query = "SELECT commentId, students.studentId, email, firstName, subject, messageText, reviewed "
+                     + "FROM comments, students "
+                     + "WHERE comments.studentId = students.studentId "
+                     + "AND reviewed = false";
+        ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
+        CommentBean[] comments = new CommentBean[resultTable.size()];
+        comments = (CommentBean[]) sqlBeanPopulate(comments, resultTable);
+        return comments;
+    }
 }

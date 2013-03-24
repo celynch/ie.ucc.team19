@@ -9,6 +9,12 @@ import ie.ucc.team19.dao.DBConnectionManager;
  */
 public class UpdateUser {
     
+    private DBConnectionManager connector;
+    
+    public UpdateUser(DBConnectionManager connector) {
+        this.connector = connector;
+    }
+    
     /**
      * 
      * @param email
@@ -17,18 +23,24 @@ public class UpdateUser {
     public void updateCookieToken(String email, String cookieToken) {
         String query = "UPDATE Students SET cookieToken = '"
                 + cookieToken + "' WHERE email = '" + email + "'";
-        new DBConnectionManager().Insert(query);
+        connector.Insert(query);
     }
     
     public void updateAuthString(String email, String authString) {
         String query = "UPDATE Students SET authString = '"
                 + authString + "' WHERE email = '" + email + "'";
-        new DBConnectionManager().Insert(query);
+        connector.Insert(query);
     }
     
     public void updatePasswordHash(String email, String passwordHash) {
         String query = "UPDATE Students SET passwordHash = '"
                 + passwordHash + "' WHERE email = '" + email + "'";
-        new DBConnectionManager().Insert(query);
+        connector.Insert(query);
+    }
+    
+    public void updateComment(String commentId) {
+        String query = "UPDATE comments SET reviewed = "
+                + true + " WHERE commentId = '" + commentId+ "'";
+        connector.Insert(query);
     }
 }

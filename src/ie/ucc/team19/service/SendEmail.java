@@ -1,5 +1,7 @@
 package ie.ucc.team19.service;
 
+import ie.ucc.team19.dao.DBConnectionManager;
+
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -15,6 +17,11 @@ public class SendEmail {
     private final String From = "team19summer@gmail.com";
     private final String smtpServer = "in.mailjet.com";
     private final String SMTP_PORT = "587";
+    private DBConnectionManager connector;
+    
+    public SendEmail(DBConnectionManager connector) {
+        this.connector = connector;
+    }
 
     /**
      *
@@ -48,5 +55,15 @@ public class SendEmail {
             System.out.println("Error sending email");
             throw new RuntimeException (e);
         }
+    }
+    
+    public void submitComment(String studentId, String subject, String messageText) {
+        String query;
+        query = "INSERT INTO comments VALUES" + "(NULL, ";
+        query += "'" + studentId +"', ";
+        query += "'" + subject + "', ";
+        query += "'" + messageText + "', ";
+        query += false + ")";
+        connector.Insert(query);
     }
 }

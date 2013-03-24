@@ -4,7 +4,13 @@ import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.StudentBean;
 
 public class InsertUser {
-    public static void createStudent(StudentBean student) {
+    private DBConnectionManager connector;
+    
+    public InsertUser(DBConnectionManager connector) {
+        this.connector = connector;
+    }
+    
+    public void createStudent(StudentBean student) {
         String query;
         query = "INSERT INTO students VALUES" + "(NULL, ";
         query += "'" + student.getFirstName() +"', ";
@@ -24,6 +30,6 @@ public class InsertUser {
         query += "'" + student.getCookieToken() + "', ";
         query += student.getEmailOptIn() + ")";
 
-        new DBConnectionManager().Insert(query);
+        connector.Insert(query);
     }
 }

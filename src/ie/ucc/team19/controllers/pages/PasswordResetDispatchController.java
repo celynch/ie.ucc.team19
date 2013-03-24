@@ -18,7 +18,7 @@ public class PasswordResetDispatchController extends AbstractController{
             getRequest().setAttribute("emailError", true);
         } else {
             student.setAuthString(UUID.randomUUID().toString());
-            new UpdateUser().updateAuthString(email, student.getAuthString());
+            new UpdateUser(connector).updateAuthString(email, student.getAuthString());
             setReturnPage("/");
             getRequest().setAttribute("pageTitle", "Welcome");
     
@@ -29,7 +29,7 @@ public class PasswordResetDispatchController extends AbstractController{
                     + student.getAuthString() + "&email=" + student.getEmail() + "\">Reset Password</a>"
                     + "<blockquote>\"Where Finbarr taught, let Munster learn\"</blockquote>"
                     + "<p>- The UCC Summer Courses Team</p></div>";
-            new SendEmail().sendEmail( student.getEmail(), subject, mailMessage);
+            new SendEmail(connector).sendEmail( student.getEmail(), subject, mailMessage);
         }
     }
 }
