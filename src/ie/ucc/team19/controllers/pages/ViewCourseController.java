@@ -14,7 +14,6 @@ public class ViewCourseController extends AbstractController {
         DBConnectionManager connector = new DBConnectionManager();
         FetchBeanUtils fetcher = new FetchBeanUtils(connector);
         String courseId = request.getParameter("courseId");
-
         CourseBean[] courses = fetcher.getCourseByCourseId(courseId);
         LecturerBean[] lecturers = fetcher.getLecturersByCourseId(courseId);
         VenueBean[] venues = fetcher.getVenuesByCourseId(courseId);

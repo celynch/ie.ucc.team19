@@ -33,23 +33,18 @@ public class EnrollStudent {
     public void enrollToCourse(String courseId, String studentId, boolean pending,
             boolean paidDeposit, boolean paidFee, boolean issuedRefund, String enrollDate) {
         String query = "INSERT INTO enrollments "
-            + "(courseId, studentId, pending, paidDeposit, paidFee, issuedRefund, enrollDate)"
-            + " VALUES ('"
-            + courseId + "', '"
-            + studentId + "', '"
-            + 1  + "', '"
-            + 0 + "', '"
-            + 0 + "', '"
-            + 0 + "', '"
-            + enrollDate + "')";
-        connector.Insert(query);
+            + "(courseId, studentId, pending, paidDeposit, paidFee, issuedRefund, enrollDate) "
+            + "VALUES (?,?,?,?,?,?,?)";
+        Object[] params = {courseId,studentId,1,0,0,0,enrollDate};
+        connector.Insert(query, params);
     }
 
     private EnrollmentBean[] getEnrollmentsByStudentId(String studentId) {
         String query = "SELECT * "
                      + "FROM enrollments "
-                     + "WHERE studentId = '" + studentId + "'";
-        ArrayList<Map<String,String[]>> resultTable = connector.Select(query);
+                     + "WHERE studentId = ?";
+        Object[] params = {studentId};
+        ArrayList<Map<String,String[]>> resultTable = connector.Select(query, params);
         EnrollmentBean[] enrollments = new EnrollmentBean[resultTable.size()];
         enrollments = (EnrollmentBean[]) new FetchBeanUtils(connector).sqlBeanPopulate(enrollments, resultTable);
         return enrollments;
@@ -61,9 +56,10 @@ public class EnrollStudent {
         		       "WHERE courseId IN (" +
         		           "SELECT courseId " +
         		           "FROM enrollments " +
-        		           "WHERE studentId = '" + studentId + "') " +
+        		           "WHERE studentId = ?) " +
 	          		  "ORDER BY courseStartDate";
-        ArrayList<Map<String,String[]>> resultTable = connector.Select(query);
+        Object[] params = {studentId};
+        ArrayList<Map<String,String[]>> resultTable = connector.Select(query, params);
         CourseBean[] courses = new CourseBean[resultTable.size()];
         courses = (CourseBean[]) new FetchBeanUtils(connector).sqlBeanPopulate(courses, resultTable);
         return courses;

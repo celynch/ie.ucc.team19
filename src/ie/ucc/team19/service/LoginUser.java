@@ -16,8 +16,9 @@ import ie.ucc.team19.dao.StudentBean;
 public class LoginUser {
     private StudentBean loginStudent(String email, String passwordHash) {
         StudentBean student = new StudentBean();
-        String query = "SELECT * FROM students WHERE email = '" + email + "'";
-        ArrayList<Map<String, String[]>> studentDetails = new DBConnectionManager().Select(query);
+        String query = "SELECT * FROM students WHERE email = ?";
+        Object[] params = {email};
+        ArrayList<Map<String, String[]>> studentDetails = new DBConnectionManager().Select(query, params);
         if(studentDetails.size() != 0) {// user exists
             if( studentDetails.get(0).get("passwordHash")[0].equals(passwordHash)) { // password matches
                 try {
@@ -33,8 +34,9 @@ public class LoginUser {
 
     public static StudentBean cookieValidate(String email, String cookie_token) {
         StudentBean student = new StudentBean();
-        String query = "SELECT * FROM students WHERE email = '" + email + "'";
-        ArrayList<Map<String, String[]>> studentDetails = new DBConnectionManager().Select(query);
+        String query = "SELECT * FROM students WHERE email = ?";
+        Object[] params = {email};
+        ArrayList<Map<String, String[]>> studentDetails = new DBConnectionManager().Select(query, params);
         if(studentDetails.size() != 0) {    // email found
             if( studentDetails.get(0).get("cookieToken")[0].equals(cookie_token)) { // cookieToken matches
                 try {

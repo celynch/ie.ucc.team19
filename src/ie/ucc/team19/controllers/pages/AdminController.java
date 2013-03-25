@@ -22,8 +22,9 @@ public class AdminController extends AbstractController{
         if(content != null) {
             System.out.println(content);
             content = content.replace("'", "''");
-            String query = "UPDATE courses SET content = '" + content + "' WHERE courseId = '1'";
-            new DBConnectionManager().Insert(query);
+            String query = "UPDATE courses SET content = ? WHERE courseId = '1'";
+            Object[] params = {content};
+            new DBConnectionManager().Insert(query, params);
         }
         request.setAttribute("pageTitle", "TinyMCE TEST");
         request.setAttribute("includeEditor", true);

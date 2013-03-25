@@ -14,63 +14,68 @@ public class FetchBeanUtils {
     }
 
     public CourseBean[] getCourseByCourseId(String course_id) {
-        course_id = course_id.replace("'", "''");
         String query = "SELECT * "
                      + "FROM courses "
-                     + "WHERE courseId = \'"
-                     + course_id + "\'";
-        ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
+                     + "WHERE courseId = ?";
+        Object[] params = {course_id};
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
         CourseBean[] courses = new CourseBean[resultTable.size()];
         courses = (CourseBean[]) sqlBeanPopulate(courses, resultTable);
         return courses;
     }
 
     public CourseBean[] getCoursesByCourseCategory(String courseCategory) {
-        courseCategory = courseCategory.replace("'", "''");
         String query = "SELECT * "
                      + "FROM courses "
-                     + "WHERE courseCategory = \'"
-                     + courseCategory + "\'";
-        ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
+                     + "WHERE courseCategory = ?";
+        Object[] params = {courseCategory};
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
         CourseBean[] courses = new CourseBean[resultTable.size()];
         courses = (CourseBean[]) sqlBeanPopulate(courses, resultTable);
         return courses;
     }
 
     public LecturerBean[] getLecturersByCourseId(String courseId) {
-        courseId = courseId.replace("'", "''");
         String query = "SELECT * "
                      + "FROM lecturers "
                      + "WHERE lecturerId IN ("
                          + "SELECT lecturerId "
                          + "FROM teaches "
-                         + "WHERE courseId >= \'"
-                         + courseId + "\')";
-        ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
+                         + "WHERE courseId = ?)";
+        Object[] params = {courseId};
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
+        LecturerBean[] lecturers = new LecturerBean[resultTable.size()];
+        lecturers = (LecturerBean[]) sqlBeanPopulate(lecturers, resultTable);
+        return lecturers;
+    }
+    
+    public LecturerBean[] getLecturers() {
+        String query = "SELECT * FROM lecturers";
+        Object[] params = {};
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
         LecturerBean[] lecturers = new LecturerBean[resultTable.size()];
         lecturers = (LecturerBean[]) sqlBeanPopulate(lecturers, resultTable);
         return lecturers;
     }
 
     public VenueBean[] getVenuesByCourseId(String courseId) {
-        courseId = courseId.replace("'", "''");
         String query = "SELECT * "
                      + "FROM venues "
                      + "WHERE venueId IN ("
                          + "SELECT venueId "
                          + "FROM courseLocations "
-                         + "WHERE courseId = \'"
-                         + courseId + "\')";
-        ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
+                         + "WHERE courseId = ?)";
+        Object[] params = {courseId};
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
         VenueBean[] venues = new VenueBean[resultTable.size()];
         venues = (VenueBean[]) sqlBeanPopulate(venues, resultTable);
         return venues;
     }
 
-    private ArrayList<Map<String, String[]>> fetchTable(String query) {
-        ArrayList<Map<String, String[]>> resultTable = connector.Select(query);
+    /*private ArrayList<Map<String, String[]>> fetchTable(String query, ) {
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
         return resultTable;
-    }
+    }*/
 
     Object[] sqlBeanPopulate(Object[] beans, ArrayList<Map<String, String[]>> resultTable) {
         int beanNum = 0;
@@ -96,9 +101,9 @@ public class FetchBeanUtils {
     public StudentBean getStudentByEmail(String email) {
         String query = "SELECT * "
                      + "FROM students "
-                     + "WHERE email = \'"
-                     + email + "\'";
-        ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
+                     + "WHERE email = ?";
+        Object[] params = {email};
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
         StudentBean[] student = new StudentBean[1];
         student = (StudentBean[]) sqlBeanPopulate(student, resultTable);
         return student[0];
@@ -108,7 +113,8 @@ public class FetchBeanUtils {
         CategoryBean categories = new CategoryBean();
         String query = "SELECT DISTINCT courseCategory "
                      + "FROM courses";
-        ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
+        Object[] params = {};
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
         String[] categoryList = new String[resultTable.size()];
         int catNumber = 0;
         for(Map<String, String[]> row : resultTable) {
@@ -124,7 +130,8 @@ public class FetchBeanUtils {
                      + "FROM comments, students "
                      + "WHERE comments.studentId = students.studentId "
                      + "AND reviewed = false";
-        ArrayList<Map<String, String[]>> resultTable = fetchTable(query);
+        Object[] params = {};
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
         CommentBean[] comments = new CommentBean[resultTable.size()];
         comments = (CommentBean[]) sqlBeanPopulate(comments, resultTable);
         return comments;

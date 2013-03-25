@@ -11,25 +11,25 @@ public class InsertUser {
     }
     
     public void createStudent(StudentBean student) {
-        String query;
-        query = "INSERT INTO students VALUES" + "(NULL, ";
-        query += "'" + student.getFirstName() +"', ";
-        query += "'" + student.getLastName() + "', ";
-        query += "'" + student.getEmail() + "', ";
-        query += "'" + student.getPasswordHash() + "', ";
-        query += "'" + student.getAddressLine1() + "', ";
-        query += "'" + student.getAddressLine2() + "', ";
-        query += "'" + student.getAddressLine3() + "', ";
-        query += "'" + student.getCountry() + "', ";
-        query += "'" + student.getTelephone() + "', ";
-        query += "'" + student.getDateOfBirth() + "', ";
-        query += "'" + student.getGender() + "', ";
-        query += student.isAuthenticated() + ", ";
-        query += "'" + student.getAuthString() + "', ";
-        query += "'" + student.getDateRegistered() + "', "; 
-        query += "'" + student.getCookieToken() + "', ";
-        query += student.getEmailOptIn() + ")";
+        String query = "INSERT INTO students VALUES"
+                + "(NULL, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        connector.Insert(query);
+        Object[] params = {student.getFirstName(), student.getLastName(),
+                student.getEmail(),
+                student.getPasswordHash(),
+                student.getAddressLine1(),
+                student.getAddressLine2(),
+                student.getAddressLine3(),
+                student.getCountry(),
+                student.getTelephone(),
+                student.getDateOfBirth(),
+                student.getGender(),
+                student.isAuthenticated(),
+                student.getAuthString(),
+                student.getDateRegistered(),
+                student.getCookieToken(),
+                student.getEmailOptIn()};
+
+        connector.Insert(query, params);
     }
 }

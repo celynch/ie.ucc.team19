@@ -58,12 +58,9 @@ public class SendEmail {
     }
     
     public void submitComment(String studentId, String subject, String messageText) {
-        String query;
-        query = "INSERT INTO comments VALUES" + "(NULL, ";
-        query += "'" + studentId +"', ";
-        query += "'" + subject + "', ";
-        query += "'" + messageText + "', ";
-        query += false + ")";
-        connector.Insert(query);
+        String query = "INSERT INTO comments VALUES" + "(NULL, ?,?,?,?)";
+
+        Object[] params = {studentId, subject, messageText, false};
+        connector.Insert(query, params);
     }
 }

@@ -13,28 +13,16 @@
     <jsp:include page="WEB-INF/views/horizNav.jsp" />
     <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
-	        <h2>Course Details</h2>
-	        <c:choose>
-	            <c:when test="${fn:length(courses) > 0}">
-	                <c:forEach var="course" items="${courses}">
-	                    <h3>${course['courseTitle']}</h3>
-	                    <h3>Fee:</h3>
-	                    <p>&euro;<fmt:formatNumber value="${course['fee']}" minFractionDigits="2" maxFractionDigits="2"/></p>
-	                    <h3>Lecturer<c:choose><c:when test="${fn:length(lecturers) > 0}">s</c:when></c:choose>:</h3>
-	                    <c:forEach var="lecturer" items="${lecturers}">
-	                        <p>${lecturer['lecturerTitle']} ${lecturer['firstName']} ${lecturer['lastName']}, ${lecturer['position']}</p>
-	                    </c:forEach>
-	                    <h3>Venue<c:choose><c:when test="${fn:length(venues) > 0}">s</c:when></c:choose>:</h3>
-	                    <c:forEach var="venue" items="${venues}">
-	                        <p>${venue['venueRoom']}, ${venue['venueBuilding']}, ${venue['addressLine1']}</p>
-	                    </c:forEach>
-	                    ${course['content']}
+            <h2>Course Categories</h2>
+            <p>Select from the list below to see the range of courses of that category.</p>
+                <ul>
+	                <c:forEach var="i" begin="0" end="${fn:length(categories.categoryTitles) - 1}">
+	                    <li class="categoryPanel<c:if test="${i % 2 == 1}"> categoryPanelRight</c:if>">
+	                       <a href="/team19/pages/browseCategory.jsp?category=${categories.categoryTitles[i]}">${categories.categoryTitles[i]}</a>
+                        </li>
 	                </c:forEach>
-	            </c:when>
-	            <c:otherwise>
-	                <p>No Courses found.</p>
-	            </c:otherwise>
-	        </c:choose>
+                </ul>
+                <div class="clear"></div>
         </div>
     </div>
 

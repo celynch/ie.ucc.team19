@@ -5,6 +5,7 @@ package ie.ucc.team19.dao;
  * @author
  */
 //import java.text.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class DBConnectionManager {
     private static final String DBName = "team19";
     private static final String username = "root";
     private static final String password = "eizeikem";
-    private Statement statementObject;
+    private PreparedStatement statementObject;
     private Connection connectionObject;
 
     private void OpenDatabaseConnection() {
@@ -52,15 +53,22 @@ public class DBConnectionManager {
         }
     } //CloseDatabaseConnection
 
-    public void Insert(String SQLinsert) {
+    public void Insert(String SQLinsert, Object[] params) {
         // Setup database connection details
         try {
             OpenDatabaseConnection();
             // Setup statement object
-            statementObject = connectionObject.createStatement();
-
+            statementObject = connectionObject.prepareStatement(SQLinsert);
+            for(int i = 0; i < params.length; i ++) {
+                int sqlType = SqlMapper.getSqlTypeFromClass(params[i]);
+                if(sqlType == -1) {
+                    statementObject.setString(i+1, params[i].toString());
+                } else {
+                    statementObject.setObject(i+1, params[i], sqlType);
+                }
+            }
             // execute SQL commands to insert data
-            statementObject.executeUpdate(SQLinsert);
+            statementObject.executeUpdate();
             writeLogSQL(SQLinsert +" Executed OK");
         } catch (SQLException exceptionObject) {
             System.out.println(SQLinsert+" - Problem is : " + exceptionObject.getMessage());
@@ -77,13 +85,21 @@ public class DBConnectionManager {
         }
     }
    
-    public ArrayList<Map<String, String[]>> Select(String SQLquery) {
+    public ArrayList<Map<String, String[]>> Select(String SQLquery, Object[] params) {
         ArrayList<Map<String, String[]>> resultTable = new ArrayList<Map<String, String[]>>();
 
         try {// Make connection to database
             OpenDatabaseConnection();
-            statementObject = connectionObject.createStatement();
-            ResultSet statementResult = statementObject.executeQuery(SQLquery);
+            statementObject = connectionObject.prepareStatement(SQLquery);
+            for(int i = 0; i < params.length; i ++) {
+                int sqlType = SqlMapper.getSqlTypeFromClass(params[i]);
+                if(sqlType == -1) {
+                    statementObject.setString(i+1, params[i].toString());
+                } else {
+                    statementObject.setObject(i+1, params[i], sqlType);
+                }
+            }
+            ResultSet statementResult = statementObject.executeQuery();
 
             ResultSetMetaData rsMetaData = statementResult.getMetaData();
             int numberOfColumns = rsMetaData.getColumnCount();

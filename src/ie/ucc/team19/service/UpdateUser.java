@@ -22,39 +22,45 @@ public class UpdateUser {
      */
     public void updateCookieToken(String email, String cookieToken) {
         String query = "UPDATE Students SET cookieToken = '"
-                + cookieToken + "' WHERE email = '" + email + "'";
-        connector.Insert(query);
+                + cookieToken + "' WHERE email = ?";
+        Object[] params = {email};
+        connector.Insert(query, params);
     }
     
     public void updateAuthString(String email, String authString) {
         String query = "UPDATE Students SET authString = '"
-                + authString + "' WHERE email = '" + email + "'";
-        connector.Insert(query);
+                + authString + "' WHERE email = ?";
+        Object[] params = {email};
+        connector.Insert(query, params);
     }
     
     public void updatePasswordHash(String email, String passwordHash) {
         String query = "UPDATE Students SET passwordHash = '"
-                + passwordHash + "' WHERE email = '" + email + "'";
-        connector.Insert(query);
+                + passwordHash + "' WHERE email = ?";
+        Object[] params = {email};
+        connector.Insert(query, params);
     }
     
     public void updateComment(String commentId) {
         String query = "UPDATE comments SET reviewed = "
-                + true + " WHERE commentId = '" + commentId+ "'";
-        connector.Insert(query);
+                + true + " WHERE commentId = ?";
+        Object[] params = {commentId};
+        connector.Insert(query, params);
     }
     
     public void expirePendingEnrolls() {
         String query = "DELETE FROM enrollments "
                      + "WHERE pending = true "
                      + "AND TIMESTAMPADD(HOUR, 2, enrollDate) < NOW()";
-        connector.Insert(query);
+        Object[] params = {};
+        connector.Insert(query, params);
     }
     
     public void expireUnverifiedStudents() {
         String query = "DELETE FROM students "
                      + "WHERE authenticated = false "
                      + "AND TIMESTAMPADD(DAY, 1, dateRegistered) < NOW()";
-        connector.Insert(query);
+        Object[] params = {};
+        connector.Insert(query, params);
     }
 }

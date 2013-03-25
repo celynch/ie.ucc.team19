@@ -18,7 +18,7 @@ public class BrowseAllCategoriesController extends AbstractController{
     public void execute() {
         DBConnectionManager connector = new DBConnectionManager();
         
-        setReturnPage("/browseAllCategories.jsp");
+        setReturnPage("/index.jsp");
         request.setAttribute("pageTitle", "Browse Categories");
         CategoryBean categories = new FetchBeanUtils(connector).getCourseCategories();
         request.setAttribute("categories", categories);

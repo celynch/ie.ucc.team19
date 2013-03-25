@@ -123,7 +123,7 @@ CREATE TABLE courses
 
 INSERT INTO courses (courseTitle, fee, spaces, courseCategory, content, enrollStartDate, enrollEndDate, courseStartDate, courseEndDate)
 VALUES 
-    ('Introduction to Irish Folklore', 190.00, 25, 'culture', 
+    ('Introduction to Irish Folklore', 190.00, 25, 'Culture', 
 '<h3>Course Content</h3>
 <ol>
 <li>Introduction - Defining "Folklore"</li>
@@ -148,7 +148,7 @@ relation to some supernatural beliefs, which can be compared to other
 cultural contexts. The focus is on belief, custom and narrative traditions 
 in the Irish context.</p>', 
 '2013-01-01', '2013-05-01', '2013-06-01', '2013-06-05'),
-    ('Sci-Fi Lore', 190.00, 25, 'sci-fi', 
+    ('Sci-Fi Lore', 190.00, 25, 'Sci-Fi', 
 '<h3>Course Content</h3>
 <ol>
 <li>Star Wars</li>
