@@ -6,6 +6,7 @@
 <jsp:include page="WEB-INF/views/header.jsp" >
     <jsp:param name="pageTitle" value="${pageTitle}" />
     <jsp:param name="serverName" value="${serverName}" />
+    <jsp:param name="secureServerName" value="${secureServerName}" />
 </jsp:include>
 
     <div id="main" >
@@ -13,10 +14,10 @@
     <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
             <p id="breadcrumbs">
-                <a href="http://${serverName}/team19/pages/">&gt; Summer Courses</a>
-                <a href="http://${serverName}/team19/pages/browseCategory?category=${courses[0].courseCategory}"
+                <a href="/team19/pages/">&gt; Summer Courses</a>
+                <a href="/team19/pages/browseCategory?category=${courses[0].courseCategory}"
                      >&gt; ${courses[0].courseCategory}</a>
-                <a href="http://${serverName}/team19/pages/viewCourse?courseId=${courses[0].courseId}"
+                <a href="/team19/pages/viewCourse?courseId=${courses[0].courseId}"
                      >&gt; ${courses[0].courseTitle}</a>
             </p>
             <h2>Course Details</h2>
@@ -26,7 +27,7 @@
                         <h3>${course.courseTitle}</h3>
                         <c:choose>
                             <c:when test="${user!=null}">
-	                            <form method="post" action="https://localhost:8443/team19/pages/enrollConfirm">
+	                            <form method="get" action="https://${secureServerName}/team19/pages/enrollConfirm">
 	                               <input type="hidden" name="enrollCourseId" value="${course.courseId}"/>
 	                               <input type="submit" value="Enroll"/>
 	                            </form>

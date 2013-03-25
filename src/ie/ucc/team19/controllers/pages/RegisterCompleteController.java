@@ -14,8 +14,8 @@ public class RegisterCompleteController extends AbstractController{
         DBConnectionManager connector = new DBConnectionManager();
         StudentBean user = setupStudent();
         new InsertUser(connector).createStudent(user);
-        this.setReturnPage("/registerComplete.jsp");
-        this.getRequest().setAttribute("pageTitle", "Registration Completed");
+        setReturnPage("/registerComplete.jsp");
+        request.setAttribute("pageTitle", "Registration Completed");
         String subject = "UCC Summer Courses | Welcome";
         String mailMessage = "<div><p>Thanks for joining UCC Summer Courses.</p>"
                 + "<p>We listed your sign in details below, make sure you keep them safe.</p>"

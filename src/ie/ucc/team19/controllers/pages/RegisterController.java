@@ -12,7 +12,7 @@ import ie.ucc.team19.controllers.AbstractController;
 public class RegisterController extends AbstractController{
     public void execute() {
         setReturnPage("/register.jsp");
-        getRequest().setAttribute("year", Calendar.getInstance().get(Calendar.YEAR));
-        getRequest().setAttribute("pageTitle", "Account Registration");
+        request.setAttribute("year", Calendar.getInstance().get(Calendar.YEAR));
+        request.setAttribute("pageTitle", "Account Registration");
     }
 }

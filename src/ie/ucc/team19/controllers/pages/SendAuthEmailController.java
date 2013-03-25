@@ -20,10 +20,10 @@ public class SendAuthEmailController extends AbstractController {
         VenueBean[] venues = fetcher.getVenuesByCourseId("1");
 
         setReturnPage("/index.jsp");
-        getRequest().setAttribute("pageTitle", "TEST EMAIL SENT");
-        getRequest().setAttribute("courses", courses);
-        getRequest().setAttribute("lecturers", lecturers);
-        getRequest().setAttribute("venues", venues);
+        request.setAttribute("pageTitle", "TEST EMAIL SENT");
+        request.setAttribute("courses", courses);
+        request.setAttribute("lecturers", lecturers);
+        request.setAttribute("venues", venues);
 
         new SendEmail(connector).sendEmail( "101664280@gmail.com", "how now brown cow", "test email");
     }

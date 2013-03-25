@@ -14,10 +14,10 @@ public class LogoutController extends AbstractController{
 
     public void execute() {
         HttpServletResponse response = getResponse();
-        StudentBean student = (StudentBean) getRequest().getSession().getAttribute("user");
-        new LoginUser().setCookies(response, student, getRequest().getServerName(), true, true);
-        getRequest().getSession().invalidate();
+        StudentBean student = (StudentBean) request.getSession().getAttribute("user");
+        new LoginUser().setCookies(response, student, request.getServerName(), true, true);
+        request.getSession().invalidate();
         setReturnPage("/logout.jsp");
-        getRequest().setAttribute("pageTitle", "Logged Out");
+        request.setAttribute("pageTitle", "Logged Out");
     }
 }

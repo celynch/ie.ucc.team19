@@ -12,31 +12,31 @@ public class PasswordResetController extends AbstractController {
         DBConnectionManager connector = new DBConnectionManager();
         FetchBeanUtils fetcher = new FetchBeanUtils(connector);
         
-        String email = getRequest().getParameter("email");
-        String authString = getRequest().getParameter("authString");
-        String passwordHash = getRequest().getParameter("passwordHash");
-        String passwordHash2 = getRequest().getParameter("passwordHash2");
+        String email = request.getParameter("email");
+        String authString = request.getParameter("authString");
+        String passwordHash = request.getParameter("passwordHash");
+        String passwordHash2 = request.getParameter("passwordHash2");
         StudentBean student = fetcher.getStudentByEmail(email);
 
         if( !passwordHash.equals(passwordHash2)) { // re-entered passwords don't match
             String resubmit = "?authString=" + authString + "&email=" + email;
             setReturnPage("/pages/passwordResetVerify.jsp" + resubmit);
-            getRequest().setAttribute("pageTitle", "Complete Password Reset");
-            getRequest().setAttribute("passwordError", true);
+            request.setAttribute("pageTitle", "Complete Password Reset");
+            request.setAttribute("passwordError", true);
         } else if(student.getEmail() == null) { // user not found
             String resubmit = "?authString=" + authString;
             setReturnPage("/pages/passwordResetVerify.jsp" + resubmit);
-            getRequest().setAttribute("pageTitle", "Complete Password");
-            getRequest().setAttribute("emailError", true);
+            request.setAttribute("pageTitle", "Complete Password");
+            request.setAttribute("emailError", true);
         } else if( !student.getAuthString().equals(authString)) { // authString doesn't match
             setReturnPage("/");
-            getRequest().setAttribute("pageTitle", "Welcome");
+            request.setAttribute("pageTitle", "Welcome");
         } else { // will update password, log user in
-            this.getRequest().getSession().setAttribute("user", student);
+            request.getSession().setAttribute("user", student);
             student.setPasswordHash(passwordHash2);
             new UpdateUser(connector).updatePasswordHash(student.getEmail(), student.getPasswordHash());
-            new LoginUser().setCookies(getResponse(), student, getRequest().getServerName(),
-                    Boolean.parseBoolean(getRequest().getParameter("rememberMe")), false);
+            new LoginUser().setCookies(response, student, request.getServerName(),
+                    Boolean.parseBoolean(request.getParameter("rememberMe")), false);
         }
     }
 }

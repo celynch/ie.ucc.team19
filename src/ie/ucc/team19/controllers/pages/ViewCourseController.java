@@ -13,7 +13,7 @@ public class ViewCourseController extends AbstractController {
     public void execute() {
         DBConnectionManager connector = new DBConnectionManager();
         FetchBeanUtils fetcher = new FetchBeanUtils(connector);
-        String courseId = getRequest().getParameter("courseId");
+        String courseId = request.getParameter("courseId");
 
         CourseBean[] courses = fetcher.getCourseByCourseId(courseId);
         LecturerBean[] lecturers = fetcher.getLecturersByCourseId(courseId);
@@ -21,9 +21,9 @@ public class ViewCourseController extends AbstractController {
         String courseTitle = courses[0].getCourseTitle();
 
         setReturnPage("/viewCourse.jsp");
-        getRequest().setAttribute("courses", courses);
-        getRequest().setAttribute("lecturers", lecturers);
-        getRequest().setAttribute("venues", venues);
-        getRequest().setAttribute("pageTitle", courseTitle);
+        request.setAttribute("courses", courses);
+        request.setAttribute("lecturers", lecturers);
+        request.setAttribute("venues", venues);
+        request.setAttribute("pageTitle", courseTitle);
     }
 }

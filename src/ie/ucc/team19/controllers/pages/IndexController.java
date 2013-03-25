@@ -19,9 +19,9 @@ public class IndexController extends AbstractController {
         VenueBean[] venues = fetcher.getVenuesByCourseId("1");
 
         setReturnPage("/index.jsp");
-        getRequest().setAttribute("pageTitle", "Welcome");
-        getRequest().setAttribute("courses", courses);
-        getRequest().setAttribute("lecturers", lecturers);
-        getRequest().setAttribute("venues", venues);
+        request.setAttribute("pageTitle", "Welcome");
+        request.setAttribute("courses", courses);
+        request.setAttribute("lecturers", lecturers);
+        request.setAttribute("venues", venues);
     }
 }

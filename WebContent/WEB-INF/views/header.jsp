@@ -33,7 +33,7 @@
 			            </form>
 				    </c:when>
 			        <c:otherwise>
-			            <form method="post" action="https://${serverName}/team19/pages/Index">
+			            <form method="post" action="https://${secureServerName}/team19/pages/Index">
 			                <fieldset id="personalinformation">
 	                            <legend>Login</legend>
 	                            <dl>

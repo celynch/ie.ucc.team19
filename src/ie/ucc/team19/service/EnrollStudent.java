@@ -1,6 +1,7 @@
 package ie.ucc.team19.service;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -30,15 +31,17 @@ public class EnrollStudent {
     }
     
     public void enrollToCourse(String courseId, String studentId, boolean pending,
-            boolean paidDeposit, boolean paidFee, boolean issuedRefund) {
-        String query = "INSERT INTO enrollments (courseId, studentId, pending, paidDeposit, paidFee, issuedRefund)"
+            boolean paidDeposit, boolean paidFee, boolean issuedRefund, String enrollDate) {
+        String query = "INSERT INTO enrollments "
+            + "(courseId, studentId, pending, paidDeposit, paidFee, issuedRefund, enrollDate)"
             + " VALUES ('"
             + courseId + "', '"
             + studentId + "', '"
             + 1  + "', '"
             + 0 + "', '"
             + 0 + "', '"
-            + 0 + "')";
+            + 0 + "', '"
+            + enrollDate + "')";
         connector.Insert(query);
     }
 
@@ -101,7 +104,8 @@ public class EnrollStudent {
         request.setAttribute("alreadyEnrolled", alreadyEnrolled);
         request.setAttribute("conflictDetected", conflictDetected);
         if(!conflictDetected && !alreadyEnrolled ) {
-            enrollToCourse(enrollCourseId, studentId, true, false, false, false);
+            String dateNow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
+            enrollToCourse(enrollCourseId, studentId, true, false, false, false, dateNow);
         }
     }
 

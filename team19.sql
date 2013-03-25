@@ -5,6 +5,7 @@ use team19
 source C:\Program Files\Tomcat\apache-tomcat-7.0.35\webapps\team19\team19.sql
 */
 
+DROP TABLE IF EXISTS comments; 
 DROP TABLE IF EXISTS teaches;
 DROP TABLE IF EXISTS enrollments;
 DROP TABLE IF EXISTS courseLocations;
@@ -202,14 +203,15 @@ CREATE TABLE enrollments
     paidDeposit BOOLEAN,
     paidFee BOOLEAN,
     issuedRefund BOOLEAN,
+    enrolldate DATETIME,
     PRIMARY KEY (courseId, studentId),
     FOREIGN KEY(courseId) REFERENCES courses(courseId),
     FOREIGN KEY(studentId) REFERENCES students(studentId)
 ) ENGINE=InnoDB;
 
-INSERT INTO enrollments (courseId, studentId, pending, paidDeposit, paidFee, issuedRefund) 
+INSERT INTO enrollments (courseId, studentId, pending, paidDeposit, paidFee, issuedRefund, enrollDate) 
 VALUES 
-    (1, 1, false, true, false, false); 
+    (1, 1, false, true, false, false, '2013-03-23 19:58:27'); 
 
 DROP TABLE IF EXISTS courseLocations; 
 
@@ -226,3 +228,22 @@ INSERT INTO courseLocations (courseId, venueId)
 VALUES 
     (1,1),
     (1,2);
+
+DROP TABLE IF EXISTS comments; 
+
+CREATE TABLE comments 
+(
+    commentId INT NOT NULL AUTO_INCREMENT,
+    studentId INT NOT NULL,
+    subject VARCHAR(100),
+    messageText TEXT,
+    reviewed BOOLEAN,
+    PRIMARY KEY (commentId),
+    FOREIGN KEY(studentId) REFERENCES students(studentId)
+) ENGINE=InnoDB;
+
+INSERT INTO comments (commentId, studentId, subject, messageText, reviewed) 
+VALUES 
+    (NULL, 1, 'help', 'am trapped in website', false),
+    (NULL, 1, 'nvrmnd', 'is only project', false)
+;

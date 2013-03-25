@@ -4,7 +4,7 @@ import ie.ucc.team19.controllers.AbstractController;
 
 public class PasswordResetVerifyController extends AbstractController {
     public void execute() {
-        this.setReturnPage("/passwordResetVerify.jsp");
-        this.getRequest().setAttribute("pageTitle", "Complete Password Reset");
+        setReturnPage("/passwordResetVerify.jsp");
+        request.setAttribute("pageTitle", "Complete Password Reset");
     }
 }

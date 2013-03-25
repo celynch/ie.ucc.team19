@@ -53,9 +53,9 @@ public class DBConnectionManager {
     } //CloseDatabaseConnection
 
     public void Insert(String SQLinsert) {
-        OpenDatabaseConnection();
         // Setup database connection details
         try {
+            OpenDatabaseConnection();
             // Setup statement object
             statementObject = connectionObject.createStatement();
 
@@ -66,6 +66,13 @@ public class DBConnectionManager {
             System.out.println(SQLinsert+" - Problem is : " + exceptionObject.getMessage());
             writeLogSQL(SQLinsert + " caused error " + exceptionObject.getMessage());
         } finally {
+            try {
+                statementObject.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing statement " + e.getMessage() + " " + e.getErrorCode());
+                writeLogSQL(SQLinsert + " caused error " + e.getClass().toString());
+                e.printStackTrace();
+            }
             CloseDatabaseConnection();
         }
     }
@@ -99,6 +106,15 @@ public class DBConnectionManager {
             System.err.println("Select problems with SQL " + SQLquery);
             System.err.println("Select problem is " + e.getMessage() + " " + e.getErrorCode());
             writeLogSQL(SQLquery + " caused error " + e.getClass().toString());
+        } finally {
+            try {
+                statementObject.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing statement " + e.getMessage() + " " + e.getErrorCode());
+                writeLogSQL(SQLquery + " caused error " + e.getClass().toString());
+                e.printStackTrace();
+            }
+            CloseDatabaseConnection();
         }
 
         return resultTable;

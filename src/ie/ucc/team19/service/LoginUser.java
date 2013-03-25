@@ -102,12 +102,7 @@ public class LoginUser {
     public void loginVerify(HttpServletRequest request, HttpServletResponse response) {
         StudentBean student = loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
         if(request.getParameter("authString").equals(student.getAuthString())) {
-            System.out.println("good authString");
             student.setAuthenticated(true);
-        } else {
-            System.out.println("bad authString");
-        }
-        if(student.isAuthenticated()) {
             request.getSession().setAttribute("user", student);
             setCookies(response, student, request.getServerName(),
                     Boolean.parseBoolean(request.getParameter("rememberMe")), false);

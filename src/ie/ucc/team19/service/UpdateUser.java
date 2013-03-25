@@ -43,4 +43,18 @@ public class UpdateUser {
                 + true + " WHERE commentId = '" + commentId+ "'";
         connector.Insert(query);
     }
+    
+    public void expirePendingEnrolls() {
+        String query = "DELETE FROM enrollments "
+                     + "WHERE pending = true "
+                     + "AND TIMESTAMPADD(HOUR, 2, enrollDate) < NOW()";
+        connector.Insert(query);
+    }
+    
+    public void expireUnverifiedStudents() {
+        String query = "DELETE FROM students "
+                     + "WHERE authenticated = false "
+                     + "AND TIMESTAMPADD(DAY, 1, dateRegistered) < NOW()";
+        connector.Insert(query);
+    }
 }

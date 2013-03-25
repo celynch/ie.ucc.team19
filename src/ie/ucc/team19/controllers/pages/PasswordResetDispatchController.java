@@ -11,16 +11,16 @@ public class PasswordResetDispatchController extends AbstractController{
         DBConnectionManager connector = new DBConnectionManager();
         FetchBeanUtils fetcher = new FetchBeanUtils(connector);
         
-        String email = getRequest().getParameter("email");
+        String email = request.getParameter("email");
         StudentBean student = fetcher.getStudentByEmail(email);
         if(student == null) {
             setReturnPage("/pages/passwordResetRequest");
-            getRequest().setAttribute("emailError", true);
+            request.setAttribute("emailError", true);
         } else {
             student.setAuthString(UUID.randomUUID().toString());
             new UpdateUser(connector).updateAuthString(email, student.getAuthString());
             setReturnPage("/");
-            getRequest().setAttribute("pageTitle", "Welcome");
+            request.setAttribute("pageTitle", "Welcome");
     
             String subject = "UCC Summer Courses | Password Reset";
             String mailMessage = "<div><p>" + student.getFirstName()

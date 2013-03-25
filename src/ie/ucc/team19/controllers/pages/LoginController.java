@@ -13,7 +13,7 @@ public class LoginController extends AbstractController{
      */
     public void execute() {
         setReturnPage("/login.jsp");
-        getRequest().setAttribute("pageTitle", "Login");
+        request.setAttribute("pageTitle", "Login");
 
         String referer = request.getHeader("referer");
         String returnPage = request.getAttribute("serverName") + "/team19/pages/";
@@ -30,6 +30,6 @@ public class LoginController extends AbstractController{
             }
         }
         System.out.println(returnPage);
-        getRequest().setAttribute("returnURL", returnPage);
+        request.setAttribute("returnURL", returnPage);
     }
 }

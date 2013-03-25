@@ -1,5 +1,7 @@
 package ie.ucc.team19.dao;
 
+import java.sql.Timestamp;
+
 public class EnrollmentBean {
     private int courseId;
     private int studentId;
@@ -7,6 +9,7 @@ public class EnrollmentBean {
     private boolean paidDeposit;
     private boolean paidFee;
     private boolean issuedRefund;
+    private Timestamp enrollDate;
 
     public EnrollmentBean() {
 
@@ -47,5 +50,11 @@ public class EnrollmentBean {
     }
     public void setIssuedRefund(boolean issuedRefund) {
         this.issuedRefund = issuedRefund;
+    }
+    public Timestamp getEnrollDate() {
+        return enrollDate;
+    }
+    public void setEnrollDate(Timestamp enrollDate) {
+        this.enrollDate = enrollDate;
     }
 }
