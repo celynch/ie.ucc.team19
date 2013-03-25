@@ -200,6 +200,13 @@
     background-color: red;
 }
 
+section {
+	padding: 1em;
+	margin: 1em;
+	width: 40%;
+	float: left;
+}
+
 #address {
 	float: left;
 }
@@ -237,4 +244,16 @@
 
 .categoryPanel:hover {
 	background-color: SkyBlue;
+}
+
+.lecturerCard {
+	padding: 1em;
+	margin: 1em;
+}
+
+.profilePic {
+	display: block;
+	float: right;
+	width: 5em;
+	height: 5em;
 }

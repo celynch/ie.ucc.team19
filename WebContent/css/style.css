@@ -2,6 +2,12 @@ body {
     background: #f3f3f3;
 }
 
+section {
+	border: 1px solid gray;
+	border-radius: 1em;
+	margin: 1em 0;
+}
+
 #wrapper {
 	background: white;
 }
@@ -137,4 +143,9 @@ a[href$='.doc']:after {
 
 a[href$='.xls']:after {
     content: " (Excel)";
+}
+
+.lecturerCard {
+	border-radius: 2em;
+	background-color: #DCDCDC;
 }

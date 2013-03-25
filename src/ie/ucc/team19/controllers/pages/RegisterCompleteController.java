@@ -13,7 +13,7 @@ public class RegisterCompleteController extends AbstractController{
     public void execute() {
         DBConnectionManager connector = new DBConnectionManager();
         StudentBean user = setupStudent();
-        new InsertUser(connector).createStudent(user);
+        new InsertData(connector).createStudent(user);
         setReturnPage("/registerComplete.jsp");
         request.setAttribute("pageTitle", "Registration Completed");
         String subject = "UCC Summer Courses | Welcome";

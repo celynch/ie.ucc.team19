@@ -43,6 +43,11 @@
 			                onfocus="if(this.value=='YYYY')this.value='';"
 			                onblur="if(this.value=='')this.value='YYYY';" />
 	                </dd>
+	                <dt><label for="gender">Gender *</label></dt>
+	                <dd id="gender">
+                        <label>Male:<input type="radio" name="gender" value="M" required="required"/></label>
+                        <label>Female:<input type="radio" name="gender" value="F" required="required"/></label>
+                    </dd>
                 </dl>
             </fieldset>
 
@@ -55,11 +60,6 @@
 		            <dd><input required="required" type="text" id="address3" name="addressLine3" /></dd>
 		            <dt><label for="country">Country: *</label></dt>
 		            <dd><input required="required" type="text" id="country" name="country" /></dd>
-		            <dt><label for="gender">Gender *</label></dt>
-		            <dd id="gender">
-		                <label>Male:<input type="radio" name="gender" value="M" required="required"/></label>
-		                <label>Female:<input type="radio" name="gender" value="F" required="required"/></label>
-	                </dd>
 	            </dl>
             </fieldset>
             <fieldset id="contactInformation">
