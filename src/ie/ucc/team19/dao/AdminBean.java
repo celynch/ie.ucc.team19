@@ -1,6 +1,6 @@
 package ie.ucc.team19.dao;
 
-public class AdminBean extends UserBean {
+public class AdminBean implements UserBean {
     private String adminName;
     private String adminPassword;
     private String email;

@@ -89,4 +89,16 @@ public class InsertData {
 
         connector.Insert(query, params);
     }
+
+    public void setLecturer(int courseId, int lecturerId) {
+        String query = "INSERT INTO teaches VALUES (?,?)";
+        Object[] params = {courseId, lecturerId};
+        connector.Insert(query, params);
+    }
+    
+    public void setVenue(int courseId, int venueId) {
+        String query = "INSERT INTO locations VALUES (?,?)";
+        Object[] params = {courseId, venueId};
+        connector.Insert(query, params);
+    }
 }

@@ -2,11 +2,11 @@ package ie.ucc.team19.controllers.pages;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-
 import org.apache.commons.beanutils.BeanUtilsBean;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.CourseBean;
 import ie.ucc.team19.dao.DBConnectionManager;
+import ie.ucc.team19.service.FetchBeanUtils;
 import ie.ucc.team19.service.InsertData;
 
 /**
@@ -20,12 +20,20 @@ public class AdminCoursesController extends AbstractController{
      */
     public void execute() {
         DBConnectionManager connector = new DBConnectionManager();
+        FetchBeanUtils fetcher = new FetchBeanUtils(connector);
+        InsertData inserter = new InsertData(connector);
 
         if(request.getParameter("addCourse") != null) {
             CourseBean course = setupCourse();
-            new InsertData(connector).createCourse(course);
+            int lecturerId = Integer.valueOf(request.getParameter("lecturerId"));
+            int venueId = Integer.valueOf(request.getParameter("venueId"));
+            inserter.createCourse(course);
+            if(lecturerId != -1) {inserter.setLecturer(course.getCourseId(), lecturerId);}
+            if(venueId != -1) {inserter.setVenue(course.getCourseId(), venueId);}
         }
-        
+        request.setAttribute("courses", fetcher.getCourses());
+        request.setAttribute("venues", fetcher.getVenues());
+        request.setAttribute("lecturers", fetcher.getLecturers());
         request.setAttribute("includeEditor", true);
         setReturnPage("/adminCourses.jsp");
         request.setAttribute("pageTitle", "Courses Management");

@@ -3,7 +3,7 @@ package ie.ucc.team19.dao;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class StudentBean {
+public class StudentBean implements UserBean {
     private String studentId;
     private String firstName;
     private String lastName;

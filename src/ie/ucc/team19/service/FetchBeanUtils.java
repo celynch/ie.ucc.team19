@@ -1,6 +1,7 @@
 package ie.ucc.team19.service;
 
 import ie.ucc.team19.dao.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -144,5 +145,14 @@ public class FetchBeanUtils {
         CommentBean[] comments = new CommentBean[resultTable.size()];
         comments = (CommentBean[]) sqlBeanPopulate(comments, resultTable);
         return comments;
+    }
+
+    public CourseBean[] getCourses() {
+        String query = "SELECT * FROM courses";
+        Object[] params = {};
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
+        CourseBean[] courses = new CourseBean[resultTable.size()];
+        courses = (CourseBean[]) sqlBeanPopulate(courses, resultTable);
+        return courses;
     }
 }
