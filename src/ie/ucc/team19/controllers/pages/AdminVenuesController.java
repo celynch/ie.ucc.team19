@@ -24,6 +24,7 @@ public class AdminVenuesController extends AbstractController{
 
         setReturnPage("/adminVenues.jsp");
         request.setAttribute("pageTitle", "Venue Management");
+        request.setAttribute("admin", true);
     }
     
     private VenueBean setupVenue() {

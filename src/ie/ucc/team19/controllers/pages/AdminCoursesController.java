@@ -29,6 +29,7 @@ public class AdminCoursesController extends AbstractController{
         request.setAttribute("includeEditor", true);
         setReturnPage("/adminCourses.jsp");
         request.setAttribute("pageTitle", "Courses Management");
+        request.setAttribute("admin", true);
     }
 
     /**

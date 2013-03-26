@@ -23,7 +23,6 @@ public class SqlMapper {
 
     public static int getSqlTypeFromClass(Object obj) {
         String className = obj.getClass().getCanonicalName();
-        System.out.println(className);
         int sqlType = -1;
         if(className != null) {
             sqlType = javaToSqlMap.get(className) == null ? -1 : javaToSqlMap.get(className);

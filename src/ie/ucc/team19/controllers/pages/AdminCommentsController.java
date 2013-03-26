@@ -36,5 +36,6 @@ public class AdminCommentsController extends AbstractController{
         setReturnPage("/adminComments.jsp");
         request.setAttribute("pageTitle", "Review Comments");
         request.setAttribute("comments", comments);
+        request.setAttribute("admin", true);
     }
 }

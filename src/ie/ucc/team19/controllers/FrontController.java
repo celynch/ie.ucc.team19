@@ -3,7 +3,7 @@ package ie.ucc.team19.controllers;
 import ie.ucc.team19.controllers.Controller;
 import ie.ucc.team19.controllers.ControllerFactory;
 import ie.ucc.team19.dao.DBConnectionManager;
-import ie.ucc.team19.dao.StudentBean;
+import ie.ucc.team19.dao.UserBean;
 import ie.ucc.team19.service.LoginUser;
 import ie.ucc.team19.service.ScheduledTask;
 import java.io.IOException;
@@ -50,8 +50,8 @@ public class FrontController extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         setServerNames(request);
-        StudentBean student = (StudentBean) request.getSession().getAttribute("user");
-        manageSession(student, request, response);
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        manageSession(user, request, response);
 
         try {
             String controller = getURLPattern(request);
@@ -77,9 +77,9 @@ public class FrontController extends HttpServlet {
      * @param request - implicit object to encapsulate the HTTP request.
      * @param response - implicit object to encapsulate the HTTP response.
      */
-    private void manageSession(StudentBean student, HttpServletRequest request, HttpServletResponse response) {
-        if( (student == null) || ( student.getFirstName() == null) )  {
-            if(request.getParameter("login") != null) {// standard login via banner
+    private void manageSession(UserBean user, HttpServletRequest request, HttpServletResponse response) {
+        if( (user == null) || ( user.getUniqueId() == null) )  {
+            if(request.getParameter("studentLogin") != null) {// standard login via banner
                 new LoginUser().loginViaForm(request, response);
             } else if(request.getParameter("loginVerify") != null) {
                 if (request.getParameter("authString") != null) {
@@ -87,6 +87,8 @@ public class FrontController extends HttpServlet {
                 } else {
                     new LoginUser().loginViaForm(request, response);// challenge login
                 }
+            } else if (request.getParameter("adminLogin") != null) {
+                new LoginUser().loginAdminForm(request, response);//admin Login
             } else {        // cookie login
                 new LoginUser().loginViaCookie(request, response);
             }

@@ -38,5 +38,6 @@ public class AdminDashBoardController extends AbstractController{
         int numberOfLecturers =  Integer.valueOf(connector.Select(
                 lecturerCount, new Object[0]).get(0).get("COUNT(*)")[0]);
         request.setAttribute("numberOfLecturers", numberOfLecturers);
+        request.setAttribute("admin", true);
     }
 }

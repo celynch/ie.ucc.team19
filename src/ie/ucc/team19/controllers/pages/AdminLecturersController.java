@@ -23,6 +23,7 @@ public class AdminLecturersController extends AbstractController{
 
         setReturnPage("/adminLecturers.jsp");
         request.setAttribute("pageTitle", "Lecturer Management");
+        request.setAttribute("admin", true);
     }
     
     private LecturerBean setupLecturer() {

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
+
+import ie.ucc.team19.dao.AdminBean;
 import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.StudentBean;
 
@@ -30,6 +32,24 @@ public class LoginUser {
             }
         }
         return student;
+    }
+
+    private AdminBean loginAdmin(String adminName, String adminPassword) {
+        AdminBean admin = new AdminBean();
+        String query = "SELECT * FROM admins WHERE adminName = ?";
+        Object[] params = {adminName};
+        ArrayList<Map<String, String[]>> adminDetails = new DBConnectionManager().Select(query, params);
+        if(adminDetails.size() != 0) {// user exists
+            if( adminDetails.get(0).get("adminPassword")[0].equals(adminPassword)) { // password matches
+                try {
+                    BeanUtilsBean.getInstance().populate(admin, adminDetails.get(0));
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    System.out.println("Error populating admin bean");
+                    e.printStackTrace();
+                }
+            }
+        }
+        return admin;
     }
 
     public static StudentBean cookieValidate(String email, String cookie_token) {
@@ -55,7 +75,9 @@ public class LoginUser {
     }
 
     public boolean loginViaForm(HttpServletRequest request, HttpServletResponse response) {
-        StudentBean student = loginStudent(request.getParameter("email"), request.getParameter("passwordHash"));
+        String email = request.getParameter("email");
+        String passwordHash = request.getParameter("passwordHash");
+        StudentBean student = loginStudent(email, passwordHash);
         boolean result = false;
         if(student.getEmail() != null && student.isAuthenticated()) {
             result = true;
@@ -110,5 +132,13 @@ public class LoginUser {
                     Boolean.parseBoolean(request.getParameter("rememberMe")), false);
         }
         
+    }
+
+    public void loginAdminForm(HttpServletRequest request,
+            HttpServletResponse response) {
+        String adminName = request.getParameter("adminName");
+        String adminPassword = request.getParameter("adminPassword");
+        AdminBean admin = loginAdmin(adminName, adminPassword);
+        request.getSession().setAttribute("user", admin);
     }
 }
