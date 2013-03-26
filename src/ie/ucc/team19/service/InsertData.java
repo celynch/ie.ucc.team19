@@ -1,5 +1,6 @@
 package ie.ucc.team19.service;
 
+import ie.ucc.team19.dao.CourseBean;
 import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.LecturerBean;
 import ie.ucc.team19.dao.StudentBean;
@@ -67,6 +68,24 @@ public class InsertData {
                 venue.getAddressLine2(),
                 venue.getAddressLine3(),
                 venue.getCapacity()};
+
+        connector.Insert(query, params);
+    }
+
+    public void createCourse(CourseBean course) {
+        String query = "INSERT INTO courses VALUES "
+                + "(NULL,?,?,?,?,?,?,?,?,?)";
+
+        Object[] params = {
+                course.getCourseTitle(),
+                course.getFee(),
+                course.getSpaces(),
+                course.getCourseCategory(),
+                course.getContent(),
+                course.getEnrollStartDate(),
+                course.getEnrollEndDate(),
+                course.getCourseStartDate(),
+                course.getCourseEndDate()};
 
         connector.Insert(query, params);
     }

@@ -58,6 +58,15 @@ public class FetchBeanUtils {
         return lecturers;
     }
 
+    public VenueBean[] getVenues() {
+        String query = "SELECT * FROM Venues";
+        Object[] params = {};
+        ArrayList<Map<String, String[]>> resultTable = connector.Select(query, params);
+        VenueBean[] venues = new VenueBean[resultTable.size()];
+        venues = (VenueBean[]) sqlBeanPopulate(venues, resultTable);
+        return venues;
+    }
+
     public VenueBean[] getVenuesByCourseId(String courseId) {
         String query = "SELECT * "
                      + "FROM venues "

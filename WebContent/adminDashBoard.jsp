@@ -22,7 +22,7 @@
                 <p>Remove Admin</p>
             </section>
             <section>
-                <h2>Course Management</h2>
+                <h2><a href="team19/pages/admin/adminCourses">Course Management</a></h2>
                 <div class="glance">
                     <p>Students: ${numberOfCourses}</p>
                 </div>
@@ -59,7 +59,7 @@
                 <p>Remove Lecturer</p>
             </section>
             <section>
-                <h2>Review Comments</h2>
+                <h2><a href="team19/pages/admin/adminComments">Review Comments</a></h2>
                 <div class="glance">
                     <p>Unreviewed Comments: ${fn:length(comments)}</p>
                 </div>
