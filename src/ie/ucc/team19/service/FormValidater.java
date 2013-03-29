@@ -7,19 +7,19 @@ public class FormValidater {
     private HashMap<String, String> formTests = new HashMap<String, String>();
 
     public FormValidater() {
-        formTests.put("firstName", ".{1,30}");
-        formTests.put("lastName", ".{1,30}");
-        formTests.put("email", ".{5,50}");
-        formTests.put("passwordHash", ".{6,32}");
-        formTests.put("addressLine1", ".{1,30}");
-        formTests.put("addressLine2", ".{1,30}");
-        formTests.put("addressLine3", ".{1,30}");
-        formTests.put("country", ".{1,30}");
-        formTests.put("telephone", ".{0,30}");
-        formTests.put("gender", "('M'|'F'){1}");
-        formTests.put("courseTitle", ".{1,30}");
-        formTests.put("fee", ".{1,30}");
-        formTests.put("courseCategory", ".{1,30}");
+        formTests.put("firstName", "^.{1,30}$");
+        formTests.put("lastName", "^.{1,30}$");
+        formTests.put("email", "^.{5,50}$");
+        formTests.put("password", "^.{6,32}$");
+        formTests.put("addressLine1", "^.{1,30}$");
+        formTests.put("addressLine2", "^.{1,30}$");
+        formTests.put("addressLine3", "^.{1,30}$");
+        formTests.put("country", "^.{1,30}$");
+        formTests.put("telephone", "^.{0,30}$");
+        formTests.put("gender", "^(M|F){1}$");
+        formTests.put("courseTitle", "^.{1,30}$");
+        formTests.put("fee", "^.{1,30}$");
+        formTests.put("courseCategory", "^.{1,30}$");
     }
 
     public String checkForm(Map<String, String[]> formValues) {

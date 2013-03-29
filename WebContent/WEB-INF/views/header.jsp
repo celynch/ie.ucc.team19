@@ -11,7 +11,8 @@
         <link rel="stylesheet" type="text/css" href="/team19/css/fontsizes.css" media="all" />
         <link rel="stylesheet" type="text/css" href="/team19/css/print.css" media="print" />
         <link rel="stylesheet" type="text/css" href="/team19/css/mobile.css" media="mobile" />
-        <!-- <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />  -->
+        <link rel="icon" href="/team19/img/favicon.ico" type="image/x-icon" />  
+        <link rel="shortcut icon" href="/team19/img/favicon.ico" type="image/x-icon" />
         <c:if test="${includeEditor!=null}">
             <jsp:include page="loadTinyMce.jsp" />
         </c:if>

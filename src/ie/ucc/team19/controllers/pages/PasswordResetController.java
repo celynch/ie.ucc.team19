@@ -37,7 +37,7 @@ public class PasswordResetController extends AbstractController {
         } else { // will update password, log user in
             request.getSession().setAttribute("user", student);
             student.setPassword(password2);
-            new UpdateUser(connector).updatePasswordHash(student.getEmail(), student.getPassword());
+            new UpdateUser(connector).updatePassword(student.getEmail(), student.getPassword());
             new LoginUser(connector).setCookies(response, student, request.getServerName(),
                     Boolean.parseBoolean(request.getParameter("rememberMe")), false);
         }

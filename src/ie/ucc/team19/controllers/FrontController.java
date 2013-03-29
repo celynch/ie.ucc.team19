@@ -25,8 +25,7 @@ public class FrontController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Called on instantiation. Sets up the servlet instance. Initiates
-     * scheduled task timers.
+     * Called on instantiation. Sets up the servlet instance.
      */
     @Override
     public void init() throws ServletException {
@@ -127,7 +126,8 @@ public class FrontController extends HttpServlet {
         //get Controllers name from request
         String controller = url.substring(0, url.indexOf(".") != -1 ? url.indexOf(".") : url.length());
         controller = controller.length() == 0 ? "Index" : controller;
-        controller = controller.substring(0,1).toUpperCase() + controller.substring(1);
+        controller = controller.substring(0,1).toUpperCase()
+                + (controller.length() == 1 ? "" :controller.substring(1));
         return controller;
     }
 

@@ -1,6 +1,7 @@
 package ie.ucc.team19.service;
 
 import ie.ucc.team19.dao.DBConnectionManager;
+import ie.ucc.team19.dao.StudentBean;
 
 /**
  * 
@@ -34,7 +35,7 @@ public class UpdateUser {
         connector.Insert(query, params);
     }
     
-    public void updatePasswordHash(String email, String passwordHash) {
+    public void updatePassword(String email, String passwordHash) {
         String query = "UPDATE Students SET passwordHash = '"
                 + passwordHash + "' WHERE email = ?";
         Object[] params = {email};
@@ -61,6 +62,16 @@ public class UpdateUser {
                      + "WHERE authenticated = false "
                      + "AND TIMESTAMPADD(DAY, 1, dateRegistered) < NOW()";
         Object[] params = {};
+        connector.Insert(query, params);
+    }
+
+    public void updateStudent(StudentBean student) {
+        String query = "UPDATE students SET firstName = ?, lastName = ?,"
+                + "addressLine1 = ?, addressLine2 = ?, addressLine3 = ?, country = ?"
+                + " WHERE studentId = ?";
+        Object[] params = {student.getFirstName(), student.getLastName(),
+                student.getAddressLine1(), student.getAddressLine2(), student.getAddressLine3(),
+                student.getCountry(), student.getStudentId()};
         connector.Insert(query, params);
     }
 }

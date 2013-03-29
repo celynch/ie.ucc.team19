@@ -4,13 +4,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.beanutils.BeanUtilsBean;
-
 import ie.ucc.team19.dao.AdminBean;
 import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.StudentBean;
@@ -136,6 +133,9 @@ public class LoginUser {
             request.getSession().setAttribute("user", student);
             setCookies(response, student, request.getServerName(),
                     Boolean.parseBoolean(request.getParameter("rememberMe")), false);
+            String query = "UPDATE students SET authenticated = '1' WHERE studentId = ?";
+            Object[] params = {student.getStudentId()};
+            connector.Insert(query, params);
         }
         
     }

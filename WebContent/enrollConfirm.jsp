@@ -36,6 +36,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${fn:length(courses)>0}">
                     <c:forEach var="i" begin="0" end="${fn:length(courses)-1}">
                         <tr class="sched_CourseDetail">
                             <td class="sched_CourseDetails sched_SideTitle">${courses[i].courseTitle}</td>
@@ -62,6 +63,7 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    </c:if>
                     </tbody>
                 </table>
             </div>
@@ -83,13 +85,14 @@
                             <input type="submit" value="Cancel" formaction="/team19/pages/viewCourse?courseId=${enrollCourse.courseId}" />
                         </form>
                         <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
-                            <input type="hidden" name="business" value="celynch@gmail.com.com">
-						    <input type="hidden" name="cmd" value="_xclick">
-						    <input type="hidden" name="item_name" value="Deposit ${enrollCourse.courseTitle}">
-						    <input type="hidden" name="amount" value="${enrollCourse.fee * 0.2}">
-						    <input type="hidden" name="currency_code" value="EUR">
-						    <input type="hidden" name="notify_url" value="http://578b.localtunnel.com/team19/ipn/">
-						    <input type="image" name="submit" style="border:none;" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+                            <input type="hidden" name="business" value="celynch@gmail.com.com" />
+						    <input type="hidden" name="cmd" value="_xclick" />
+						    <input type="hidden" name="item_name" value="Deposit ${enrollCourse.courseTitle}" />
+						    <input type="hidden" name="amount" value="${enrollCourse.fee * 0.2}" />
+						    <input type="hidden" name="currency_code" value="EUR" />
+						    <input type="hidden" name="notify_url" value="http://${serverName}/team19/ipn/" />
+						    <label for="deposit">Deposit: &euro;${enrollCourse.fee * 0.2}</label>
+						    <input id="deposit" type="image" name="submit" style="border:none;" src="http://images.paypal.com/images/x-click-but2.gif" alt="PayPal - The safer, easier way to pay online">
 						    <img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />
                         </form>
                         <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
@@ -98,7 +101,9 @@
                             <input type="hidden" name="item_name" value="Fee ${enrollCourse.courseTitle}">
                             <input type="hidden" name="amount" value="${enrollCourse.fee * 0.8}">
                             <input type="hidden" name="currency_code" value="EUR">
-                            <input type="image" name="submit" style="border:none;" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+                            <input type="hidden" name="notify_url" value="http://${serverName}/team19/ipn/" />
+                            <label for="fee">Fee: &euro;${enrollCourse.fee * 0.8}</label>
+                            <input id="fee" type="image" name="submit" style="border:none;" src="http://images.paypal.com/images/x-click-but2.gif" alt="PayPal - The safer, easier way to pay online">
                             <img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />
                         </form>
                     </c:otherwise>

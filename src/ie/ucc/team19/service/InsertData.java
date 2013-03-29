@@ -1,5 +1,6 @@
 package ie.ucc.team19.service;
 
+import ie.ucc.team19.dao.AdminBean;
 import ie.ucc.team19.dao.CourseBean;
 import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.LecturerBean;
@@ -12,10 +13,22 @@ public class InsertData {
     public InsertData(DBConnectionManager connector) {
         this.connector = connector;
     }
-    
+
+    public void createAdmin(AdminBean admin) {
+        String query = "INSERT INTO admins VALUES "
+                + "(?,?,?)";
+
+        Object[] params = {
+                admin.getAdminName(),
+                admin.getAdminPassword(),
+                admin.getEmail()};
+
+        connector.Insert(query, params);
+    }
+
     public void createStudent(StudentBean student) {
         String query = "INSERT INTO students VALUES "
-                + "(NULL, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "(NULL, ?,?,?,?,?,?,?,?,?,?,?,0,?,?,?,0)";
 
         Object[] params = {
                 student.getFirstName(),
@@ -29,11 +42,9 @@ public class InsertData {
                 student.getTelephone(),
                 student.getDateOfBirth(),
                 student.getGender(),
-                student.isAuthenticated(),
                 student.getAuthString(),
                 student.getDateRegistered(),
-                student.getCookieToken(),
-                student.getEmailOptIn()};
+                student.getCookieToken()};
 
         connector.Insert(query, params);
     }

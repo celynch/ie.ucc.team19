@@ -9,8 +9,8 @@
         <jsp:include page="WEB-INF/views/horizNav.jsp" />
         <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
-        <p>${registerError}</p>
-        <form method="post" action="https://localhost:8443/team19/pages/RegisterComplete.jsp">
+        <p class="feedback">${registerError}</p>
+        <form method="post" action="https://${secureServerName}/team19/pages/RegisterComplete">
             <fieldset id="personalInformation">
                 <legend>Personal information</legend>
                 <dl>
@@ -80,7 +80,7 @@
                 <script>
                     function checkPasswordLength() {
 	                    if(document.getElementById('password').value.length<6) {
-	                    	document.getElementById('passwordLabel1').innerHTML='Password: * <span style=\"color:blue;\">At least 6 characters</span>';
+	                    	document.getElementById('passwordLabel1').innerHTML='Password: * <span class=\"feedback\">At least 6 characters</span>';
 	                	} else {
 	                		document.getElementById('passwordLabel1').innerHTML='Password: *';
 	              		}
@@ -89,7 +89,7 @@
                 <script>
                     function checkPasswordMatch() {
                     	if(document.getElementById('password2').value != document.getElementById('password').value) {
-                    		document.getElementById('passwordLabel2').innerHTML='Re-enter Password: * <span style=\"color:blue;\">Does not match</span>';
+                    		document.getElementById('passwordLabel2').innerHTML='Re-enter Password: * <span class=\"feedback\">Does not match</span>';
                    		} else {
                    			document.getElementById('passwordLabel2').innerHTML='Re-enter Password: *';
                    		}

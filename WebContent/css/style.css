@@ -29,7 +29,7 @@ section {
 }
 
 #horizNav li a:hover {
-    background: url(/img/nav/hoizNav-selected.jpg) repeat-x scroll 0 0;
+    background-color: DeepSkyBlue;
     color:#f0f0f0;
 }
 
@@ -148,4 +148,8 @@ a[href$='.xls']:after {
 .lecturerCard {
 	border-radius: 2em;
 	background-color: #DCDCDC;
+}
+
+.feedback {
+	background-color: yellow;
 }

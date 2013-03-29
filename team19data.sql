@@ -1,4 +1,4 @@
-INSERT INTO students (studentID, firstName, lastName, email, passwordHash, addressLine1, addressLine2, addressLine3, country,  telephone, dateOfBirth, gender, authenticated, authString, dateRegistered, cookieToken, emailOPtIn)
+INSERT INTO students (studentID, firstName, lastName, email, password, addressLine1, addressLine2, addressLine3, country,  telephone, dateOfBirth, gender, authenticated, authString, dateRegistered, cookieToken, emailOPtIn)
     VALUES
     (NULL, 'Cormac','Lynch','celynch@gmail.com','123','1 A Street','B-Town','C-City','Ireland','086-1234567','1981-01-01','M',true,'072d-31bbd0e-d3f582ae-340f0e39-f73e8','2013-02-24 16:30:00', '072d-31bbd0e-d3f582ae-340f0e39-f73e8', true),
     (NULL, 'Aaron','Aaronson','101664280@umail.ucc.ie','123','1 A Street','B-Town','C-City','Ireland','086-1234567','1981-01-01','M',true,'072d-31bbd0e-d3f582ae-340f0e39-f73e8','2013-02-24 16:30:00', '072d-31bbd0e-d3f582ae-340f0e39-f73e8', true)

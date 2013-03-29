@@ -18,7 +18,7 @@
             <h2>Reviewed Comments</h2>
                 <c:choose>
                     <c:when test="${param['respond'] != null }">
-                        <p>Response to ${param['email']} sent.</p>
+                        <p class="feedback">Response to ${param['email']} sent.</p>
                     </c:when>
                     <c:otherwise><p>No comment updates.</p></c:otherwise>
                 </c:choose>

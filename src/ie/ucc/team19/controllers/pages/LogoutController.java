@@ -21,7 +21,7 @@ public class LogoutController extends AbstractController{
         DBConnectionManager connector = new DBConnectionManager(properties);
         HttpServletResponse response = getResponse();
         UserBean user = (UserBean) request.getSession().getAttribute("user");
-        if(!(user.isAdmin())) {
+        if(user != null && !user.isAdmin()) {
             StudentBean student = (StudentBean) request.getSession().getAttribute("user");
             new LoginUser(connector).setCookies(response, student, request.getServerName(), true, true);
         }

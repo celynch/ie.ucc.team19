@@ -59,11 +59,12 @@ public class RegisterCompleteController extends AbstractController{
     
     private void sendVerifyEmail(StudentBean user, DBConnectionManager connector) {
         String subject = "UCC Summer Courses | Welcome";
-        StringBuilder mailMessage = new StringBuilder(); 
+        StringBuilder mailMessage = new StringBuilder();
+        String serverName = (String) request.getAttribute("serverName");
         mailMessage.append("<div><p>Thanks for joining UCC Summer Courses.</p>");
         mailMessage.append("<p>We listed your sign in details below, make sure you keep them safe.</p>");
-        mailMessage.append("<p>To verify your email address, please follow this link:");
-        mailMessage.append("<a href=\"http://localhost:8080/team19/pages/login");
+        mailMessage.append("<p>To verify your email address, please follow this link: ");
+        mailMessage.append("<a href=\"http://" + serverName +  "/team19/pages/login");
         mailMessage.append("?authString=" + user.getAuthString());
         mailMessage.append("&email=" + user.getEmail() +"\">Complete Registration</a></p>");
         mailMessage.append("<p>Your email address: " + user.getEmail() + "</p>");

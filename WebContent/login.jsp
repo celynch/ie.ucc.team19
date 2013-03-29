@@ -18,7 +18,7 @@
                     <legend>Login to verify Account</legend>
                     <dl>
                         <dd><input required="required" type="text" id="email" name="email" placeholder="email" size="12"/></dd>
-                        <dd><input required="required" type="password" id="passwordHash" name="passwordHash"  placeholder="password" size="12"/></dd>
+                        <dd><input required="required" type="password" id="password" name="password"  placeholder="password" size="12"/></dd>
                         <dt><label for="rememberMe">Remember&nbsp;me</label></dt>
                         <dd><input type="checkbox" id="rememberMe" name="rememberMe" value="true"/></dd>
                     </dl>

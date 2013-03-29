@@ -37,6 +37,12 @@ public class EnrollStudent {
         Object[] params = {courseId,studentId,1,0,0,0,enrollDate};
         connector.Insert(query, params);
     }
+    
+    public void unEnrollFromCourse(String courseId, String studentId) {
+        String query = "DELETE FROM enrollments WHERE courseId = ? AND studentId = ?";
+        Object[] params = {courseId,studentId};
+        connector.Insert(query, params);
+    }
 
     private EnrollmentBean[] getEnrollmentsByStudentId(String studentId) {
         String query = "SELECT * "
@@ -49,7 +55,7 @@ public class EnrollStudent {
         return enrollments;
     }
 
-    private CourseBean[] getCoursesByStudentId(String studentId) {
+    public CourseBean[] getCoursesByStudentId(String studentId) {
         String query = "SELECT * " +
         		       "FROM courses " +
         		       "WHERE courseId IN (" +

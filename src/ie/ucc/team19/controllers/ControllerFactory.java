@@ -35,12 +35,13 @@ public class ControllerFactory {
      */
     public static final Controller getControllerByFullClassName(String className) {
         try {
-            String name = "ie.ucc.team19.controllers.pages." + className + "Controller";
-            Class<?> actionClass = Class.forName(name);
+            String classType = "ie.ucc.team19.controllers.pages." + className + "Controller";
+            Class<?> actionClass = Class.forName(classType);
             return getControllerByClass(actionClass);
         } catch (ClassNotFoundException e) {
+            System.out.println("404: error");
             e.printStackTrace();
+            return getControllerByClass(ie.ucc.team19.controllers.pages.IndexController.class);
         }
-        return null;
     }
 }

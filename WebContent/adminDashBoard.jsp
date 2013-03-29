@@ -16,7 +16,7 @@
     
         <div id="content">
             <section>
-                <h2>Admin Management</h2>
+                <h2><a href="team19/pages/admin/adminManage">Admin Management</a></h2>
                 <p>Add new Admin</p>
                 <p>Update Admin Details</p>
                 <p>Remove Admin</p>

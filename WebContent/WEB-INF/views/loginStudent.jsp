@@ -5,6 +5,7 @@
             <fieldset>
                 <legend><a href="/team19/pages/account">Welcome <c:out value="${user.firstName}"/></a></legend>
                 <input type="submit" name="logout" value="Logout"/>
+                <p><a href="/team19/pages/account">View your Account</a></p>
             </fieldset>
         </form>
     </c:when>
@@ -14,12 +15,12 @@
                 <legend>Login</legend>
                 <dl>
                     <dd><input required="required" type="text" name="email" placeholder="email" size="12"/></dd>
-                    <dd><input required="required" type="password" name="passwordHash"  placeholder="password" size="12"/></dd>
+                    <dd><input required="required" type="password" name="password"  placeholder="password" size="12"/></dd>
                     <dt><label for="rememberMe">Remember&nbsp;me</label></dt>
                     <dd><input type="checkbox" id="rememberMe" name="rememberMe" value="true"/></dd>
                 </dl>
                 <a href="/team19/pages/register.jsp">Register</a>
-                <a href="/team19/pages/passwordResetRequest.jsp">Forgot password?</a>
+                <a href="/team19/pages/passwordResetRequest">Forgot password?</a>
                 <input type="submit" name="studentLogin" value="Login"/>
             </fieldset>
         </form>

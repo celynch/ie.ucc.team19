@@ -13,7 +13,7 @@
     <jsp:include page="WEB-INF/views/horizNav.jsp" />
     <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
-            <form method="post" action="https://localhost:8443/team19/pages/passwordReset">
+            <form method="post" action="https://${secureServerName}/team19/pages/passwordReset">
                 <fieldset id="passwordReset">
                     <legend>Complete password Reset</legend>
                     <c:choose>
