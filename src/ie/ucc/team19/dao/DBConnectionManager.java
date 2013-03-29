@@ -1,10 +1,6 @@
 package ie.ucc.team19.dao;
 
-/**
- *
- * @author
- */
-//import java.text.*;
+import ie.ucc.team19.service.PropertiesReader;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,15 +8,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.io.*;
 
+/**
+ *
+ * @author Cormac
+ */
 public class DBConnectionManager {
 
-    // TODO initialise from xml
-    private static final String DBServerName = "localhost";
-    private static final String DBName = "team19";
-    private static final String username = "root";
-    private static final String password = "eizeikem";
+    private static String DBServerName;// = "localhost";
+    private static String DBName;// = "team19";
+    private static String DBusername;// = "root";
+    private static String DBpassword;// = "eizeikem";
     private PreparedStatement statementObject;
     private Connection connectionObject;
+
+    public DBConnectionManager(PropertiesReader properties) {
+        DBServerName = properties.getDBServerName();
+        DBName = properties.getDBName();
+        DBusername = properties.getDBusername();
+        DBpassword = properties.getDBpassword();
+    }
 
     private void OpenDatabaseConnection() {
         String URL = "jdbc:mysql://" + DBServerName + "/" + DBName;
@@ -33,7 +39,7 @@ public class DBConnectionManager {
         }
 
         try { // Establish connection to database
-            connectionObject = DriverManager.getConnection(URL, username, password);
+            connectionObject = DriverManager.getConnection(URL, DBusername, DBpassword);
         } catch (SQLException exceptionObject) {
             System.out.println("Problem with setting up " + URL);
             writeLogSQL(URL + " caused error " + exceptionObject.getMessage());

@@ -9,17 +9,18 @@
         <jsp:include page="WEB-INF/views/horizNav.jsp" />
         <jsp:include page="WEB-INF/views/vertiNav.jsp" />
         <div id="content">
+        <p>${registerError}</p>
         <form method="post" action="https://localhost:8443/team19/pages/RegisterComplete.jsp">
             <fieldset id="personalInformation">
                 <legend>Personal information</legend>
                 <dl>
 	                <dt><label for="firstName">First Name: *</label></dt>
-	                <dd><input required="required" type="text" id="firstName" name="firstName" /></dd>
+	                <dd><input x-webkit-speech="x-webkit-speech" required="required" type="text" id="firstName" name="firstName" value="${retry.firstName[0]}" /></dd>
 	                <dt><label for="lastName">Last Name: *</label></dt>
-	                <dd><input required="required" type="text" id="lastName" name="lastName" /></dd>
+	                <dd><input x-webkit-speech="x-webkit-speech" required="required" type="text" id="lastName" name="lastName" value="${retry.lastName[0]}" /></dd>
 	                <dt><label for="dobD">Date of Birth *</label></dt>
 		            <dd>
-		                <input required="required" type="number" min="1" max="31" name="dobD" maxlength="2" size="2" id="dobD"
+		                <input x-webkit-speech="x-webkit-speech" required="required" type="number" min="1" max="31" name="dobD" maxlength="2" size="2" id="dobD"
 			                value="DD"
 			                onfocus="if(this.value=='DD')this.value='';"
 			                onblur="if(this.value=='')this.value='DD';" />
@@ -38,7 +39,7 @@
 							<option value="11">November</option>
 							<option value="12">December</option>
 	                    </select>
-	                    <input required="required" type="number" min="1900" max="${year - 18}" name="dobY" maxlength="4" size="4" id="dobY"
+	                    <input x-webkit-speech="x-webkit-speech" required="required" type="number" min="1900" max="${year - 18}" name="dobY" maxlength="4" size="4" id="dobY"
 			                value="YYYY"
 			                onfocus="if(this.value=='YYYY')this.value='';"
 			                onblur="if(this.value=='')this.value='YYYY';" />
@@ -55,32 +56,50 @@
                 <legend>Address</legend>
                 <dl>
 		            <dt><label for="address1">Address: *</label></dt>
-		            <dd><input required="required" type="text" id="address1" name="addressLine1" /></dd>
-		            <dd><input required="required" type="text" id="address2" name="addressLine2" /></dd>
-		            <dd><input required="required" type="text" id="address3" name="addressLine3" /></dd>
-		            <dt><label for="country">Country: *</label></dt>
-		            <dd><input required="required" type="text" id="country" name="country" /></dd>
+		            <dd><input x-webkit-speech="x-webkit-speech" required="required" type="text" id="address1" name="addressLine1" value="${retry.addressLine1[0]}" /></dd>
+		            <dd><input x-webkit-speech="x-webkit-speech" required="required" type="text" id="address2" name="addressLine2" value="${retry.addressLine2[0]}" /></dd>
+		            <dd><input x-webkit-speech="x-webkit-speech" required="required" type="text" id="address3" name="addressLine3" value="${retry.addressLine3[0]}" /></dd>
+		            <dt><label for="country" >Country: *</label></dt>
+		            <dd><input x-webkit-speech="x-webkit-speech" required="required" type="text" id="country" name="country" value="${retry.country[0]}" /></dd>
 	            </dl>
             </fieldset>
             <fieldset id="contactInformation">
                 <legend>Contact Information</legend>
                 <dl>
                     <dt><label for="telephone">Telephone:</label></dt>
-                    <dd><input type="tel" id="telephone" name="telephone" /></dd>
+                    <dd><input x-webkit-speech="x-webkit-speech" type="tel" id="telephone" name="telephone" value="${retry.telephone[0]}" /></dd>
 		            <dt><label for="email">Email: *</label></dt>
-		            <dd><input required="required" type="email" id="email" name="email" placeholder="email"/></dd>
+		            <dd><input x-webkit-speech="x-webkit-speech" required="required" type="email" id="email" name="email" placeholder="email" value="${retry.email[0]}" /></dd>
 		            <dt><label for="email2">Verify Email: *</label></dt>
-                    <dd><input required="required" type="password" id="email2" name="email2" placeholder="verify email" /></dd>
+                    <dd><input x-webkit-speech="x-webkit-speech" required="required" type="text" id="email2" name="email2" placeholder="verify email" value="${retry.email2[0]}" /></dd>
                 </dl>
             </fieldset>
             <fieldset id="PasswordInformation">
                 <legend>Contact Information</legend>
                 <p>Please enter a password for your student account. Passwords should be between 6 and 20 characters and contain at least 1 letter and 1 number.</p>
+                <script>
+                    function checkPasswordLength() {
+	                    if(document.getElementById('password').value.length<6) {
+	                    	document.getElementById('passwordLabel1').innerHTML='Password: * <span style=\"color:blue;\">At least 6 characters</span>';
+	                	} else {
+	                		document.getElementById('passwordLabel1').innerHTML='Password: *';
+	              		}
+                    }
+                </script>
+                <script>
+                    function checkPasswordMatch() {
+                    	if(document.getElementById('password2').value != document.getElementById('password').value) {
+                    		document.getElementById('passwordLabel2').innerHTML='Re-enter Password: * <span style=\"color:blue;\">Does not match</span>';
+                   		} else {
+                   			document.getElementById('passwordLabel2').innerHTML='Re-enter Password: *';
+                   		}
+                    }
+                </script>
                 <dl>
-		            <dt><label for="password">Password: *</label></dt>
-		            <dd><input required="required" type="password" id="password" name="passwordHash" /><dd>
-		            <dt><label for="password2">Re-enter Password: *</label></dt>
-		            <dd><input required="required" type="password" id="password2" name="passwordHash2" /></dd>
+		            <dt><label for="password" id="passwordLabel1">Password: *</label></dt>
+		            <dd><input required="required" type="password" id="password" name="password" onblur="checkPasswordLength()"/><dd>
+		            <dt><label for="password2" id="passwordLabel2">Re-enter Password: *</label></dt>
+		            <dd><input required="required" type="password" id="password2" name="password2" onblur="checkPasswordMatch()" /></dd>
 	            </dl>
             </fieldset>
             <input type="submit" name="cancel" value="Cancel" formaction="/tema19/pages/"/>

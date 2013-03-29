@@ -5,9 +5,9 @@ import ie.ucc.team19.controllers.ControllerFactory;
 import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.UserBean;
 import ie.ucc.team19.service.LoginUser;
-import ie.ucc.team19.service.ScheduledTask;
+import ie.ucc.team19.service.PropertiesReader;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 public class FrontController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private ArrayList<ScheduledTask> tasks = new ArrayList<ScheduledTask>();
 
     /**
      * Called on instantiation. Sets up the servlet instance. Initiates
@@ -32,10 +31,6 @@ public class FrontController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        int milisPerDay = 1000*60*60*24;
-        int milisPerHour = 1000*60*60;
-        new ScheduledTask(milisPerDay, "expireUnverifiedStudents", new DBConnectionManager());
-        new ScheduledTask(milisPerHour * 2, "expirePendingEnrolls", new DBConnectionManager());
     }
 
     /**
@@ -79,18 +74,22 @@ public class FrontController extends HttpServlet {
      */
     private void manageSession(UserBean user, HttpServletRequest request, HttpServletResponse response) {
         if( (user == null) || ( user.getUniqueId() == null) )  {
+            PropertiesReader properties = (PropertiesReader)
+                    request.getSession().getServletContext().getAttribute("properties");
+            DBConnectionManager connector = new DBConnectionManager(properties);
+            LoginUser logger = new LoginUser(connector);
             if(request.getParameter("studentLogin") != null) {// standard login via banner
-                new LoginUser().loginViaForm(request, response);
+                logger.loginViaForm(request, response);
             } else if(request.getParameter("loginVerify") != null) {
                 if (request.getParameter("authString") != null) {
-                    new LoginUser().loginVerify(request, response);// verification login
+                    logger.loginVerify(request, response);// verification login
                 } else {
-                    new LoginUser().loginViaForm(request, response);// challenge login
+                    logger.loginViaForm(request, response);// challenge login
                 }
             } else if (request.getParameter("adminLogin") != null) {
-                new LoginUser().loginAdminForm(request, response);//admin Login
+                logger.loginAdminForm(request, response);//admin Login
             } else {        // cookie login
-                new LoginUser().loginViaCookie(request, response);
+                logger.loginViaCookie(request, response);
             }
         }
     }
@@ -147,13 +146,10 @@ public class FrontController extends HttpServlet {
 
     /**
      * Called on application shutdown. Performs clean up tasks, releases
-     * resources, cancels scheduled tasks.
+     * resources.
      */
     @Override
     public void destroy() {
         super.destroy();
-        for(ScheduledTask task : tasks) {
-            task.stop();
-        }
     }
 }

@@ -30,11 +30,11 @@ public class SendEmail {
     public void sendEmail(String toAddress, String subject, String mailMessage) { 
         Properties props = new Properties ();
 
-        props.put ("mail.smtp.host", smtpServer);
-        props.put ("mail.smtp.socketFactory.port", SMTP_PORT);
-        props.put ("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put ("mail.smtp.auth", "true");
-        props.put ("mail.smtp.port", SMTP_PORT);
+        props.put("mail.smtp.host", smtpServer);
+        props.put("mail.smtp.socketFactory.port", SMTP_PORT);
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", SMTP_PORT);
 
         Session session = Session.getDefaultInstance (props,
             new javax.mail.Authenticator () {
@@ -47,8 +47,8 @@ public class SendEmail {
             Message message = new MimeMessage (session);
             message.setFrom (new InternetAddress (From));
             message.setRecipients (Message.RecipientType.TO, InternetAddress.parse(toAddress));
-            message.setSubject (subject);
-            message.setText (mailMessage);
+            message.setSubject(subject);
+            message.setContent(mailMessage, "text/html; charset=utf-8");
 
             Transport.send (message);
         } catch (MessagingException e) {

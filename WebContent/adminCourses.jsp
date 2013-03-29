@@ -7,6 +7,7 @@
     <jsp:param name="pageTitle" value="${pageTitle}" />
     <jsp:param name="serverName" value="${serverName}" />
     <jsp:param name="secureServerName" value="${secureServerName}" />
+    <jsp:param name="admin" value="${admin}" />
 </jsp:include>
 
     <div id="main" >

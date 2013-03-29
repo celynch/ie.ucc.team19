@@ -6,8 +6,10 @@ import org.apache.commons.beanutils.BeanUtilsBean;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.CourseBean;
 import ie.ucc.team19.dao.DBConnectionManager;
+import ie.ucc.team19.dao.UserBean;
 import ie.ucc.team19.service.FetchBeanUtils;
 import ie.ucc.team19.service.InsertData;
+import ie.ucc.team19.service.PropertiesReader;
 
 /**
  * Controller class to handle request for the admin dashboard.
@@ -19,9 +21,19 @@ public class AdminCoursesController extends AbstractController{
      * Fetches beans from model for display in dashboard view.
      */
     public void execute() {
-        DBConnectionManager connector = new DBConnectionManager();
+        PropertiesReader properties = (PropertiesReader)
+                request.getSession().getServletContext().getAttribute("properties");
+        DBConnectionManager connector = new DBConnectionManager(properties);
         FetchBeanUtils fetcher = new FetchBeanUtils(connector);
         InsertData inserter = new InsertData(connector);
+        String returnPage = "/adminCourses.jsp";
+        String pageTitle = "Courses Management";
+
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        if(user == null || !user.isAdmin()) {
+            returnPage = "/admin.jsp";
+            pageTitle = "Admin Access";
+        }
 
         if(request.getParameter("addCourse") != null) {
             CourseBean course = setupCourse();
@@ -35,8 +47,8 @@ public class AdminCoursesController extends AbstractController{
         request.setAttribute("venues", fetcher.getVenues());
         request.setAttribute("lecturers", fetcher.getLecturers());
         request.setAttribute("includeEditor", true);
-        setReturnPage("/adminCourses.jsp");
-        request.setAttribute("pageTitle", "Courses Management");
+        setReturnPage(returnPage);
+        request.setAttribute("pageTitle", pageTitle);
         request.setAttribute("admin", true);
     }
 

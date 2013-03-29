@@ -16,6 +16,7 @@ public class AccountController  extends AbstractController {
     public void execute() {
         setReturnPage("/account.jsp");
         request.setAttribute("pageTitle", "Your Account");
+
         //Solutions for JSP pages and Struts, By Kevin H. Le, JavaWorld.com, 09/27/04
         response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
         response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance

@@ -12,7 +12,8 @@ INSERT INTO lecturers (firstName, lastName, email, lecturerTitle, position, addr
 
 INSERT INTO admins (adminName, adminPassword, email)
     VALUES 
-    ('mindaugas', 'rakauskas', 'mrakauskas@gmail.com')
+    ('mindaugas', 'rakauskas', 'mrakauskas@gmail.com'),
+    ('joesph', 'soap', '101664280@umail.ucc.ie')
 ;
 
 INSERT INTO venues (venueRoom, venueBuilding, addressLine1, addressLine2, addressLine3, capacity, onCampus)

@@ -1,0 +1,10 @@
+DBServerName=localhost
+DBName=team19
+DBusername=root
+DBpassword=eizeikem
+paypalEmailId=celynch@gmail.com
+mailjetAPIKey=c743932567e67d22f61fd5f06b04893b
+mailjetSecretKey=ef121152d6cbc7f8071dff913a1dc103
+mailjetSenderAddress=team19summer@gmail.com
+mailjetSmtpServer=in.mailjet.com
+SMTP_PORT=587

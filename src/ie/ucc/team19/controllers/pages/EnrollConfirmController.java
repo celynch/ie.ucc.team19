@@ -3,6 +3,7 @@ package ie.ucc.team19.controllers.pages;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.service.EnrollStudent;
+import ie.ucc.team19.service.PropertiesReader;
 
 /**
  * Controller class to handle request to confirm course enrollment.
@@ -23,7 +24,9 @@ public class EnrollConfirmController extends AbstractController{
      */
     public void execute() {
         if(request.getSession().getAttribute("user") != null) { // is logged in
-            DBConnectionManager connector = new DBConnectionManager();
+            PropertiesReader properties = (PropertiesReader)
+                    request.getSession().getServletContext().getAttribute("properties");
+            DBConnectionManager connector = new DBConnectionManager(properties);
             EnrollStudent enroller = new EnrollStudent(connector);
             if(request.getParameter("enrollCourseId") != null) {
                 enroller.detectConflicts(request);

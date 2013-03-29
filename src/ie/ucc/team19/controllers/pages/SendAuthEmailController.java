@@ -3,6 +3,7 @@ package ie.ucc.team19.controllers.pages;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.*;
 import ie.ucc.team19.service.FetchBeanUtils;
+import ie.ucc.team19.service.PropertiesReader;
 import ie.ucc.team19.service.SendEmail;
 
 /**
@@ -12,7 +13,9 @@ import ie.ucc.team19.service.SendEmail;
 public class SendAuthEmailController extends AbstractController {
 
     public void execute() {
-        DBConnectionManager connector = new DBConnectionManager();
+        PropertiesReader properties = (PropertiesReader)
+                request.getSession().getServletContext().getAttribute("properties");
+        DBConnectionManager connector = new DBConnectionManager(properties);
         FetchBeanUtils fetcher = new FetchBeanUtils(connector);
 
         CourseBean[] courses = fetcher.getCourseByCourseId("1");

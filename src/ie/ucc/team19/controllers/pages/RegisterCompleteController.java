@@ -3,30 +3,34 @@ package ie.ucc.team19.controllers.pages;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.*;
 import ie.ucc.team19.service.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Map;
 import java.util.UUID;
 import org.apache.commons.beanutils.BeanUtilsBean;
 
 public class RegisterCompleteController extends AbstractController{
     public void execute() {
-        DBConnectionManager connector = new DBConnectionManager();
-        StudentBean user = setupStudent();
-        new InsertData(connector).createStudent(user);
-        setReturnPage("/registerComplete.jsp");
-        request.setAttribute("pageTitle", "Registration Completed");
-        String subject = "UCC Summer Courses | Welcome";
-        String mailMessage = "<div><p>Thanks for joining UCC Summer Courses.</p>"
-                + "<p>We listed your sign in details below, make sure you keep them safe.</p>"
-                + "<p>To verify your email address, please follow this link:"
-                + "<a href=\"http://localhost:8080/team19/pages/login"
-                + "?authString=" + user.getAuthString()
-                + "&email=" + user.getEmail() +"\">Complete Registration</a></p>"
-                + "<p>Your email address: " + user.getEmail() + "</p>"
-                + "<blockquote>\"Where Finbarr taught, let Munster learn\"</blockquote>"
-                + "<p>- The UCC Summer Courses Team</p></div>";
-        new SendEmail(connector).sendEmail( user.getEmail(), subject, mailMessage);
+        String error = new FormValidater().checkForm(request.getParameterMap());
+        if(error == null) {
+            PropertiesReader properties = (PropertiesReader)
+                    request.getSession().getServletContext().getAttribute("properties");
+            DBConnectionManager connector = new DBConnectionManager(properties);
+            StudentBean user = setupStudent();
+            new InsertData(connector).createStudent(user);
+            sendVerifyEmail(user, connector);
+
+            setReturnPage("/registerComplete.jsp");
+            request.setAttribute("pageTitle", "Registration Completed");
+        } else {
+            setReturnPage("/register.jsp");
+            request.setAttribute("pageTitle", "Register");
+            request.setAttribute("year", Calendar.getInstance().get(Calendar.YEAR));
+            request.setAttribute("registerError", error);
+            request.setAttribute("retry", request.getParameterMap());
+        }
     }
 
     private StudentBean setupStudent() {
@@ -51,5 +55,20 @@ public class RegisterCompleteController extends AbstractController{
             e.printStackTrace();
         }
         return user;
+    }
+    
+    private void sendVerifyEmail(StudentBean user, DBConnectionManager connector) {
+        String subject = "UCC Summer Courses | Welcome";
+        StringBuilder mailMessage = new StringBuilder(); 
+        mailMessage.append("<div><p>Thanks for joining UCC Summer Courses.</p>");
+        mailMessage.append("<p>We listed your sign in details below, make sure you keep them safe.</p>");
+        mailMessage.append("<p>To verify your email address, please follow this link:");
+        mailMessage.append("<a href=\"http://localhost:8080/team19/pages/login");
+        mailMessage.append("?authString=" + user.getAuthString());
+        mailMessage.append("&email=" + user.getEmail() +"\">Complete Registration</a></p>");
+        mailMessage.append("<p>Your email address: " + user.getEmail() + "</p>");
+        mailMessage.append("<blockquote>\"Where Finbarr taught, let Munster learn\"</blockquote>");
+        mailMessage.append("<p>- The UCC Summer Courses Team</p></div>");
+        new SendEmail(connector).sendEmail( user.getEmail(), subject, mailMessage.toString());
     }
 }

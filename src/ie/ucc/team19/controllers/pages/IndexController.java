@@ -3,6 +3,7 @@ package ie.ucc.team19.controllers.pages;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.*;
 import ie.ucc.team19.service.FetchBeanUtils;
+import ie.ucc.team19.service.PropertiesReader;
 
 /**
  *Controller class to handle request to view the Front Page
@@ -14,13 +15,15 @@ public class IndexController extends AbstractController {
      * 
      */
     public void execute() {
-        DBConnectionManager connector = new DBConnectionManager();
+        PropertiesReader properties = (PropertiesReader)
+                request.getSession().getServletContext().getAttribute("properties");
+        DBConnectionManager connector = new DBConnectionManager(properties);
         FetchBeanUtils fetcher = new FetchBeanUtils(connector);
 
         CategoryBean categories = fetcher.getCourseCategories();
+        request.setAttribute("categories", categories);
 
         setReturnPage("/index.jsp");
         request.setAttribute("pageTitle", "Welcome");
-        request.setAttribute("categories", categories);
     }
 }

@@ -8,7 +8,9 @@ import java.util.UUID;
 
 public class PasswordResetDispatchController extends AbstractController{
     public void execute() {
-        DBConnectionManager connector = new DBConnectionManager();
+        PropertiesReader properties = (PropertiesReader)
+                request.getSession().getServletContext().getAttribute("properties");
+        DBConnectionManager connector = new DBConnectionManager(properties);
         FetchBeanUtils fetcher = new FetchBeanUtils(connector);
         
         String email = request.getParameter("email");

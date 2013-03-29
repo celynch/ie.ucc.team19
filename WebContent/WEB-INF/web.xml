@@ -10,6 +10,10 @@
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
 
+    <listener>
+        <listener-class>ie.ucc.team19.service.StartupListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>FrontController</servlet-name>
         <servlet-class>ie.ucc.team19.controllers.FrontController</servlet-class>

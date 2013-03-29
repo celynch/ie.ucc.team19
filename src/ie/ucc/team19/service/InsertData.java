@@ -21,7 +21,7 @@ public class InsertData {
                 student.getFirstName(),
                 student.getLastName(),
                 student.getEmail(),
-                student.getPasswordHash(),
+                student.getPassword(),
                 student.getAddressLine1(),
                 student.getAddressLine2(),
                 student.getAddressLine3(),

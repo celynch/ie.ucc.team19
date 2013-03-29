@@ -1,5 +1,7 @@
 package ie.ucc.team19.paypal;
 
+import ie.ucc.team19.service.PropertiesReader;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,8 +35,7 @@ public class IpnPaypalListenerServlet extends HttpServlet {
     		paramName = (String) en.nextElement();
     		paramValue = request.getParameter(paramName);
 
-    		System.out.println(paramName);
-    		System.out.println(paramValue);
+    		System.out.println(paramName + " = " + paramValue);
     		strBuffer.append("&").append(paramName).append("=")
     				.append(URLEncoder.encode(paramValue, "UTF-8"));
     	}
@@ -73,9 +74,11 @@ public class IpnPaypalListenerServlet extends HttpServlet {
     	// check notification validation
     	if (res.equals("VERIFIED")) {
     	    System.out.println("IPN VALID");
+    	    PropertiesReader properties = (PropertiesReader)
+    	            request.getSession().getServletContext().getAttribute("properties");
     	    if( (paymentStatus.equals("Completed"))
-    	            && (receiverEmail.equals("celynch@gmail.com")) ) {
-    	        System.out.println("paydirt!!");
+    	            && (receiverEmail.equals(properties.getPaypalEmailId())) ) {
+    	        System.out.println("IPN received");
     	    }
     		// check that paymentStatus=Completed
     		// check that txnId has not been previously processed

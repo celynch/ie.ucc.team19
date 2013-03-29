@@ -3,7 +3,9 @@ package ie.ucc.team19.controllers.pages;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.CommentBean;
 import ie.ucc.team19.dao.DBConnectionManager;
+import ie.ucc.team19.dao.UserBean;
 import ie.ucc.team19.service.FetchBeanUtils;
+import ie.ucc.team19.service.PropertiesReader;
 
 /**
  * Controller class to handle request for the admin dashboard.
@@ -15,11 +17,20 @@ public class AdminDashBoardController extends AbstractController{
      * Fetches beans from model for display in dashboard view.
      */
     public void execute() {
-        DBConnectionManager connector = new DBConnectionManager();
+        PropertiesReader properties = (PropertiesReader)
+                request.getSession().getServletContext().getAttribute("properties");
+        DBConnectionManager connector = new DBConnectionManager(properties);
         FetchBeanUtils fetcher = new FetchBeanUtils(connector);
 
-        setReturnPage("/adminDashBoard.jsp");
-        request.setAttribute("pageTitle", "Administration DashBoard");
+        String returnPage = "/adminDashBoard.jsp";
+        String pageTitle = "Administration DashBoard";
+
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        if(user == null || !user.isAdmin()) {
+            returnPage = "/admin.jsp";
+            pageTitle = "Admin Access";
+        }
+
         CommentBean[] comments = fetcher.getUnreviewedComments();
         request.setAttribute("comments", comments);
         String coursesCount = "SELECT COUNT(*) FROM courses";
@@ -38,6 +49,9 @@ public class AdminDashBoardController extends AbstractController{
         int numberOfLecturers =  Integer.valueOf(connector.Select(
                 lecturerCount, new Object[0]).get(0).get("COUNT(*)")[0]);
         request.setAttribute("numberOfLecturers", numberOfLecturers);
+
+        setReturnPage(returnPage);
+        request.setAttribute("pageTitle", pageTitle);
         request.setAttribute("admin", true);
     }
 }

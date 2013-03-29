@@ -24,7 +24,7 @@ CREATE TABLE students
     firstName VARCHAR(30) NOT NULL,
     lastName VARCHAR(30) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
-    passwordHash CHAR(32),
+    password CHAR(32),
     addressLine1 VARCHAR(30),
     addressLine2 VARCHAR(30),
     addressLine3 VARCHAR(30),

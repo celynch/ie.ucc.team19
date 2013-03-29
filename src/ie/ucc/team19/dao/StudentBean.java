@@ -8,7 +8,7 @@ public class StudentBean implements UserBean {
     private String firstName;
     private String lastName;
     private String email;
-    private String passwordHash;
+    private String password;
     private String addressLine1;
     private String addressLine2;
     private String addressLine3;
@@ -24,6 +24,16 @@ public class StudentBean implements UserBean {
 
     public StudentBean() {
 
+    }
+
+    @Override
+    public String getUniqueId() {
+        return email;
+    }
+
+    @Override
+    public boolean isAdmin() {
+        return false;
     }
 
     public String getFirstName() {
@@ -44,11 +54,11 @@ public class StudentBean implements UserBean {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
     public String getAddressLine1() {
         return addressLine1;

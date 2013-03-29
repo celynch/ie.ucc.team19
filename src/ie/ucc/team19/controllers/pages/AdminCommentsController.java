@@ -3,7 +3,9 @@ package ie.ucc.team19.controllers.pages;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.CommentBean;
 import ie.ucc.team19.dao.DBConnectionManager;
+import ie.ucc.team19.dao.UserBean;
 import ie.ucc.team19.service.FetchBeanUtils;
+import ie.ucc.team19.service.PropertiesReader;
 import ie.ucc.team19.service.SendEmail;
 import ie.ucc.team19.service.UpdateUser;
 
@@ -20,8 +22,17 @@ public class AdminCommentsController extends AbstractController{
      * message is sent and comment is marked as reviewed.
      */
     public void execute() {
-        DBConnectionManager connector = new DBConnectionManager();
+        PropertiesReader properties = (PropertiesReader)
+                request.getSession().getServletContext().getAttribute("properties");
+        DBConnectionManager connector = new DBConnectionManager(properties);
+        String returnPage = "/adminComments.jsp";
+        String pageTitle = "Review Comments";
 
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        if(user == null || !user.isAdmin()) {
+            returnPage = "/admin.jsp";
+            pageTitle = "Admin Access";
+        }
         if(request.getParameter("respond") != null) {
             String commentId = request.getParameter("commentId");
             String email = request.getParameter("email");
@@ -33,9 +44,9 @@ public class AdminCommentsController extends AbstractController{
         }
 
         CommentBean[] comments = new FetchBeanUtils(connector).getUnreviewedComments();
-        setReturnPage("/adminComments.jsp");
-        request.setAttribute("pageTitle", "Review Comments");
         request.setAttribute("comments", comments);
+        setReturnPage(returnPage);
+        request.setAttribute("pageTitle", pageTitle);
         request.setAttribute("admin", true);
     }
 }

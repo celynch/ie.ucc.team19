@@ -17,7 +17,6 @@ public class EnrollStudent {
     private static final long DAY_OFFSET = 1000 *60 * 60 * 24;
     private Date earliestStart;
     private Date latestEnd;
-
     private CourseBean[] courses;
     private CourseBean[] enrollCourse;
     private long[] offsets;

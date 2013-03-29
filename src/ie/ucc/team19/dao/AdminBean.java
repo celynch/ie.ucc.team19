@@ -13,6 +13,10 @@ public class AdminBean implements UserBean {
         return adminName;
     }
 
+    public boolean isAdmin() {
+        return true;
+    }
+
     public String getAdminName() {
         return adminName;
     }
@@ -31,6 +35,4 @@ public class AdminBean implements UserBean {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    
 }
