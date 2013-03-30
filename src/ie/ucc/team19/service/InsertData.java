@@ -101,14 +101,28 @@ public class InsertData {
         connector.Insert(query, params);
     }
 
+    public void updateCourse(CourseBean course) {
+        String query = "UPDATE courses SET " +
+        		"courseTitle=?,fee=?,spaces=?,courseCategory=?," +
+        		"enrollStartDate=?,enrollEndDate=?," +
+        		"courseStartDate=?,courseEndDate=?,content=?" +
+        		"WHERE courseId=?";
+        Object[] params = {course.getCourseTitle(), course.getFee(),
+                course.getSpaces(), course.getCourseCategory(),
+                course.getEnrollStartDate(), course.getEnrollEndDate(),
+                course.getCourseStartDate(), course.getCourseEndDate(),
+                course.getContent(), course.getCourseId()};
+        connector.Insert(query, params);
+    }
+
     public void setLecturer(int courseId, int lecturerId) {
-        String query = "INSERT INTO teaches VALUES (?,?)";
+        String query = "INSERT INTO teaches (courseId, lecturerId) VALUES (?,?)";
         Object[] params = {courseId, lecturerId};
         connector.Insert(query, params);
     }
     
     public void setVenue(int courseId, int venueId) {
-        String query = "INSERT INTO locations VALUES (?,?)";
+        String query = "INSERT INTO courseLocations (courseId, venueId)  VALUES (?,?)";
         Object[] params = {courseId, venueId};
         connector.Insert(query, params);
     }

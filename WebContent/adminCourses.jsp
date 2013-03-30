@@ -51,14 +51,26 @@
                     </fieldset>
                 </form>
             </section>
-            <!-- <div>
-	            ${param['content']}
-	        </div>
-            <form method="post" action="/team19/pages/admin.jsp">  
-		        <textarea name="content" cols="50" rows="15" >${content}</textarea>
-		        <input type="submit" value="submit"/>
-	        </form>
-             -->
+            <section>
+                <c:if test="${courseUpdated!=null}"><p class="feedback">${courseUpdated}</p></c:if>
+                <c:if test="${updateError!=null}"><p class="feedback">${updateError}</p></c:if>
+                <form method="get" action="http://${serverName}/team19/pages/adminCourseEdit">
+                    <fieldset id="courseInfo">
+                        <legend>Edit Courses</legend>
+                        <dl>
+                            <dd>
+                                <select name="courseId">
+                                    <c:forEach var="course" items="${courses}">
+                                        <option value="${course.courseId}">${course.courseTitle}</option>
+                                    </c:forEach>
+                                </select>
+                            </dd>
+                        </dl>
+                        <input type="submit" name="editCourse" value="Edit Course?" />
+                        <input type="submit" name="view" value="View Course" formaction="/team19/pages/viewCourse" />
+                    </fieldset>
+                </form>
+            </section>
         </div>
     </div>
 

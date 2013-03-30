@@ -4,6 +4,7 @@ public class AdminBean implements UserBean {
     private String adminName;
     private String adminPassword;
     private String email;
+    private boolean admin = true;
 
     public AdminBean() {
         
@@ -11,10 +12,6 @@ public class AdminBean implements UserBean {
 
     public String getUniqueId() {
         return adminName;
-    }
-
-    public boolean isAdmin() {
-        return true;
     }
 
     public String getAdminName() {
@@ -34,5 +31,12 @@ public class AdminBean implements UserBean {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+    @Override
+    public boolean isAdmin() {
+        return admin;
+    }
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }

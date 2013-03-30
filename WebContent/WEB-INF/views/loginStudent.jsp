@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:choose>
-    <c:when test="${user.firstName != null}">
+    <c:when test="${user != null && !user.admin}">
         <form method="post" action="/team19/pages/Logout">
             <fieldset>
                 <legend><a href="/team19/pages/account">Welcome <c:out value="${user.firstName}"/></a></legend>

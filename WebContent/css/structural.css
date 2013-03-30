@@ -203,8 +203,11 @@
 section {
 	padding: 1em;
 	margin: 1em;
-	width: 40%;
-	float: left;
+}
+
+.dashBoard {
+    width: 40%;
+    float: left;	
 }
 
 #address {

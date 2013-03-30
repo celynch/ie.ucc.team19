@@ -21,6 +21,7 @@ public class StudentBean implements UserBean {
     private Timestamp dateRegistered;
     private String cookieToken;
     private boolean emailOptIn;
+    private boolean admin = false;
 
     public StudentBean() {
 
@@ -31,11 +32,12 @@ public class StudentBean implements UserBean {
         return email;
     }
 
-    @Override
-    public boolean isAdmin() {
-        return false;
+    public String getStudentId() {
+        return studentId;
     }
-
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -132,10 +134,11 @@ public class StudentBean implements UserBean {
     public void setEmailOptIn(boolean emailOptIn) {
         this.emailOptIn = emailOptIn;
     }
-    public String getStudentId() {
-        return studentId;
+    @Override
+    public boolean isAdmin() {
+        return admin;
     }
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }
