@@ -12,10 +12,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import org.apache.commons.beanutils.BeanUtilsBean;
 
+/**
+ * Controller for handling form submitting changes to existing course.
+ * @author Cormac
+ */
 public class AdminCourseUpdateController extends AbstractController{
 
     /**
-     * Fetches beans from model for display in dashboard view.
+     * Sends submitted form for validation. Valid data entered to db,
+     * error messages returned to adminCourses view for display.
      */
     public void execute() {
         PropertiesReader properties = (PropertiesReader)
@@ -57,19 +62,19 @@ public class AdminCourseUpdateController extends AbstractController{
     }
 
     /**
-     * 
-     * @return
+     * Updates CourseBean for course being updated.  
+     * @return CourseBean updated.
      */
     private CourseBean setupCourse(FetchBeanUtils fetcher, Integer courseId) {
-        CourseBean[] course = fetcher.getCourseByCourseId(courseId.toString());
+        CourseBean course = fetcher.getCourseByCourseId(courseId.toString())[0];
         Map<String, String[]> userFormValues = request.getParameterMap();
         BeanUtilsBean beanManager = BeanUtilsBean.getInstance();
         try {
-            beanManager.populate(course[0], userFormValues);
+            beanManager.populate(course, userFormValues);
         } catch (IllegalAccessException | InvocationTargetException e) {
             System.out.println("Error updating CourseBean");
             e.printStackTrace();
         }
-        return course[0];
+        return course;
     }
 }

@@ -103,7 +103,7 @@
 	            </dl>
             </fieldset>
             <input type="submit" name="cancel" value="Cancel" formaction="/tema19/pages/"/>
-            <input type="submit" name="Proceed" value="Proceed"/>
+            <input type="submit" name="addStudent" value="Register"/>
         </form>
         </div>
     </div>

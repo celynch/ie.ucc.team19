@@ -1,5 +1,9 @@
 package ie.ucc.team19.dao;
 
+/**
+ * Bean to represent a comment submitted to the db. 
+ * @author Cormac
+ */
 public class CommentBean {
     private int commentId;
     private int studentId;

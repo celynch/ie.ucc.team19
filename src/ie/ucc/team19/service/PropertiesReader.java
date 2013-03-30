@@ -21,7 +21,7 @@ public class PropertiesReader {
         try {
             System.out.println("Setup application properties");
             prop.load(new FileInputStream(
-                    "C:\\Program Files\\Tomcat\\apache-tomcat-7.0.35\\webapps\\team19\\setup.xml"));
+                    "C:\\Program Files\\Tomcat\\apache-tomcat-7.0.35\\webapps\\team19\\setup.txt"));
         } catch (IOException e) {
             System.out.println("Error fetching application config");
             e.printStackTrace();

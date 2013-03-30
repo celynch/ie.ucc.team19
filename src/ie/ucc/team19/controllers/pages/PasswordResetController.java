@@ -8,7 +8,15 @@ import ie.ucc.team19.service.LoginUser;
 import ie.ucc.team19.service.PropertiesReader;
 import ie.ucc.team19.service.UpdateUser;
 
+/**
+ * Controller for password reset page.
+ * @author Cormac
+ */
 public class PasswordResetController extends AbstractController {
+    /**
+     * Tests if users new passwords match, user exists, and has correct
+     * authorization string, then updates password and logs user in.
+     */
     public void execute() {
         PropertiesReader properties = (PropertiesReader)
             request.getSession().getServletContext().getAttribute("properties");
@@ -40,6 +48,8 @@ public class PasswordResetController extends AbstractController {
             new UpdateUser(connector).updatePassword(student.getEmail(), student.getPassword());
             new LoginUser(connector).setCookies(response, student, request.getServerName(),
                     Boolean.parseBoolean(request.getParameter("rememberMe")), false);
+            setReturnPage("/");
+            request.setAttribute("pageTitle", "Welcome");
         }
     }
 }

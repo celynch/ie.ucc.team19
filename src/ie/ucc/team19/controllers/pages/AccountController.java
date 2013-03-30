@@ -68,7 +68,12 @@ public class AccountController  extends AbstractController {
         setReturnPage(returnPage);
         request.setAttribute("pageTitle", pageTitle);
     }
-    
+
+    /**
+     * Updates user with values submit via request parameter map.
+     * @param user StudentBean to update
+     * @return StudentBean updated
+     */
     private StudentBean editStudent(StudentBean user) {
         Map<String, String[]> userFormValues = request.getParameterMap();
         BeanUtilsBean beanManager = BeanUtilsBean.getInstance();

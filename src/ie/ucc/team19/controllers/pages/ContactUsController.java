@@ -25,7 +25,7 @@ public class ContactUsController extends AbstractController{
             String studentId = request.getParameter("studentId");
             String subject = request.getParameter("subject");
             String messageText = request.getParameter("messageText");
-            new SendEmail(connector).submitComment(
+            new SendEmail(connector, properties).submitComment(
                     studentId, subject, messageText);
         }
     }

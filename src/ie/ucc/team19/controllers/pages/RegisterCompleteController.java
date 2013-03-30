@@ -3,7 +3,6 @@ package ie.ucc.team19.controllers.pages;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.*;
 import ie.ucc.team19.service.*;
-
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,7 +10,15 @@ import java.util.Map;
 import java.util.UUID;
 import org.apache.commons.beanutils.BeanUtilsBean;
 
+/**
+ * Controller to handle completion of student registration. 
+ * @author Cormac
+ */
 public class RegisterCompleteController extends AbstractController{
+    /**
+     * Sends user form values to validater, sets up StudentBean, inserts
+     * into db and sends activation email.
+     */
     public void execute() {
         String error = new FormValidater().checkForm(request.getParameterMap());
         if(error == null) {
@@ -20,7 +27,7 @@ public class RegisterCompleteController extends AbstractController{
             DBConnectionManager connector = new DBConnectionManager(properties);
             StudentBean user = setupStudent();
             new InsertData(connector).createStudent(user);
-            sendVerifyEmail(user, connector);
+            sendVerifyEmail(user, connector, properties);
 
             setReturnPage("/registerComplete.jsp");
             request.setAttribute("pageTitle", "Registration Completed");
@@ -33,6 +40,11 @@ public class RegisterCompleteController extends AbstractController{
         }
     }
 
+    /**
+     * Populates new StudentBean with user form values, initializes
+     * non-user generated data (dates, uid, booleans).
+     * @return StudentBean for new student.
+     */
     private StudentBean setupStudent() {
         StudentBean user = new StudentBean();
         Map<String, String[]> userFormValues = request.getParameterMap();
@@ -56,8 +68,14 @@ public class RegisterCompleteController extends AbstractController{
         }
         return user;
     }
-    
-    private void sendVerifyEmail(StudentBean user, DBConnectionManager connector) {
+
+    /**
+     * Builds email message welcoming new student, adds account activation
+     * link, and dispatches via mailjet.
+     * @param user - StudentBean for new user
+     * @param connector - the connector object for adding auth token to.
+     */
+    private void sendVerifyEmail(StudentBean user, DBConnectionManager connector, PropertiesReader properties) {
         String subject = "UCC Summer Courses | Welcome";
         StringBuilder mailMessage = new StringBuilder();
         String serverName = (String) request.getAttribute("serverName");
@@ -70,6 +88,6 @@ public class RegisterCompleteController extends AbstractController{
         mailMessage.append("<p>Your email address: " + user.getEmail() + "</p>");
         mailMessage.append("<blockquote>\"Where Finbarr taught, let Munster learn\"</blockquote>");
         mailMessage.append("<p>- The UCC Summer Courses Team</p></div>");
-        new SendEmail(connector).sendEmail( user.getEmail(), subject, mailMessage.toString());
+        new SendEmail(connector,properties).sendEmail( user.getEmail(), subject, mailMessage.toString());
     }
 }

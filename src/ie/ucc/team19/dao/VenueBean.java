@@ -1,5 +1,9 @@
 package ie.ucc.team19.dao;
 
+/**
+ * Bean to represent a venue. 
+ * @author Cormac
+ */
 public class VenueBean {
     private int venueId;
     private String venueRoom;

@@ -16,6 +16,7 @@
         
         <div id="content">
             <section id="addCourse">
+                <c:if test="${addCourseError!=null}"><p class="feedback">${addCourseError}</p></c:if>
                 <form method="post" action="/team19/pages/adminCourses">
                     <fieldset>
                         <legend>Add Course</legend>

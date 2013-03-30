@@ -8,10 +8,16 @@ import javax.servlet.ServletException;
 import ie.ucc.team19.controllers.AbstractController;
 import ie.ucc.team19.dao.UserBean;
 
+/**
+ * Controller for page displayed when attempt made to access page which
+ * requires admin login.
+ * @author Cormac
+ */
 public class AdminController extends AbstractController{
 
     /**
-     * Fetches beans from model for display in dashboard view.
+     * Tests if the user is logged in as an admin and displays the admin
+     * access page, else logs the user out.
      */
     public void execute() {
         UserBean user = (UserBean) request.getSession().getAttribute("user");

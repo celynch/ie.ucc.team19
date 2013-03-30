@@ -1,6 +1,8 @@
 package ie.ucc.team19.paypal;
 
+import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.service.PropertiesReader;
+import ie.ucc.team19.service.UpdateUser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,15 +17,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet to respond to paypal Instant Payment Notifications.
+ * Conforms to paypal API.
+ * @author Cormac
+ */
 public class IpnPaypalListenerServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Initialises servlet instance.
+     */
     @Override
     public void init() throws ServletException {
         super.init();
     }
 
+    /**
+     * Processes received ipns from paypal, sends response with mirrored
+     * fields, gets confirmation that ipn came from paypal and updates db.
+     * @param request - incoming request
+     * @param response - mirrored POST repsonse
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // read post from PayPal system and add 'cmd'
@@ -34,8 +52,7 @@ public class IpnPaypalListenerServlet extends HttpServlet {
     	while (en.hasMoreElements()) {
     		paramName = (String) en.nextElement();
     		paramValue = request.getParameter(paramName);
-
-    		System.out.println(paramName + " = " + paramValue);
+    		//System.out.println(paramName + " = " + paramValue);
     		strBuffer.append("&").append(paramName).append("=")
     				.append(URLEncoder.encode(paramValue, "UTF-8"));
     	}
@@ -61,24 +78,25 @@ public class IpnPaypalListenerServlet extends HttpServlet {
     	in.close();
 
     	// assign posted variables to local variables
-
     	//String itemName = request.getParameter("item_name");
     	//String itemNumber = request.getParameter("item_number");
-    	String paymentStatus = request.getParameter("payment_status");
     	//String paymentAmount = request.getParameter("mc_gross");
     	//String paymentCurrency = request.getParameter("mc_currency");
     	//String txnId = request.getParameter("txn_id");
-    	String receiverEmail = request.getParameter("receiver_email");
     	//String payerEmail = request.getParameter("payer_email");
+    	String[] customFields = request.getParameter("custom").split("-");
+    	String receiverEmail = request.getParameter("receiver_email");
 
     	// check notification validation
     	if (res.equals("VERIFIED")) {
     	    System.out.println("IPN VALID");
     	    PropertiesReader properties = (PropertiesReader)
     	            request.getSession().getServletContext().getAttribute("properties");
-    	    if( (paymentStatus.equals("Completed"))
-    	            && (receiverEmail.equals(properties.getPaypalEmailId())) ) {
+    	    /*paymentStatus.equals("Completed")*/
+    	    if( receiverEmail.equals(properties.getPaypalEmailId()) ) {
     	        System.out.println("IPN received");
+    	        DBConnectionManager connector = new DBConnectionManager(properties);
+    	        new UpdateUser(connector).updateEnrollment(customFields);
     	    }
     		// check that paymentStatus=Completed
     		// check that txnId has not been previously processed
@@ -93,12 +111,18 @@ public class IpnPaypalListenerServlet extends HttpServlet {
     	}
     }
 
+    /**
+     * GET requests handled by processRequest
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * POST requests handled by processRequest
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

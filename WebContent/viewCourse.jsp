@@ -39,6 +39,9 @@
                                 </form>
                             </c:otherwise>
                         </c:choose>
+                        <h3>Dates:</h3>
+                        <p>Start Date: <fmt:formatDate type="date" value="${course.courseStartDate}" pattern="MMM-dd" /></p>
+                        <p>End Date: <fmt:formatDate type="date" value="${course.courseEndDate}" pattern="MMM-dd" /></p>
                         <h3>Fee:</h3>
                         <p>&euro;<fmt:formatNumber value="${course.fee}" minFractionDigits="2" maxFractionDigits="2"/></p>
                         <h3>Lecturer<c:choose><c:when test="${fn:length(lecturers) > 0}">s</c:when></c:choose>:</h3>

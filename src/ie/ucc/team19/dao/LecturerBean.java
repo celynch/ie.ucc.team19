@@ -1,5 +1,9 @@
 package ie.ucc.team19.dao;
 
+/**
+ * Bean to represent a lecturer. 
+ * @author Cormac
+ */
 public class LecturerBean {
     private int lecturerId;
     private String firstName;

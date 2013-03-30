@@ -3,6 +3,10 @@ package ie.ucc.team19.dao;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+/**
+ * Bean to represent student account details.  
+ * @author Cormac
+ */
 public class StudentBean implements UserBean {
     private String studentId;
     private String firstName;

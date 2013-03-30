@@ -6,7 +6,15 @@ import ie.ucc.team19.service.*;
 
 import java.util.UUID;
 
+/**
+ * Controller to respond to request for password reset. 
+ * @author Cormac
+ */
 public class PasswordResetDispatchController extends AbstractController{
+    /**
+     * Checks if named user exists, if so dispatches email with reset
+     * authorization string in link for user to complete password reest.
+     */
     public void execute() {
         PropertiesReader properties = (PropertiesReader)
                 request.getSession().getServletContext().getAttribute("properties");
@@ -31,7 +39,7 @@ public class PasswordResetDispatchController extends AbstractController{
                     + student.getAuthString() + "&email=" + student.getEmail() + "\">Reset Password</a>"
                     + "<blockquote>\"Where Finbarr taught, let Munster learn\"</blockquote>"
                     + "<p>- The UCC Summer Courses Team</p></div>";
-            new SendEmail(connector).sendEmail( student.getEmail(), subject, mailMessage);
+            new SendEmail(connector, properties).sendEmail( student.getEmail(), subject, mailMessage);
         }
     }
 }

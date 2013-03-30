@@ -2,6 +2,10 @@ package ie.ucc.team19.dao;
 
 import java.sql.Date;
 
+/**
+ * Bean to represent a course, dates stored in java.sql format.
+ * @author Cormac
+ */
 public class CourseBean {
     private int courseId;
     private String courseTitle;

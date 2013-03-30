@@ -8,17 +8,19 @@ import ie.ucc.team19.dao.CourseBean;
 import ie.ucc.team19.dao.DBConnectionManager;
 import ie.ucc.team19.dao.UserBean;
 import ie.ucc.team19.service.FetchBeanUtils;
+import ie.ucc.team19.service.FormValidater;
 import ie.ucc.team19.service.InsertData;
 import ie.ucc.team19.service.PropertiesReader;
 
 /**
- * Controller class to handle request for the admin dashboard.
+ * Controller for view listing courses, and creation of new courses.
  * @author Cormac
  */
 public class AdminCoursesController extends AbstractController{
 
     /**
      * Fetches beans from model for display in dashboard view.
+     * Sends submitted course form for validation. Valid data sent to db.
      */
     public void execute() {
         PropertiesReader properties = (PropertiesReader)
@@ -36,12 +38,17 @@ public class AdminCoursesController extends AbstractController{
         }
 
         if(request.getParameter("addCourse") != null) {
-            CourseBean course = setupCourse();
-            int lecturerId = Integer.valueOf(request.getParameter("lecturerId"));
-            int venueId = Integer.valueOf(request.getParameter("venueId"));
-            inserter.createCourse(course);
-            if(lecturerId != -1) {inserter.setLecturer(course.getCourseId(), lecturerId);}
-            if(venueId != -1) {inserter.setVenue(course.getCourseId(), venueId);}
+            String error = new FormValidater().checkForm(request.getParameterMap());
+            if(error == null) {
+                CourseBean course = setupCourse();
+                int lecturerId = Integer.valueOf(request.getParameter("lecturerId"));
+                int venueId = Integer.valueOf(request.getParameter("venueId"));
+                inserter.createCourse(course);
+                if(lecturerId != -1) {inserter.setLecturer(course.getCourseId(), lecturerId);}
+                if(venueId != -1) {inserter.setVenue(course.getCourseId(), venueId);}
+            } else {
+                request.setAttribute("addCourseError", error);
+            }
         }
         request.setAttribute("courses", fetcher.getCourses());
         request.setAttribute("venues", fetcher.getVenues());

@@ -1,5 +1,9 @@
 package ie.ucc.team19.dao;
 
+/**
+ * Bean to represent an admin 
+ * @author Cormac
+ */
 public class AdminBean implements UserBean {
     private String adminName;
     private String adminPassword;

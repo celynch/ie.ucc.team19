@@ -2,6 +2,10 @@ package ie.ucc.team19.dao;
 
 import java.sql.Timestamp;
 
+/**
+ * Bean to relate a student to a course for enrollment. 
+ * @author Cormac
+ */
 public class EnrollmentBean {
     private int courseId;
     private int studentId;

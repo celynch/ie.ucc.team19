@@ -7,11 +7,14 @@ import ie.ucc.team19.service.PropertiesReader;
 import ie.ucc.team19.service.SendEmail;
 
 /**
- *
+ * Test Class for dispatching email
  * @author Cormac
  */
 public class SendAuthEmailController extends AbstractController {
 
+    /**
+     * Dispatches test email to specified address.
+     */
     public void execute() {
         PropertiesReader properties = (PropertiesReader)
                 request.getSession().getServletContext().getAttribute("properties");
@@ -28,6 +31,7 @@ public class SendAuthEmailController extends AbstractController {
         request.setAttribute("lecturers", lecturers);
         request.setAttribute("venues", venues);
 
-        new SendEmail(connector).sendEmail( "101664280@gmail.com", "how now brown cow", "test email");
+        new SendEmail(connector, properties).sendEmail(
+                "101664280@gmail.com", "how now brown cow", "test email");
     }
 }

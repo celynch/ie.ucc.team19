@@ -10,10 +10,15 @@ import ie.ucc.team19.dao.UserBean;
 import ie.ucc.team19.service.InsertData;
 import ie.ucc.team19.service.PropertiesReader;
 
+/**
+ * Controller for view for lecturer management.
+ * @author Cormac
+ */
 public class AdminLecturersController extends AbstractController{
 
     /**
-     * 
+     * Accepts form submited for new lecturer, enters to db. Unauthorised
+     * users sent to admin access page.
      */
     public void execute() {
         PropertiesReader properties = (PropertiesReader)
@@ -37,7 +42,12 @@ public class AdminLecturersController extends AbstractController{
         request.setAttribute("pageTitle", pageTitle);
         request.setAttribute("admin", true);
     }
-    
+
+    /**
+     * Creates and populates LecturerBean from user form values describing
+     * new lecturer.
+     * @return LecturerBean for new lecturer.
+     */
     private LecturerBean setupLecturer() {
         LecturerBean user = new LecturerBean();
         Map<String, String[]> userFormValues = request.getParameterMap();

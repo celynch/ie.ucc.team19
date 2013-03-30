@@ -1,5 +1,9 @@
 package ie.ucc.team19.dao;
 
+/**
+ * Bean to represent a list of course Category names. 
+ * @author Cormac
+ */
 public class CategoryBean {
     String[] categoryTitles;
 

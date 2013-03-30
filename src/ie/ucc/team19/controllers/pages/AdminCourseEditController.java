@@ -10,7 +10,7 @@ import ie.ucc.team19.service.FetchBeanUtils;
 import ie.ucc.team19.service.PropertiesReader;
 
 /**
- *
+ * Controller for view displaying the course selected for editing.
  * @author Cormac
  */
 public class AdminCourseEditController extends AbstractController{

@@ -1,0 +1,47 @@
+validation
+
+forms are validated in two stages:
+1/ Regular Expressions tests:
+    The request parameter map of input names(as String which are keys) and
+    input values (as String which are values) is fetched.
+    The system also maintains a map of corresponding input names(keys) and
+    values(regular expressions).
+        Each input name from the parameter map is checked against keys in the
+    regex map, returning the corresponding regex.
+        The parameter map value is tested against this regex. If the value
+    satisfies the regex test, nothing happens and further inputs are tested.
+    If a test fails, an ERROR string describing the problem input is returned.
+
+    The inputs and regular expression tests are described below:
+        "firstName"      "^.{1,30}$");
+        "lastName"       "^.{1,30}$");
+        "email"          "^.{5,50}$");
+        "password"       "^.{6,32}$");
+        "addressLine1"   "^.{1,30}$");
+        "addressLine2"   "^.{1,30}$");
+        "addressLine3"   "^.{1,30}$");
+        "country"        "^.{1,30}$");
+        "telephone"      "^.{0,30}$");
+        "gender"         "^(M|F){1}$");
+        "courseTitle"    "^.{1,30}$");
+        "fee"            "^.{1,30}$");
+        "courseCategory" "^.{1,30}$");
+
+2/  Input specific tests:
+    Some inputs must both match a format and pass a test in relation to other
+    inputs. For example, the Course-End date must be a valid date and not be
+    before the Course-Start date.
+        There are specific tests in relation to:
+            Enroll-Start date vs Enroll-End date,
+            Enroll-End date vs Course-Start date,
+            Course-Start date vs Course-End date.
+        Each date is instantiated as a Date object and compared. If there is
+    any error instantiating the Date (due to an incorrect format), an ERROR
+    string describing the correct date format is returned. If the comparison
+    test fails, an ERROR string describing the problem is returned
+
+        If a null ERROR string is returned, then no errors occured and the
+    controller may process the form.
+        If any error did occur, the controller redirects back to the form page
+    and passes the ERROR string as a request attribute accessible in the view,
+    which displays the string as a highlighted feedback message for the user.

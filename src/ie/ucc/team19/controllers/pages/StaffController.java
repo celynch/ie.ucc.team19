@@ -6,8 +6,15 @@ import ie.ucc.team19.dao.LecturerBean;
 import ie.ucc.team19.service.FetchBeanUtils;
 import ie.ucc.team19.service.PropertiesReader;
 
+/**
+ * Controller for display of staff page. 
+ * @author Cormac
+ */
 public class StaffController extends AbstractController {
 
+    /**
+     * Fetches lecturer details for display on cards in view.
+     */
     public void execute() {
         PropertiesReader properties = (PropertiesReader)
                 request.getSession().getServletContext().getAttribute("properties");

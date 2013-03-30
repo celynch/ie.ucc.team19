@@ -12,10 +12,15 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
 
+/**
+ * Controller for view for venue management.
+ * @author Cormac
+ */
 public class AdminVenuesController extends AbstractController{
 
     /**
-     * 
+     * Accepts form submited for new venues, enters to db. Unauthorised
+     * users sent to admin access page.
      */
     public void execute() {
         PropertiesReader properties = (PropertiesReader)
@@ -40,6 +45,11 @@ public class AdminVenuesController extends AbstractController{
         request.setAttribute("admin", true);
     }
 
+    /**
+     * Creates and populates VenueBean from user form values describing
+     * new venue.
+     * @return VenueBean for new venue.
+     */
     private VenueBean setupVenue() {
         VenueBean venue = new VenueBean();
         Map<String, String[]> userFormValues = request.getParameterMap();

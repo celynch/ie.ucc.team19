@@ -1,7 +1,6 @@
 package ie.ucc.team19.service;
 
 import ie.ucc.team19.dao.DBConnectionManager;
-
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -10,22 +9,40 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
- 
+
+/**
+ * Utilises javamail api to create mail message sent via mailjet cloud
+ * smtp service. 
+ * @author Cormac
+ */
 public class SendEmail {
-    private final String APIKey = "c743932567e67d22f61fd5f06b04893b";
-    private final String SecretKey = "ef121152d6cbc7f8071dff913a1dc103";
-    private final String From = "team19summer@gmail.com";
-    private final String smtpServer = "in.mailjet.com";
-    private final String SMTP_PORT = "587";
+    private String APIKey;// = "c743932567e67d22f61fd5f06b04893b";
+    private String SecretKey;// = "ef121152d6cbc7f8071dff913a1dc103";
+    private String From;// = "team19summer@gmail.com";
+    private String smtpServer;// = "in.mailjet.com";
+    private String SMTP_PORT;// = "587";
     private DBConnectionManager connector;
-    
-    public SendEmail(DBConnectionManager connector) {
+
+    /**
+     * Constructor for SendMail. Sets fields read from properties.
+     * @param connector
+     * @param properties
+     */
+    public SendEmail(DBConnectionManager connector, PropertiesReader properties) {
         this.connector = connector;
+        APIKey = properties.getMailjetAPIKey();
+        SecretKey = properties.getMailjetSecretKey();
+        From = properties.getMailjetSenderAddress();
+        smtpServer = properties.getMailjetSmtpServer();
+        SMTP_PORT = properties.getSMTP_PORT();
     }
 
     /**
-     *
-     * @param toAddress
+     * Create email with given recipient, subject and message, sends via
+     * mailjet service.
+     * @param toAddress - String for recipient address.
+     * @param subject - String for email subject
+     * @param mailMessage - String for message content
      */
     public void sendEmail(String toAddress, String subject, String mailMessage) { 
         Properties props = new Properties ();
@@ -56,7 +73,13 @@ public class SendEmail {
             throw new RuntimeException (e);
         }
     }
-    
+
+    /**
+     * Comments for admins submitted via the contact us page are entered to the db.
+     * @param studentId - the id of the student making the comment
+     * @param subject - topic comment concerns
+     * @param messageText - body of comment
+     */
     public void submitComment(String studentId, String subject, String messageText) {
         String query = "INSERT INTO comments VALUES" + "(NULL, ?,?,?,0)";
 

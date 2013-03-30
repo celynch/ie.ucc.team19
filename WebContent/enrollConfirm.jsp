@@ -21,6 +21,8 @@
 	            <p>Selected Course: <span>${enrollCourse.courseTitle}</span></p>
 	            <p>Deposit Required: <span>${enrollCourse.fee * 0.2}</span></p>
 	            <p>Rest of Fee: <span>${enrollCourse.fee * 0.8}</span></p>
+                <p>Start Date: <fmt:formatDate type="date" value="${enrollCourse.courseStartDate}" pattern="MMM-dd" /></p>
+                <p>End Date: <fmt:formatDate type="date" value="${enrollCourse.courseEndDate}" pattern="MMM-dd" /></p>
             </div>
             <div id="schedule">
                 <h3>Your current schedule:</h3>
@@ -85,23 +87,29 @@
                             <input type="submit" value="Cancel" formaction="/team19/pages/viewCourse?courseId=${enrollCourse.courseId}" />
                         </form>
                         <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
-                            <input type="hidden" name="business" value="celynch@gmail.com.com" />
+                            <input type="hidden" name="business" value="celynch@gmail.com" />
 						    <input type="hidden" name="cmd" value="_xclick" />
 						    <input type="hidden" name="item_name" value="Deposit ${enrollCourse.courseTitle}" />
 						    <input type="hidden" name="amount" value="${enrollCourse.fee * 0.2}" />
 						    <input type="hidden" name="currency_code" value="EUR" />
+						    <input type="hidden" name="custom" value="${user.studentId}-${enrollCourse.courseId}-1">
 						    <input type="hidden" name="notify_url" value="http://${serverName}/team19/ipn/" />
+						    <input type="hidden" name="cancel_return" value="http://${serverName}/team19/pages/">
+						    <input type="hidden" name="return" value="http://${serverName}/team19/pages/">
 						    <label for="deposit">Deposit: &euro;${enrollCourse.fee * 0.2}</label>
 						    <input id="deposit" type="image" name="submit" style="border:none;" src="http://images.paypal.com/images/x-click-but2.gif" alt="PayPal - The safer, easier way to pay online">
 						    <img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />
                         </form>
                         <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
-                            <input type="hidden" name="business" value="celynch@gmail.com.com">
+                            <input type="hidden" name="business" value="celynch@gmail.com">
                             <input type="hidden" name="cmd" value="_xclick">
                             <input type="hidden" name="item_name" value="Fee ${enrollCourse.courseTitle}">
                             <input type="hidden" name="amount" value="${enrollCourse.fee * 0.8}">
                             <input type="hidden" name="currency_code" value="EUR">
+                            <input type="hidden" name="custom" value="${user.studentId}-${enrollCourse.courseId}-2">
                             <input type="hidden" name="notify_url" value="http://${serverName}/team19/ipn/" />
+                            <input type="hidden" name="cancel_return" value="http://${serverName}/team19/pages/">
+                            <input type="hidden" name="return" value="http://${serverName}/team19/pages/">
                             <label for="fee">Fee: &euro;${enrollCourse.fee * 0.8}</label>
                             <input id="fee" type="image" name="submit" style="border:none;" src="http://images.paypal.com/images/x-click-but2.gif" alt="PayPal - The safer, easier way to pay online">
                             <img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />

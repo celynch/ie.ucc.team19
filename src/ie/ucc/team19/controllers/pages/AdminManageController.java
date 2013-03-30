@@ -7,10 +7,14 @@ import ie.ucc.team19.dao.UserBean;
 import ie.ucc.team19.service.InsertData;
 import ie.ucc.team19.service.PropertiesReader;
 
+/**
+ * Controller for view for Admin management, allows new admin setup.
+ * @author Cormac
+ */
 public class AdminManageController extends AbstractController{
 
     /**
-     * Fetches beans from model for display in dashboard view.
+     * Accepts form for new admins, enters to db.
      */
     public void execute() {
         PropertiesReader properties = (PropertiesReader)
@@ -35,7 +39,12 @@ public class AdminManageController extends AbstractController{
         request.setAttribute("pageTitle", pageTitle);
         request.setAttribute("admin", true);
     }
-    
+
+    /**
+     * Creates and populates AdminBean from user form values describing
+     * new lecturer.
+     * @return AdminBean for new admin.
+     */
     private AdminBean setupAdmin() {
         AdminBean admin = new AdminBean();
         admin.setAdminName(request.getParameter("adminName"));

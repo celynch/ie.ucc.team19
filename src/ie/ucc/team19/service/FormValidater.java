@@ -1,5 +1,6 @@
 package ie.ucc.team19.service;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,28 @@ public class FormValidater {
             if(!result) {
                 return "Problem with input: " + input;
             }
+        }
+        if(formValues.containsKey("addCourse") || formValues.containsKey("updateCourse")) {
+            try{
+                Date enrollStartDate = Date.valueOf(formValues.get("enrollStartDate")[0]); 
+                Date enrollEndDate = Date.valueOf(formValues.get("enrollEndDate")[0]);
+                Date courseStartDate = Date.valueOf(formValues.get("courseStartDate")[0]);
+                Date courseEndDate = Date.valueOf(formValues.get("courseEndDate")[0]);
+                if(enrollStartDate.compareTo(enrollEndDate)>0) {
+                    return "Enroll Dates Error";
+                }
+                if(enrollEndDate.compareTo(courseStartDate)>0) {
+                    return "Dates Error: Course starts before enrollment ends";
+                }
+                if(courseStartDate.compareTo(courseEndDate)>0) {
+                    return "Course Dates Error";
+                }
+            } catch(IllegalArgumentException ex) {
+                System.out.println("Error handling dates");
+                ex.printStackTrace();
+                return "Dates error: must use yyyy-MM-dd format";
+            }
+            
         }
         return null;
     }

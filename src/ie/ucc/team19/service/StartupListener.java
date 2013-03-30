@@ -7,18 +7,26 @@ import ie.ucc.team19.dao.DBConnectionManager;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * Listener declared in application deployment descriptor. Instantiated on
+ * application startup. Starts scheduled tasks at startup. Stops tasks
+ * before shutdown. 
+ * @author Cormac
+ */
 public class StartupListener implements ServletContextListener {
     private ArrayList<ScheduledTask> tasks = new ArrayList<ScheduledTask>();
 
     /**
-     * Called on application start. Setsup properties for access via the
-     * servletcontext. Initiates scheduled task timers.
+     * Called on application start. Sets up properties for access via the
+     * ServletContext. Initiates scheduled task timers.
      */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         PropertiesReader properties = new PropertiesReader();
         sce.getServletContext().setAttribute("properties", properties);
+
         DBConnectionManager connector = new DBConnectionManager(properties);
+
         int milisPerDay = 1000*60*60*24;
         int milisPerHour = 1000*60*60;
         tasks.add(new ScheduledTask(milisPerDay, "expireUnverifiedStudents", connector));

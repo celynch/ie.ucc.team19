@@ -38,7 +38,7 @@ public class AdminCommentsController extends AbstractController{
             String email = request.getParameter("email");
             String subject = request.getParameter("subject");
             String mailMessage = request.getParameter("mailMessage");
-            SendEmail sender = new SendEmail(connector);
+            SendEmail sender = new SendEmail(connector,properties);
             sender.sendEmail(email, subject, mailMessage);
             new UpdateUser(connector).updateComment(commentId);
         }

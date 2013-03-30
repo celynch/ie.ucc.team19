@@ -1,7 +1,6 @@
 package ie.ucc.team19.dao;
 
 import ie.ucc.team19.service.PropertiesReader;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +8,8 @@ import java.util.Map;
 import java.io.*;
 
 /**
- *
+ * DAO to handle connections via JDBC, gets credentials from properties.
+ * Exceptions write to log via writeLogSQL method. 
  * @author Cormac
  */
 public class DBConnectionManager {
@@ -21,6 +21,11 @@ public class DBConnectionManager {
     private PreparedStatement statementObject;
     private Connection connectionObject;
 
+    /**
+     * Constructor for DBConnectionManager. Credentials read from
+     * ServletContext scoped properties reader, reads from setup.txt.
+     * @param properties Properties reader for credentials.
+     */
     public DBConnectionManager(PropertiesReader properties) {
         DBServerName = properties.getDBServerName();
         DBName = properties.getDBName();
@@ -28,6 +33,9 @@ public class DBConnectionManager {
         DBpassword = properties.getDBpassword();
     }
 
+    /**
+     * Instantiates JDBC driver object and opens connection to db.
+     */
     private void OpenDatabaseConnection() {
         String URL = "jdbc:mysql://" + DBServerName + "/" + DBName;
 
@@ -47,6 +55,9 @@ public class DBConnectionManager {
 
     }
 
+    /**
+     * Closes connection to db. Releases resources.
+     */
     private void CloseDatabaseConnection() {
         try {
             // Establish connection to database
@@ -59,6 +70,12 @@ public class DBConnectionManager {
         }
     } //CloseDatabaseConnection
 
+    /**
+     * Prepares statement with mapped SQL types, uses db connection to
+     *  execute statement. Opens and closes connection per query.
+     * @param SQLinsert - the raw query string to execute.
+     * @param params - parameters to map to SQL types and add to query.
+     */
     public void Insert(String SQLinsert, Object[] params) {
         // Setup database connection details
         try {
@@ -90,7 +107,15 @@ public class DBConnectionManager {
             CloseDatabaseConnection();
         }
     }
-   
+
+    /**
+     * For Nullipotent queries. Prepares statement with mapped SQL types,
+     * uses db connection to execute statement, resultset entered to map.
+     * Opens and closes connection per query.
+     * @param SQLinsert - the raw query string to execute.
+     * @param params - parameters to map to SQL types and add to query.
+     * @return rows of result as list of maps
+     */
     public ArrayList<Map<String, String[]>> Select(String SQLquery, Object[] params) {
         ArrayList<Map<String, String[]>> resultTable = new ArrayList<Map<String, String[]>>();
 
@@ -142,6 +167,10 @@ public class DBConnectionManager {
         return resultTable;
     } // End Select
 
+    /**
+     * Called on exception, writes exception message to file.
+     * @param message
+     */
     private void writeLogSQL(String message) {
         PrintStream output;
         try {

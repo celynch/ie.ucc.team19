@@ -12,7 +12,7 @@ import ie.ucc.team19.service.PropertiesReader;
 public class IndexController extends AbstractController {
 
     /**
-     * 
+     * Fetches Category Names for front page category navigation view.
      */
     public void execute() {
         PropertiesReader properties = (PropertiesReader)

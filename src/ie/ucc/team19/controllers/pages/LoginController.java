@@ -3,13 +3,14 @@ package ie.ucc.team19.controllers.pages;
 import ie.ucc.team19.controllers.AbstractController;
 
 /**
- *
+ * Controller for login challenge page.
  * @author Cormac
  */
 public class LoginController extends AbstractController{
 
     /**
-     *
+     * Determines if referred from another page on the site and sets the
+     * form submit destination appropriately.
      */
     public void execute() {
         setReturnPage("/login.jsp");
