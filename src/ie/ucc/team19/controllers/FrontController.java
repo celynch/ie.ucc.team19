@@ -133,7 +133,7 @@ public class FrontController extends HttpServlet {
 
     /**
      * Sets as a request scoped reference the server name with or without
-     * port number suffix.
+     * port number suffix. Port numbers appended for when run on localhost.
      * @param request - implicit object to encapsulate the HTTP request.
      */
     private void setServerNames(HttpServletRequest request) {

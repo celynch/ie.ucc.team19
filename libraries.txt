@@ -1,0 +1,19 @@
+libraries used
+
+Apache Commons BeanUtils
+commons-beanutils-core-1.8.3.jar
+Utility methods for populating JavaBeans properties via reflection.
+
+Apache Taglibs
+taglibs-standard-1.1.2-jstl.jar
+An implementation of the JSP Standard Tag Library (JSTL) specification.
+
+JavaMail
+javamail1_4_7mail.jar
+JavaMail API provides a platform-independent and protocol-independent
+framework to build mail and messaging applications.
+
+MySQL Connector/JDBC
+mysql_connector_java_5.1.23_bin.jar
+Native Java driver that converts JDBC (Java Database Connectivity) calls
+into the network protocol used by the MySQL database.

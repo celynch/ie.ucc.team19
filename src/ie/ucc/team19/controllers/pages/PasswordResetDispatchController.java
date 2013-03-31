@@ -35,7 +35,8 @@ public class PasswordResetDispatchController extends AbstractController{
             String subject = "UCC Summer Courses | Password Reset";
             String mailMessage = "<div><p>" + student.getFirstName()
                     + ", if you requested this password reset, follow this link:</p>"
-                    + "<a href=\"http://localhost:8080/team19/pages/passwordResetVerify?authString="
+                    + "<a href=\"http://" + request.getParameter("serverName")
+                    + "/team19/pages/passwordResetVerify?authString="
                     + student.getAuthString() + "&email=" + student.getEmail() + "\">Reset Password</a>"
                     + "<blockquote>\"Where Finbarr taught, let Munster learn\"</blockquote>"
                     + "<p>- The UCC Summer Courses Team</p></div>";

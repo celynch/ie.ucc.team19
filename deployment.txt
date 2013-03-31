@@ -1,0 +1,79 @@
+1/  install apache tomcat
+        http://tomcat.apache.org/download-70.cgi
+    
+2/  prepare web application for deployment:
+        copy .war file to C:\Program Files\apache-tomcat-7.0.35\webapps\
+    
+3/  set environment variable for JAVA eg
+        ~$ set JRE_HOME=C:\Program Files\Java\jre7
+
+4/  Using a keystore file for https connections.
+    Generate a keystore using the java keystore generator, alternatively, use the ".keystore" file provided:
+        Real deployment would get a certificate from a trusted authority, so this is just a self signed keystore.
+        Enter at the cmd prompt:
+        %JAVA_HOME%\bin\keytool -genkey -alias tomcat -keyalg RSA \ -keystore C:\Program Files\apache-tomcat-7.0.35\
+        
+        Either create or copy the .keystore file to the tomcat base directory or a location which corresponds
+        to the keyStoreFile attribute of the connecter element in tomcat's server.xml described below
+
+    4.1/ edit the tomcat config file:
+        C:\Program Files\apache-tomcat-7.0.35\conf\server.xml
+
+        Find the commented out reference to a connector port 8443 (near line 90 depending on version) and insert:
+
+    <Connector 
+            port="8443" maxThreads="200" protocol="org.apache.coyote.http11.Http11NioProtocol"
+            scheme="https" secure="true" SSLEnabled="true"
+            keystoreFile="${catalina.base}/.keystore" keystorePass="changeit"
+            clientAuth="false" sslProtocol="TLS" />
+
+        note the password you are asked for by the java keytool and the one in the server.xml must match
+        - "changeit" is default
+
+5/  run tomcat:
+        ~$ C:\Program Files\apache-tomcat-7.0.35\bin\catalina run
+        on startup the .war will be deployed
+
+6/  install mySQL server
+        http://dev.mysql.com/downloads/
+
+        commands to initialize database*:
+        
+            drop database team19;
+            CREATE DATABASE team19 CHARACTER SET utf8 COLLATE utf8_general_ci;
+            use team19
+            source C:\Program Files\apache-tomcat-7.0.35\webapps\team19\team19.sql
+            source C:\Program Files\apache-tomcat-7.0.35\webapps\team19\team19data.sql
+        *alter paths as required
+    
+6/  to run via reverse proxy, required for visibility to use paypal:
+        install python
+            http://www.python.org/download/
+        get pagekite.py
+            http://pagekite.net/downloads/
+            requires no install can be run from desktop
+                run pagekite client, double click pagekite.py or from command promt:
+                $ pagekite.py --signup
+                    first time startup asks for email etc, to reserve a domain name and bandwidth,
+                    free for 30 days, does not require activation for 10 days, so ignore.
+                default setup exposes localhost:80, since tomcat listens on port 8080,
+                halt the pagekite client (ctrl-c) and enter
+                $ pagekite.py 8080 *SOMEURL.pagekite.me
+                    *may be reserved, choose a unique name, in development we used team19summer.pagekite.me
+                if tomcat is running, the application should now be accessible at:
+                    SOMEURL.pagekite.me/team19/pages/
+                    or
+                    SOMEURL.pagekite.me/team19/pages/admmin
+                    for admin access.
+
+7/  Properties for application configuration are  stored in the application
+root folder in the file named setup.txt.
+    This file stores urls and credentials for access to the database,
+the business name for identifying the recipient of paypal transactions,
+urls and credentials for utilising the mailjet cloud smtp service.
+Also note that a paypal sandbox account for test transactions has been
+setup for convenience, details below:
+
+paypal sandbox a/c
+    email: team19test@test.com
+    pswrd: test1test
